@@ -11,3 +11,4 @@
 @interface JobInfoDetailView : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *ContentTableView;
 @end
+ 
