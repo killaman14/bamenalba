@@ -1,0 +1,22 @@
+//
+//  JobInformation.h
+//  bamenalba
+//
+//  Created by GSMAC on 2017. 5. 26..
+//  Copyright © 2017년 bamenalba. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface JobInformation : UIViewController
+{
+    UIView *_headerview;
+    UITableView *_tableview;
+}
+
+@property (nonatomic, strong) IBOutlet UIView *TopView;
+@property (nonatomic, strong) IBOutlet UITableView *Table;
+
+@property (nonatomic, strong) NSMutableArray *data;
+
+@end
