@@ -9,13 +9,38 @@
 #import "JobInfoDetailView.h"
 
 @interface JobInfoDetailView () <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UIScrollView *ScrollView;
 
+@property (weak, nonatomic) IBOutlet UIStackView *StackView;
 @end
 
 @implementation JobInfoDetailView
 
+
+- (id) initWithCoder:(NSCoder *)aDecoder data:(NSDictionary *)data
+{
+    self = [super initWithCoder:aDecoder];
+    
+    if (self)
+    {
+        
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    [_ScrollView setContentSize:_ScrollView.frame.size];
+    
+    [_ScrollView resignFirstResponder];
+    
+    
+    NSLog(@"Frame Size : %@", NSStringFromCGRect(_ScrollView.frame));
+    
+    NSLog(@"Stack View : %@", NSStringFromCGRect(_StackView.frame));
     
 }
 
@@ -41,6 +66,16 @@
     UITableViewCell *cell;
     
     return cell;
+}
+
+
+
+#pragma mark - [ EVENT ]
+
+- (IBAction) Close:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 @end

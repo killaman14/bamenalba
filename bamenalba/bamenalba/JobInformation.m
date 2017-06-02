@@ -9,6 +9,7 @@
 #import "JobInformation.h"
 #import "JobInfoTopView.h"
 #import "JobInfoCell.h"
+#import "JobInfoDetailView.h"
 
 #import "SystemManager.h"
 #import "AlertManager.h"
@@ -165,6 +166,17 @@
 
 - (void) CallDetailButton:(int) index{
     NSLog(@"Detail :  %d", index);
+    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"viewController"];
+    //vc.modalTransitionStyle = uimodaltransi  UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:vc animated:YES completion:NULL];
+    
+    
+//    JobInfoDetailView *viewController = [[JobInfoDetailView alloc] init];
+//    [self presentViewController:viewController animated:YES completion:^{
+//        
+//    }];
 }
 
 - (void) CallPostButton:(int) index {

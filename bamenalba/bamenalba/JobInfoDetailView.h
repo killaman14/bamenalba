@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface JobInfoDetailView : UIViewController
-@property (weak, nonatomic) IBOutlet UITableView *ContentTableView;
+
+- (id) initWithCoder:(NSCoder *)aDecoder data:(NSDictionary *)data;
+
 @end
  
