@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5409F8A71EE08306003CAB00 /* JobInfoDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5409F8A51EE08306003CAB00 /* JobInfoDetailView.m */; };
+		5409F8A81EE08306003CAB00 /* JobInfoDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5409F8A61EE08306003CAB00 /* JobInfoDetailView.xib */; };
 		5413665C1ED7AD42008CFAF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5413665B1ED7AD42008CFAF1 /* main.m */; };
 		5413665F1ED7AD43008CFAF1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5413665E1ED7AD43008CFAF1 /* AppDelegate.m */; };
 		541366681ED7AD44008CFAF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 541366661ED7AD44008CFAF1 /* Main.storyboard */; };
@@ -36,6 +38,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5409F8A41EE08306003CAB00 /* JobInfoDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobInfoDetailView.h; sourceTree = "<group>"; };
+		5409F8A51EE08306003CAB00 /* JobInfoDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobInfoDetailView.m; sourceTree = "<group>"; };
+		5409F8A61EE08306003CAB00 /* JobInfoDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobInfoDetailView.xib; sourceTree = "<group>"; };
 		541366571ED7AD42008CFAF1 /* bamenalba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bamenalba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5413665B1ED7AD42008CFAF1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5413665D1ED7AD43008CFAF1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -177,6 +182,9 @@
 				541366A31ED7F4B5008CFAF1 /* JobInfoTopView.xib */,
 				541366A01ED7F468008CFAF1 /* JobInfoTopView.h */,
 				541366A11ED7F468008CFAF1 /* JobInfoTopView.m */,
+				5409F8A41EE08306003CAB00 /* JobInfoDetailView.h */,
+				5409F8A51EE08306003CAB00 /* JobInfoDetailView.m */,
+				5409F8A61EE08306003CAB00 /* JobInfoDetailView.xib */,
 			);
 			name = JobInfomation;
 			sourceTree = "<group>";
@@ -262,6 +270,7 @@
 				5413666A1ED7AD48008CFAF1 /* Assets.xcassets in Resources */,
 				541366681ED7AD44008CFAF1 /* Main.storyboard in Resources */,
 				541366771ED7B447008CFAF1 /* tab_1_1_01.png in Resources */,
+				5409F8A81EE08306003CAB00 /* JobInfoDetailView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +292,7 @@
 				541366A21ED7F468008CFAF1 /* JobInfoTopView.m in Sources */,
 				541366891ED7C9A6008CFAF1 /* MemoBox.m in Sources */,
 				F3F4816C1EDD23B400A29635 /* CHCSVParser.m in Sources */,
+				5409F8A71EE08306003CAB00 /* JobInfoDetailView.m in Sources */,
 				5413669E1ED7EF65008CFAF1 /* JobInfoCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
