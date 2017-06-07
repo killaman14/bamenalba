@@ -1,23 +1,18 @@
 //
-//  More.m
+//  CashChargeView.m
 //  bamenalba
 //
-//  Created by GSMAC on 2017. 5. 26..
+//  Created by Sejung Park on 2017. 6. 6..
 //  Copyright © 2017년 bamenalba. All rights reserved.
 //
 
-#import "More.h"
-
-
-#import "SettingView.h"
-#import "ClauseView.h"
 #import "CashChargeView.h"
 
-@interface More ()
+@interface CashChargeView ()
 
 @end
 
-@implementation More
+@implementation CashChargeView
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,25 +34,10 @@
 }
 */
 
-
-- (IBAction) SettingViewLoad:(id)sender {
-    [self Viewload:@"Setting"];
+- (IBAction) Close:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
-
-- (IBAction) ClauseViewLoad:(id)sender {
-    [self Viewload:@"Clause"];
-}
-
-- (IBAction) CashChargeViewLoad:(id)sender {
-    [self Viewload:@"CashCharge"];
-}
-
-
-- (void) Viewload:(NSString *)storyboardIdentity {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:storyboardIdentity];
-    [self presentViewController:vc animated:YES completion:NULL];
-}
-
 
 @end

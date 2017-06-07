@@ -11,6 +11,7 @@
 
 @interface JobInfoCell()
 @property (assign, nonatomic) int Index;
+@property (assign, nonatomic) float scale;
 @end
 
 
@@ -22,6 +23,8 @@
 
 @synthesize Items;
 @synthesize ItemDatas;
+
+@synthesize scale;
 
 @synthesize delegate;
 
@@ -56,6 +59,19 @@
         [self ItemSetting:[ItemDatas objectForKey:[Key objectAtIndex:k]] ItemType:(ITEM_TYPE)k];
     }
     
+    CGRect rc = self.ItemView.frame;
+    NSLog(@"1. rc : %@   scale : %f", NSStringFromCGRect(rc), scale );
+    [self.ItemView setFrame:CGRectMake(rc.origin.x, rc.origin.y, rc.size.width * scale, rc.size.height * scale)];
+    NSLog(@"2. rc : %@   scale : %f", NSStringFromCGRect(rc), scale );
+    
+    NSArray *arr = [self.ItemView subviews];
+    
+    for (id aa in arr) {
+        CGRect gc = [aa frame];
+        [aa setFrame:CGRectMake(gc.origin.x * scale, gc.origin.y * scale, gc.size.width * scale, gc.size.height * scale)];
+    }
+    
+    
     [Items removeAllObjects];
 }
 
@@ -74,16 +90,24 @@
 {
     UILabel *lb = [[UILabel alloc] init];
     [lb setText:content];
-    [lb setFont:[UIFont systemFontOfSize:14]];
-    [lb setMinimumScaleFactor:6];
+    [lb setFont:[UIFont systemFontOfSize:10]];
+    [lb setMinimumScaleFactor:4];
+    [lb setAdjustsFontSizeToFitWidth:YES];
     [lb sizeToFit];
+    
     [self ContentTextLabel:lb ColorChangeItemType:type];
+    
     [self.ItemView addSubview:lb];
     
  
     float x = [[Items lastObject] frame].size.width + [[Items lastObject] frame].origin.x + 4;
     float y = [[Items lastObject] frame].origin.y;
     if (type == CITY) {
+        float w = self.ItemView.frame.size.width;
+        float r = w/x;
+        r = r > 1.0f ? 1.0f : r;
+        scale = r;
+        
         x = 4;
         y = [[Items lastObject] frame].size.height + [[Items lastObject] frame].origin.y + 2;
     }
@@ -91,7 +115,7 @@
     UIImageView *imgView = [self RoundImageSetting:type];
     [imgView setFrame:CGRectMake(x, y, lb.frame.size.width + 6, lb.frame.size.height + 4)];
     [self.ItemView addSubview:imgView];
-     
+    
     [lb setFrame:CGRectMake(x + 3, y + 2, lb.frame.size.width, lb.frame.size.height)];
     
     [Items addObject:imgView];

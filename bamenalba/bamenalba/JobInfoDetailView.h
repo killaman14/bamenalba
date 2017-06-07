@@ -12,5 +12,10 @@
 
 - (id) initWithCoder:(NSCoder *)aDecoder data:(NSDictionary *)data;
 
+- (IBAction)Close:(id)sender;
+
+- (IBAction)Call:(id)sender;
+
+- (IBAction)Post:(id)sender;
 @end
  

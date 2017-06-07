@@ -26,9 +26,17 @@
 		541366971ED7EE12008CFAF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 541366961ED7EE12008CFAF1 /* Foundation.framework */; };
 		541366991ED7EE20008CFAF1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 541366981ED7EE20008CFAF1 /* CoreGraphics.framework */; };
 		5413669E1ED7EF65008CFAF1 /* JobInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5413669D1ED7EF65008CFAF1 /* JobInfoCell.m */; };
-		541366A21ED7F468008CFAF1 /* JobInfoTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 541366A11ED7F468008CFAF1 /* JobInfoTopView.m */; };
-		541366A41ED7F4B5008CFAF1 /* JobInfoTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541366A31ED7F4B5008CFAF1 /* JobInfoTopView.xib */; };
+		541366A21ED7F468008CFAF1 /* SearchTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 541366A11ED7F468008CFAF1 /* SearchTopView.m */; };
+		541366A41ED7F4B5008CFAF1 /* SearchTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541366A31ED7F4B5008CFAF1 /* SearchTopView.xib */; };
 		541366AB1ED806E9008CFAF1 /* ui_bluebox_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 541366AA1ED806E9008CFAF1 /* ui_bluebox_03.png */; };
+		F35198661EE53CF100881EFE /* HumanInfoDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = F35198651EE53CF100881EFE /* HumanInfoDetailView.m */; };
+		F351986B1EE55D9400881EFE /* PostAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = F351986A1EE55D9400881EFE /* PostAlert.m */; };
+		F351986D1EE55DA200881EFE /* PostAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = F351986C1EE55DA200881EFE /* PostAlert.xib */; };
+		F35198711EE5E06500881EFE /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F351986F1EE5E06500881EFE /* SettingView.m */; };
+		F35198761EE5E4B400881EFE /* ClauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F35198751EE5E4B400881EFE /* ClauseView.m */; };
+		F35198791EE5EA0100881EFE /* CashChargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F35198781EE5EA0100881EFE /* CashChargeView.m */; };
+		F3A31F741EE523C100D18923 /* HumanResourcesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A31F721EE523C100D18923 /* HumanResourcesCell.m */; };
+		F3A31F751EE523C100D18923 /* HumanResourcesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3A31F731EE523C100D18923 /* HumanResourcesCell.xib */; };
 		F3F4816C1EDD23B400A29635 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4816B1EDD23B400A29635 /* CHCSVParser.m */; };
 		F3F481701EDD23D500A29635 /* SystemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4816F1EDD23D500A29635 /* SystemManager.m */; };
 		F3F481731EDE4F8400A29635 /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F481721EDE4F8400A29635 /* AlertManager.m */; };
@@ -66,10 +74,24 @@
 		541366981ED7EE20008CFAF1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5413669C1ED7EF65008CFAF1 /* JobInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobInfoCell.h; sourceTree = "<group>"; };
 		5413669D1ED7EF65008CFAF1 /* JobInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobInfoCell.m; sourceTree = "<group>"; };
-		541366A01ED7F468008CFAF1 /* JobInfoTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobInfoTopView.h; sourceTree = "<group>"; };
-		541366A11ED7F468008CFAF1 /* JobInfoTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobInfoTopView.m; sourceTree = "<group>"; };
-		541366A31ED7F4B5008CFAF1 /* JobInfoTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobInfoTopView.xib; sourceTree = "<group>"; };
+		541366A01ED7F468008CFAF1 /* SearchTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTopView.h; sourceTree = "<group>"; };
+		541366A11ED7F468008CFAF1 /* SearchTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTopView.m; sourceTree = "<group>"; };
+		541366A31ED7F4B5008CFAF1 /* SearchTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTopView.xib; sourceTree = "<group>"; };
 		541366AA1ED806E9008CFAF1 /* ui_bluebox_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ui_bluebox_03.png; sourceTree = "<group>"; };
+		F35198641EE53CF100881EFE /* HumanInfoDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanInfoDetailView.h; sourceTree = "<group>"; };
+		F35198651EE53CF100881EFE /* HumanInfoDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HumanInfoDetailView.m; sourceTree = "<group>"; };
+		F35198691EE55D9400881EFE /* PostAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostAlert.h; sourceTree = "<group>"; };
+		F351986A1EE55D9400881EFE /* PostAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostAlert.m; sourceTree = "<group>"; };
+		F351986C1EE55DA200881EFE /* PostAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostAlert.xib; sourceTree = "<group>"; };
+		F351986E1EE5E06500881EFE /* SettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingView.h; sourceTree = "<group>"; };
+		F351986F1EE5E06500881EFE /* SettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingView.m; sourceTree = "<group>"; };
+		F35198741EE5E4B400881EFE /* ClauseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClauseView.h; sourceTree = "<group>"; };
+		F35198751EE5E4B400881EFE /* ClauseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClauseView.m; sourceTree = "<group>"; };
+		F35198771EE5EA0100881EFE /* CashChargeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashChargeView.h; sourceTree = "<group>"; };
+		F35198781EE5EA0100881EFE /* CashChargeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashChargeView.m; sourceTree = "<group>"; };
+		F3A31F711EE523C100D18923 /* HumanResourcesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanResourcesCell.h; sourceTree = "<group>"; };
+		F3A31F721EE523C100D18923 /* HumanResourcesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HumanResourcesCell.m; sourceTree = "<group>"; };
+		F3A31F731EE523C100D18923 /* HumanResourcesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HumanResourcesCell.xib; sourceTree = "<group>"; };
 		F3F4816A1EDD23B400A29635 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
 		F3F4816B1EDD23B400A29635 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		F3F4816E1EDD23D500A29635 /* SystemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemManager.h; sourceTree = "<group>"; };
@@ -117,8 +139,6 @@
 				F3F4816D1EDD23B900A29635 /* Utils */,
 				5413665D1ED7AD43008CFAF1 /* AppDelegate.h */,
 				5413665E1ED7AD43008CFAF1 /* AppDelegate.m */,
-				F3F4816E1EDD23D500A29635 /* SystemManager.h */,
-				F3F4816F1EDD23D500A29635 /* SystemManager.m */,
 				541366801ED7C930008CFAF1 /* Main */,
 				541366661ED7AD44008CFAF1 /* Main.storyboard */,
 				541366691ED7AD48008CFAF1 /* Assets.xcassets */,
@@ -146,6 +166,7 @@
 		541366801ED7C930008CFAF1 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				F35198681EE55C9C00881EFE /* Common */,
 				5413667D1ED7C92A008CFAF1 /* JobInformation.h */,
 				5413667E1ED7C92A008CFAF1 /* JobInformation.m */,
 				541366811ED7C95D008CFAF1 /* HumanResources.h */,
@@ -157,6 +178,8 @@
 				5413668A1ED7C9B9008CFAF1 /* More.h */,
 				5413668B1ED7C9B9008CFAF1 /* More.m */,
 				5413669F1ED7F44B008CFAF1 /* JobInfomation */,
+				F3A31F761EE523C800D18923 /* HumanResources */,
+				F35198731EE5E06900881EFE /* More */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -177,12 +200,46 @@
 				541366901ED7E788008CFAF1 /* JobInfoCell.xib */,
 				5413669C1ED7EF65008CFAF1 /* JobInfoCell.h */,
 				5413669D1ED7EF65008CFAF1 /* JobInfoCell.m */,
-				541366A31ED7F4B5008CFAF1 /* JobInfoTopView.xib */,
-				541366A01ED7F468008CFAF1 /* JobInfoTopView.h */,
-				541366A11ED7F468008CFAF1 /* JobInfoTopView.m */,
+				541366A31ED7F4B5008CFAF1 /* SearchTopView.xib */,
+				541366A01ED7F468008CFAF1 /* SearchTopView.h */,
+				541366A11ED7F468008CFAF1 /* SearchTopView.m */,
 				F372EE5E1EE0EA7000F033C2 /* DetailView */,
 			);
 			name = JobInfomation;
+			sourceTree = "<group>";
+		};
+		F35198671EE53CF800881EFE /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				F35198641EE53CF100881EFE /* HumanInfoDetailView.h */,
+				F35198651EE53CF100881EFE /* HumanInfoDetailView.m */,
+			);
+			name = DetailView;
+			sourceTree = "<group>";
+		};
+		F35198681EE55C9C00881EFE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F3F4816E1EDD23D500A29635 /* SystemManager.h */,
+				F3F4816F1EDD23D500A29635 /* SystemManager.m */,
+				F35198691EE55D9400881EFE /* PostAlert.h */,
+				F351986A1EE55D9400881EFE /* PostAlert.m */,
+				F351986C1EE55DA200881EFE /* PostAlert.xib */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		F35198731EE5E06900881EFE /* More */ = {
+			isa = PBXGroup;
+			children = (
+				F351986E1EE5E06500881EFE /* SettingView.h */,
+				F351986F1EE5E06500881EFE /* SettingView.m */,
+				F35198741EE5E4B400881EFE /* ClauseView.h */,
+				F35198751EE5E4B400881EFE /* ClauseView.m */,
+				F35198771EE5EA0100881EFE /* CashChargeView.h */,
+				F35198781EE5EA0100881EFE /* CashChargeView.m */,
+			);
+			name = More;
 			sourceTree = "<group>";
 		};
 		F372EE5E1EE0EA7000F033C2 /* DetailView */ = {
@@ -192,6 +249,17 @@
 				5409F8A51EE08306003CAB00 /* JobInfoDetailView.m */,
 			);
 			name = DetailView;
+			sourceTree = "<group>";
+		};
+		F3A31F761EE523C800D18923 /* HumanResources */ = {
+			isa = PBXGroup;
+			children = (
+				F3A31F731EE523C100D18923 /* HumanResourcesCell.xib */,
+				F3A31F711EE523C100D18923 /* HumanResourcesCell.h */,
+				F3A31F721EE523C100D18923 /* HumanResourcesCell.m */,
+				F35198671EE53CF800881EFE /* DetailView */,
+			);
+			name = HumanResources;
 			sourceTree = "<group>";
 		};
 		F3F4816D1EDD23B900A29635 /* Utils */ = {
@@ -264,12 +332,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3A31F751EE523C100D18923 /* HumanResourcesCell.xib in Resources */,
 				F3F481791EDFA82300A29635 /* x.csv in Resources */,
-				541366A41ED7F4B5008CFAF1 /* JobInfoTopView.xib in Resources */,
+				541366A41ED7F4B5008CFAF1 /* SearchTopView.xib in Resources */,
 				5413666D1ED7AD49008CFAF1 /* LaunchScreen.storyboard in Resources */,
 				541366AB1ED806E9008CFAF1 /* ui_bluebox_03.png in Resources */,
 				541366911ED7E788008CFAF1 /* JobInfoCell.xib in Resources */,
 				541366751ED7B3F9008CFAF1 /* iCon.jpg in Resources */,
+				F351986D1EE55DA200881EFE /* PostAlert.xib in Resources */,
 				541366791ED7B520008CFAF1 /* icon_call.png in Resources */,
 				F3F481771EDE609100A29635 /* area.csv in Resources */,
 				5413666A1ED7AD48008CFAF1 /* Assets.xcassets in Resources */,
@@ -289,14 +359,20 @@
 				5413668C1ED7C9B9008CFAF1 /* More.m in Sources */,
 				5413667F1ED7C92A008CFAF1 /* JobInformation.m in Sources */,
 				541366861ED7C98D008CFAF1 /* JobRegistor.m in Sources */,
+				F351986B1EE55D9400881EFE /* PostAlert.m in Sources */,
 				5413665F1ED7AD43008CFAF1 /* AppDelegate.m in Sources */,
 				541366831ED7C95D008CFAF1 /* HumanResources.m in Sources */,
 				F3F481701EDD23D500A29635 /* SystemManager.m in Sources */,
 				5413665C1ED7AD42008CFAF1 /* main.m in Sources */,
-				541366A21ED7F468008CFAF1 /* JobInfoTopView.m in Sources */,
+				F35198791EE5EA0100881EFE /* CashChargeView.m in Sources */,
+				F35198661EE53CF100881EFE /* HumanInfoDetailView.m in Sources */,
+				541366A21ED7F468008CFAF1 /* SearchTopView.m in Sources */,
 				541366891ED7C9A6008CFAF1 /* MemoBox.m in Sources */,
 				F3F4816C1EDD23B400A29635 /* CHCSVParser.m in Sources */,
+				F35198761EE5E4B400881EFE /* ClauseView.m in Sources */,
 				5409F8A71EE08306003CAB00 /* JobInfoDetailView.m in Sources */,
+				F3A31F741EE523C100D18923 /* HumanResourcesCell.m in Sources */,
+				F35198711EE5E06500881EFE /* SettingView.m in Sources */,
 				5413669E1ED7EF65008CFAF1 /* JobInfoCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

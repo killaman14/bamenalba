@@ -10,4 +10,11 @@
 
 @interface More : UIViewController
 
+
+- (IBAction) SettingViewLoad:(id)sender;
+
+- (IBAction) ClauseViewLoad:(id)sender;
+
+- (IBAction) CashChargeViewLoad:(id)sender;
+
 @end

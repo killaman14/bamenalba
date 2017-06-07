@@ -12,7 +12,7 @@
 
 
 
-@interface SystemManager() <CHCSVParserDelegate>
+@interface SystemManager() <CHCSVParserDelegate, UITabBarDelegate, UITabBarControllerDelegate>
 {
     NSMutableArray *Keys;
     
@@ -29,6 +29,8 @@
 
 @property (strong, nonatomic) NSMutableDictionary *Data;
 
+@property (strong, nonatomic) UITabBarController *Tabbar;
+
 @end
 
 
@@ -38,6 +40,7 @@
 @synthesize Keys;
 @synthesize ProvinceKeys;
 @synthesize Data;
+@synthesize Tabbar;
 
 @synthesize ReadLineIndex = _ReadLineIndex;
 
@@ -57,9 +60,10 @@ static SystemManager *sharedInstance = nil;
                       sharedInstance = [[SystemManager alloc] init];
                       
                       [sharedInstance InitCSVLoad];
-                      NSLog(@"InitCSVLoad");
+                      
                       [sharedInstance InitProvinceKeySetting];
-                      NSLog(@"InitProvinceKeySetting");
+                      
+                      [sharedInstance InitTabbar];
                   });
     
     return sharedInstance;
@@ -73,7 +77,7 @@ static SystemManager *sharedInstance = nil;
             return [[sharedInstance Data] objectForKey:key];
         }
     }
-    NSLog(@"NotData");
+    
     return nil;
 }
 
@@ -81,8 +85,29 @@ static SystemManager *sharedInstance = nil;
     return [[sharedInstance ProvinceKeys] objectForKey:area];
 }
 
++ (UITabBarController *) TabbarController {
+    if (sharedInstance.Tabbar == nil) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        sharedInstance.Tabbar = [sb instantiateViewControllerWithIdentifier:@"TabBar"];
+    }
+    
+    return sharedInstance.Tabbar;
+}
+
+
+- (BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    NSLog(@"alsdkjflaskdj");
+    return NO;
+}
+
 
 #pragma mark - [ PROCESSING ]
+
+- (void) InitTabbar {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    Tabbar = [sb instantiateViewControllerWithIdentifier:@"TabBar"];
+    [Tabbar setDelegate:self];
+}
 
 - (void) InitProvinceKeySetting
 {

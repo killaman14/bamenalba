@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HumanResourcesCell" rowHeight="81" id="KGk-i7-Jjw" userLabel="Human Resources Cell" customClass="HumanResourcesCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EWi-R7-Wz6">
+                        <rect key="frame" x="8" y="3" width="55" height="55"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="bIL-br-Ifg"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="도봉순(22세)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7p-Pt-X5D">
+                        <rect key="frame" x="71" y="8" width="97" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="97" id="BAO-1e-wHR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhi-pG-nJx">
+                        <rect key="frame" x="176" y="8" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="안전한 일자리 구하고 싶어요~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="I2r-sm-F2i">
+                        <rect key="frame" x="71" y="30" width="210" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Kx1-gh-PJh"/>
+                            <constraint firstAttribute="width" constant="210" id="cqW-T6-PHL"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRW-DT-GaW" userLabel="상세">
+                        <rect key="frame" x="280" y="10" width="40" height="40"/>
+                        <color key="backgroundColor" red="1" green="0.32233099713738345" blue="0.52275381712003033" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="nC8-ZM-I83"/>
+                        </constraints>
+                        <state key="normal" title="상세"/>
+                        <connections>
+                            <action selector="CallDetail:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="UQb-SQ-Y8X"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3pf-Bb-hZ7" userLabel="쪽지">
+                        <rect key="frame" x="327" y="11" width="40" height="40"/>
+                        <color key="backgroundColor" red="1" green="0.2635245443875025" blue="0.27549282773777473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="npq-Fb-ety"/>
+                        </constraints>
+                        <state key="normal" title="쪽지"/>
+                        <connections>
+                            <action selector="CallPost:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="KZV-Cm-bHo"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="oRW-DT-GaW" firstAttribute="leading" secondItem="xhi-pG-nJx" secondAttribute="trailing" constant="62" id="22D-AD-oAX"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="EWi-R7-Wz6" secondAttribute="bottom" constant="-6" id="3iw-5T-kK3"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="EWi-R7-Wz6" secondAttribute="leading" id="4O2-kF-t9X"/>
+                    <constraint firstItem="f7p-Pt-X5D" firstAttribute="leading" secondItem="EWi-R7-Wz6" secondAttribute="trailing" constant="8" symbolic="YES" id="4On-67-Ccu"/>
+                    <constraint firstItem="I2r-sm-F2i" firstAttribute="leading" secondItem="EWi-R7-Wz6" secondAttribute="trailing" constant="8" symbolic="YES" id="AJj-so-k1n"/>
+                    <constraint firstItem="EWi-R7-Wz6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="MeL-yw-0lY"/>
+                    <constraint firstItem="I2r-sm-F2i" firstAttribute="top" secondItem="xhi-pG-nJx" secondAttribute="bottom" constant="1" id="Q1s-y2-hra"/>
+                    <constraint firstItem="3pf-Bb-hZ7" firstAttribute="centerY" secondItem="EWi-R7-Wz6" secondAttribute="centerY" id="QkQ-uH-WGQ"/>
+                    <constraint firstItem="3pf-Bb-hZ7" firstAttribute="bottom" secondItem="I2r-sm-F2i" secondAttribute="bottom" id="Tbn-Kq-qaz"/>
+                    <constraint firstItem="f7p-Pt-X5D" firstAttribute="top" secondItem="xhi-pG-nJx" secondAttribute="top" id="VSF-52-DVw"/>
+                    <constraint firstItem="oRW-DT-GaW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="Za6-Bh-wwl"/>
+                    <constraint firstItem="3pf-Bb-hZ7" firstAttribute="leading" secondItem="oRW-DT-GaW" secondAttribute="trailing" constant="7" id="dxI-gM-Kkk"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="I2r-sm-F2i" secondAttribute="bottom" constant="0.5" id="fwc-hg-b06"/>
+                    <constraint firstItem="EWi-R7-Wz6" firstAttribute="centerY" secondItem="oRW-DT-GaW" secondAttribute="centerY" id="ngC-5M-FCi"/>
+                    <constraint firstItem="EWi-R7-Wz6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-5.5" id="pSg-kd-QNA"/>
+                    <constraint firstItem="xhi-pG-nJx" firstAttribute="leading" secondItem="f7p-Pt-X5D" secondAttribute="trailing" constant="8" symbolic="YES" id="tnh-Ik-iJq"/>
+                    <constraint firstItem="f7p-Pt-X5D" firstAttribute="bottom" secondItem="xhi-pG-nJx" secondAttribute="bottom" id="xVZ-Jb-dPn"/>
+                    <constraint firstItem="3pf-Bb-hZ7" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="ykW-Mk-724"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="24.5" y="52"/>
+        </tableViewCell>
+    </objects>
+</document>

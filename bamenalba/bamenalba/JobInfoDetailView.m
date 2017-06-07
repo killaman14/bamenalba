@@ -8,13 +8,25 @@
 
 #import "JobInfoDetailView.h"
 
-@interface JobInfoDetailView () <UITableViewDelegate, UITableViewDataSource>
+@interface JobInfoDetailView () <UIScrollViewDelegate, UITextViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIScrollView *ScrollView;
 
-@property (weak, nonatomic) IBOutlet UIStackView *StackView;
+@property (weak, nonatomic) IBOutlet UITextView *IntroduceTextView;
+
+@property (strong, nonatomic) NSString *IntroduceText;
+
+@property (strong, nonatomic) NSMutableDictionary *Data;
+
 @end
 
 @implementation JobInfoDetailView
+
+@synthesize IntroduceTextView;
+
+@synthesize IntroduceText;
+
+@synthesize Data;
 
 
 - (id) initWithCoder:(NSCoder *)aDecoder data:(NSDictionary *)data
@@ -25,23 +37,31 @@
     {
         
     }
-    
     return self;
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    
+    [self.IntroduceTextView setDelegate:self];
+    
+    [self.IntroduceTextView setText:IntroduceText];
+    [self.IntroduceTextView setTextColor:[UIColor lightGrayColor]];
+    
+    
+    [self.ScrollView setDelegate:self];
+    
+    CGSize size = CGSizeMake(self.ScrollView.contentSize.width, self.ScrollView.contentSize.height * 1.3f);
+    [self.ScrollView setContentSize:size];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+
     [_ScrollView setContentSize:_ScrollView.frame.size];
     
     [_ScrollView resignFirstResponder];
-    
-    
-    NSLog(@"Frame Size : %@", NSStringFromCGRect(_ScrollView.frame));
-    
-    NSLog(@"Stack View : %@", NSStringFromCGRect(_StackView.frame));
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,34 +69,32 @@
     
 }
 
-
-
-#pragma mark - [ TableView Delegate ]
-
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell;
-    
-    return cell;
-}
-
-
-
-#pragma mark - [ EVENT ]
-
-- (IBAction) Close:(id)sender {
+- (IBAction)Close:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
 }
 
+- (IBAction)Call:(id)sender {
+    
+}
+
+- (IBAction)Post:(id)sender {
+    
+}
+
+
+#pragma mark - [ SCROLL VIEW DELEGATE ]
+
+
+
+
+#pragma mark - [ TEXT VIEW DELEGATE ]
+
+- (void) textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"");
+    [self.ScrollView setContentOffset:CGPointMake(self.IntroduceTextView.frame.origin.x,
+                                                  self.IntroduceTextView.frame.origin.y + self.IntroduceTextView.frame.size.height + [UIScreen mainScreen].bounds.size.height/2) ];
+}
+
 @end
- 

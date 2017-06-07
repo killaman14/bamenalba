@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,48 +19,68 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iCon.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Vqn-fm-8S3" userLabel="MainImage">
-                        <rect key="frame" x="6" y="7" width="75" height="73"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iCon.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Vqn-fm-8S3" userLabel="MainImage">
+                        <rect key="frame" x="8" y="7" width="75" height="75"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="75" id="cGc-r1-YlH"/>
+                            <constraint firstAttribute="width" constant="75" id="ufO-dn-I9N"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="가락동 1번지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rw0-0q-ZQk" userLabel="Address">
-                        <rect key="frame" x="88" y="12" width="78" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가락동 1번지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rw0-0q-ZQk" userLabel="Address">
+                        <rect key="frame" x="88" y="12" width="71" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.94004124402999878" green="0.41730910539627075" blue="0.22233656048774719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="김실장(33세)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpD-uo-Dfm" userLabel="Name(age)">
-                        <rect key="frame" x="173" y="12" width="89" height="19"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김실장(33세)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpD-uo-Dfm" userLabel="Name(age)">
+                        <rect key="frame" x="169" y="17" width="55" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" red="0.29085028171539307" green="0.48326236009597778" blue="0.99479442834854126" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wwq-FQ-jZd" userLabel="ItemView">
-                        <rect key="frame" x="87" y="35" width="240" height="46"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <rect key="frame" x="87" y="35" width="240" height="40"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.66286272321428574" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k4Z-qs-IDi" userLabel="DetailButton">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k4Z-qs-IDi" userLabel="DetailButton">
                         <rect key="frame" x="335" y="8" width="32" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="1" green="0.29797194417402861" blue="0.92624018715950218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="32" id="Ibe-lM-H53"/>
+                            <constraint firstAttribute="height" constant="32" id="dOQ-xO-B1Q"/>
+                        </constraints>
                         <state key="normal" title="Detail"/>
                         <connections>
                             <action selector="CallDetail" destination="05r-dL-bXP" eventType="touchUpInside" id="KzG-PB-nmf"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-JD-09m" userLabel="PostButton">
-                        <rect key="frame" x="335" y="48" width="32" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-JD-09m" userLabel="PostButton">
+                        <rect key="frame" x="335" y="44" width="32" height="32"/>
                         <color key="backgroundColor" red="1" green="0.76316260641662614" blue="0.98452898287507939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="Ge5-0i-8xK"/>
+                            <constraint firstAttribute="width" constant="32" id="vlf-uC-Ncd"/>
+                        </constraints>
                         <state key="normal" title="Post"/>
                         <connections>
                             <action selector="CallPost" destination="05r-dL-bXP" eventType="touchUpInside" id="mqM-vd-Hxj"/>
                         </connections>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="Rw0-0q-ZQk" firstAttribute="leading" secondItem="Vqn-fm-8S3" secondAttribute="trailing" constant="5" id="3bd-vg-boQ"/>
+                    <constraint firstItem="WpD-uo-Dfm" firstAttribute="leading" secondItem="Rw0-0q-ZQk" secondAttribute="trailing" constant="10" id="3gu-39-Fkl"/>
+                    <constraint firstItem="Vqn-fm-8S3" firstAttribute="leading" secondItem="yub-zG-oAL" secondAttribute="leadingMargin" id="J0g-qg-3vm"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="k4Z-qs-IDi" secondAttribute="trailing" id="K6C-xA-Wvu"/>
+                    <constraint firstItem="Vqn-fm-8S3" firstAttribute="top" secondItem="yub-zG-oAL" secondAttribute="top" constant="7.5" id="Rzh-1P-KLS"/>
+                    <constraint firstAttribute="bottom" secondItem="Vqn-fm-8S3" secondAttribute="bottom" constant="7.5" id="Uw2-0D-VmL"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="KwS-JD-09m" secondAttribute="trailing" id="dKt-j4-DdO"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="KwS-JD-09m" secondAttribute="bottom" constant="5" id="fKw-C0-AS0"/>
+                    <constraint firstAttribute="topMargin" secondItem="k4Z-qs-IDi" secondAttribute="top" id="jG1-BQ-EvU"/>
+                    <constraint firstItem="Rw0-0q-ZQk" firstAttribute="top" secondItem="Vqn-fm-8S3" secondAttribute="top" constant="5" id="qK8-Z4-EKj"/>
+                    <constraint firstItem="WpD-uo-Dfm" firstAttribute="top" secondItem="Rw0-0q-ZQk" secondAttribute="top" constant="5" id="xbo-9J-0Jb"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="Address" destination="Rw0-0q-ZQk" id="4xi-6B-DbZ"/>

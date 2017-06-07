@@ -6,19 +6,18 @@
 //  Copyright © 2017년 bamenalba. All rights reserved.
 //
 
-#import "JobInfoTopView.h"
+#import "SearchTopView.h"
 
 
-@interface JobInfoTopView()
+@interface SearchTopView()
 
 
 
-@property (weak, nonatomic) IBOutlet UIButton *PrimiumButton;
-@property (weak, nonatomic) IBOutlet UIButton *DistanceButton;
+
 
 @end
 
-@implementation JobInfoTopView
+@implementation SearchTopView
 
 @synthesize delegate;
 
@@ -51,7 +50,10 @@
                             action:@selector(CallProvinceButton:)
                   forControlEvents:UIControlEventTouchUpInside];
     
-    [self.PrimiumButton addTarget:self
+    [[self.ProvinceButton titleLabel] setAdjustsFontSizeToFitWidth:YES];
+    [[self.ProvinceButton titleLabel] setMinimumScaleFactor:0.5f];
+    
+    [self.PremiumButton addTarget:self
                            action:@selector(CallPremium:)
                  forControlEvents:UIControlEventTouchUpInside];
     
@@ -76,7 +78,7 @@
 }
 
 - (void) SetPrimiumLabelText:(NSString *)text {
-    [self.PrimiumButton setTitle:text forState:UIControlStateNormal];
+    [self.PremiumButton setTitle:text forState:UIControlStateNormal];
 }
 
 - (void) SetDistanceLabelText:(NSString *)text {
@@ -100,7 +102,7 @@
 
 - (void)CallPremium:(id)sender {
     if (delegate != nil) {
-        [delegate CallProvinceButton];
+        [delegate CallPremiumButton];
     }
 }
 

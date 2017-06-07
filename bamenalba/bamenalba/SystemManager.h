@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #define CSV_KEY_AGE @"age"
 #define CSV_KEY_SECTOR @"sector"
@@ -43,5 +44,7 @@
 + (NSArray *) AlertDataKey:(NSString *)key;
 
 + (NSString *) ProvinceKey:(NSString *)area;
+
++ (UITabBarController *) TabbarController;
 
 @end

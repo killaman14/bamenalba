@@ -7,16 +7,18 @@
 //
 
 #import "JobInformation.h"
-#import "JobInfoTopView.h"
+#import "SearchTopView.h"
 #import "JobInfoCell.h"
 #import "JobInfoDetailView.h"
 
 #import "SystemManager.h"
 #import "AlertManager.h"
 
+#import "AppDelegate.h"
+
 @interface JobInformation ()
-<UITableViewDelegate, UITableViewDataSource, JobInfoTopViewDelegate, JobInfoCellDelegate, AlertManagerDelegate>
-@property (strong, nonatomic) JobInfoTopView *_JobInfoTopView;
+<UITableViewDelegate, UITableViewDataSource, SearchTopViewDelegate, JobInfoCellDelegate, AlertManagerDelegate>
+@property (strong, nonatomic) SearchTopView *_SearchTopView;
 
 @property (weak, nonatomic) NSString *CityName;
 @property (weak, nonatomic) NSString *ProvinceName;
@@ -35,27 +37,29 @@
 
 
 
-@synthesize _JobInfoTopView;
+@synthesize _SearchTopView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    data = [NSMutableArray array];
-    
-    
     [SystemManager sharedInstance];
 
-    _JobInfoTopView = [[[NSBundle mainBundle] loadNibNamed:@"JobInfoTopView"
+    
+    data = [NSMutableArray array];
+    
+    [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
+                                   owner:self
+                                 options:nil] objectAtIndex:0];
+    
+    _SearchTopView = [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
                                                      owner:self
                                                    options:nil] objectAtIndex:0];
-    
-    [_JobInfoTopView setDelegate:self];
-    [TopView addSubview:_JobInfoTopView];
+    [_SearchTopView setDelegate:self];
+    [TopView addSubview:_SearchTopView];
     
     Table.delegate = self;
     Table.dataSource = self;
     [Table registerNib:[UINib nibWithNibName:NSStringFromClass([JobInfoCell class]) bundle:nil] forCellReuseIdentifier:@"JobInfoCell"];
-    
     
     NSArray *address = @[ @"가락동 1번지", @"황금동 2번지", @"황금동 2번지" ];
     NSArray *name = @[ @"김실장", @"김마담", @"미미짱"];
@@ -123,13 +127,13 @@
 {
     if (tag == AlertDataArea) {
         self.CityName = selectedString;
-        [_JobInfoTopView SetCityLabelText:selectedString];
+        [_SearchTopView SetCityLabelText:selectedString];
         
         [self CallProvinceButton];
     }
     else if(tag == AlertDataProvince) {
         self.ProvinceName = selectedString;
-        [_JobInfoTopView SetProvinceLabelText:selectedString];
+        [_SearchTopView SetProvinceLabelText:selectedString];
     }
 }
 
@@ -154,7 +158,7 @@
                                showViewController:self];
 }
 
-- (void) CallPrimiumButton {
+- (void) CallPremiumButton {
     NSLog(@"CallPrimiumButton");
 }
 
@@ -165,22 +169,15 @@
 #pragma mark - [ JobInfoCell Delegate ]
 
 - (void) CallDetailButton:(int) index{
-    NSLog(@"Detail :  %d", index);
-    
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"viewController"];
-    //vc.modalTransitionStyle = uimodaltransi  UIModalTransitionStyleFlipHorizontal;
+    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"JobInfoDetailView"];
     [self presentViewController:vc animated:YES completion:NULL];
-    
-    
-//    JobInfoDetailView *viewController = [[JobInfoDetailView alloc] init];
-//    [self presentViewController:viewController animated:YES completion:^{
-//        
-//    }];
 }
 
 - (void) CallPostButton:(int) index {
     NSLog(@"Post :  %d", index);
 }
+
+
 
 @end

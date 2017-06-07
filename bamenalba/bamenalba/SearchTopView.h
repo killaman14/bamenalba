@@ -8,26 +8,31 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol JobInfoTopViewDelegate <NSObject>
+@protocol SearchTopViewDelegate <NSObject>
 
 @required
 - (void) CallCityButton;
 - (void) CallProvinceButton;
-- (void) CallPrimiumButton;
+- (void) CallPremiumButton;
 - (void) CallDistanceButton;
 
 @end
 
-@interface JobInfoTopView : UIView
+@interface SearchTopView : UIView
 
 @property (weak, nonatomic) IBOutlet UIButton *CityButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *ProvinceButton;
 
-@property (weak, nonatomic) id<JobInfoTopViewDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIButton *PremiumButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *DistanceButton;
+
+
+@property (weak, nonatomic) id<SearchTopViewDelegate> delegate;
 
 - (void) SetCityLabelText:(NSString *)text;
 - (void) SetProvinceLabelText:(NSString *)text;
-- (void) SetPrimiumLabelText:(NSString *)text;
+- (void) SetPremiumLabelText:(NSString *)text;
 - (void) SetDistanceLabelText:(NSString *)text;
 @end
