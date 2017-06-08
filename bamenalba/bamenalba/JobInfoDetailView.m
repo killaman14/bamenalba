@@ -52,7 +52,7 @@
     
     [self.ScrollView setDelegate:self];
     
-    CGSize size = CGSizeMake(self.ScrollView.contentSize.width, self.ScrollView.contentSize.height * 1.3f);
+    CGSize size = CGSizeMake(self.view.frame.size.width, self.ScrollView.contentSize.height * 1.3f);
     [self.ScrollView setContentSize:size];
 }
 

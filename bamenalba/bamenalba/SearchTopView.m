@@ -77,7 +77,7 @@
     [self.ProvinceButton setTitle:[NSString stringWithFormat:@"▼ %@", text] forState:UIControlStateNormal];
 }
 
-- (void) SetPrimiumLabelText:(NSString *)text {
+- (void) SetPremiumLabelText:(NSString *)text {
     [self.PremiumButton setTitle:text forState:UIControlStateNormal];
 }
 

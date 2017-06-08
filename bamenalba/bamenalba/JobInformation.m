@@ -54,6 +54,8 @@
     _SearchTopView = [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
                                                      owner:self
                                                    options:nil] objectAtIndex:0];
+    
+    [_SearchTopView setFrame:CGRectMake(0, 0, self.view.frame.size.width, _SearchTopView.frame.size.height)];
     [_SearchTopView setDelegate:self];
     [TopView addSubview:_SearchTopView];
     

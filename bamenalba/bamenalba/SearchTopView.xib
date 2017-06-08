@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,40 +17,56 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" tag="100" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWA-e4-Hw3">
-                    <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWA-e4-Hw3">
+                    <rect key="frame" x="10" y="0.0" width="43" height="30"/>
                     <color key="backgroundColor" red="0.98416592235304068" green="1" blue="0.96694205236003694" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" title="▼ 전체">
                         <color key="titleColor" red="1" green="0.96085914417300222" blue="0.96972350659739426" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
-                <button hidden="YES" opaque="NO" tag="101" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQZ-04-Gai" userLabel="Province Button">
-                    <rect key="frame" x="60" y="0.0" width="60" height="30"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                <button hidden="YES" opaque="NO" tag="101" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQZ-04-Gai" userLabel="Province Button">
+                    <rect key="frame" x="58" y="0.0" width="43" height="30"/>
                     <color key="backgroundColor" red="0.9841659224" green="1" blue="0.96694205239999997" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" title="▼ 선택">
                         <color key="titleColor" red="1" green="0.96085914419999996" blue="0.96972350659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" tag="102" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRX-xo-hEH" userLabel="▼ 프리미엄">
+                <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRX-xo-hEH" userLabel="▼ 프리미엄">
                     <rect key="frame" x="235" y="3" width="90" height="23"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.9841659224" green="1" blue="0.96694205239999997" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="EXC-Ka-VG4"/>
+                    </constraints>
                     <state key="normal" title="▼ 프리미엄">
                         <color key="titleColor" red="1" green="0.96085914419999996" blue="0.96972350659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" tag="103" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzG-UL-Uwb">
+                <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzG-UL-Uwb">
                     <rect key="frame" x="320" y="3" width="90" height="23"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.9841659224" green="1" blue="0.96694205239999997" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="7RM-1z-0n9"/>
+                    </constraints>
                     <state key="normal" title="▼ 거리순">
                         <color key="titleColor" red="1" green="0.96085914419999996" blue="0.96972350659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.99381440877914429" green="0.52333182096481323" blue="0.71984142065048218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="DQZ-04-Gai" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2kV-bE-Mut"/>
+                <constraint firstAttribute="trailing" secondItem="fzG-UL-Uwb" secondAttribute="trailing" constant="4" id="9eh-Hj-gUJ"/>
+                <constraint firstItem="DQZ-04-Gai" firstAttribute="leading" secondItem="iWA-e4-Hw3" secondAttribute="trailing" constant="5" id="Cjn-Pi-f1O"/>
+                <constraint firstItem="fzG-UL-Uwb" firstAttribute="top" secondItem="jRX-xo-hEH" secondAttribute="top" id="FQ3-L5-j7k"/>
+                <constraint firstItem="DQZ-04-Gai" firstAttribute="baseline" secondItem="iWA-e4-Hw3" secondAttribute="baseline" id="GcL-dv-Gs7"/>
+                <constraint firstAttribute="trailing" secondItem="jRX-xo-hEH" secondAttribute="trailing" constant="89" id="Glh-H1-ucJ"/>
+                <constraint firstItem="fzG-UL-Uwb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="MSP-8b-eMm"/>
+                <constraint firstItem="iWA-e4-Hw3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Mbx-Vg-aWa"/>
+                <constraint firstItem="fzG-UL-Uwb" firstAttribute="baseline" secondItem="jRX-xo-hEH" secondAttribute="firstBaseline" id="eWW-L8-Vfl"/>
+                <constraint firstItem="fzG-UL-Uwb" firstAttribute="firstBaseline" secondItem="jRX-xo-hEH" secondAttribute="baseline" id="fBf-a7-73l"/>
+                <constraint firstItem="DQZ-04-Gai" firstAttribute="centerY" secondItem="jRX-xo-hEH" secondAttribute="centerY" id="jb8-Wb-AJB"/>
+                <constraint firstItem="fzG-UL-Uwb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="3" id="nDv-1r-FjI"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="CityButton" destination="iWA-e4-Hw3" id="jjx-TX-pej"/>

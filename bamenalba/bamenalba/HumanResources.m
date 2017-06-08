@@ -40,8 +40,11 @@
     _SearchTopView = [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
                                                     owner:self
                                                   options:nil] objectAtIndex:0];
+    [_SearchTopView setFrame:CGRectMake(0, 0, TopView.frame.size.width, TopView.frame.size.height)];
     [_SearchTopView setDelegate:self];
     [TopView addSubview:_SearchTopView];
+    
+    NSLog(@"%@\n%@\n%@", NSStringFromCGRect(self.view.frame), NSStringFromCGRect(_SearchTopView.frame), NSStringFromCGRect(TopView.frame));
     
     [TableView setDelegate:self];
     [TableView setDataSource:self];
