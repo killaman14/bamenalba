@@ -37,6 +37,8 @@
 		F35198791EE5EA0100881EFE /* CashChargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F35198781EE5EA0100881EFE /* CashChargeView.m */; };
 		F3A31F741EE523C100D18923 /* HumanResourcesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A31F721EE523C100D18923 /* HumanResourcesCell.m */; };
 		F3A31F751EE523C100D18923 /* HumanResourcesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3A31F731EE523C100D18923 /* HumanResourcesCell.xib */; };
+		F3AC34591EEA28A200473033 /* MyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AC34581EEA28A200473033 /* MyInfo.m */; };
+		F3AC345C1EEA54FD00473033 /* JobWriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AC345B1EEA54FD00473033 /* JobWriteView.m */; };
 		F3F4816C1EDD23B400A29635 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4816B1EDD23B400A29635 /* CHCSVParser.m */; };
 		F3F481701EDD23D500A29635 /* SystemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4816F1EDD23D500A29635 /* SystemManager.m */; };
 		F3F481731EDE4F8400A29635 /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F481721EDE4F8400A29635 /* AlertManager.m */; };
@@ -92,6 +94,10 @@
 		F3A31F711EE523C100D18923 /* HumanResourcesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanResourcesCell.h; sourceTree = "<group>"; };
 		F3A31F721EE523C100D18923 /* HumanResourcesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HumanResourcesCell.m; sourceTree = "<group>"; };
 		F3A31F731EE523C100D18923 /* HumanResourcesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HumanResourcesCell.xib; sourceTree = "<group>"; };
+		F3AC34571EEA28A200473033 /* MyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfo.h; sourceTree = "<group>"; };
+		F3AC34581EEA28A200473033 /* MyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfo.m; sourceTree = "<group>"; };
+		F3AC345A1EEA54FD00473033 /* JobWriteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobWriteView.h; sourceTree = "<group>"; };
+		F3AC345B1EEA54FD00473033 /* JobWriteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobWriteView.m; sourceTree = "<group>"; };
 		F3F4816A1EDD23B400A29635 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
 		F3F4816B1EDD23B400A29635 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		F3F4816E1EDD23D500A29635 /* SystemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemManager.h; sourceTree = "<group>"; };
@@ -238,6 +244,8 @@
 				F35198751EE5E4B400881EFE /* ClauseView.m */,
 				F35198771EE5EA0100881EFE /* CashChargeView.h */,
 				F35198781EE5EA0100881EFE /* CashChargeView.m */,
+				F3AC34571EEA28A200473033 /* MyInfo.h */,
+				F3AC34581EEA28A200473033 /* MyInfo.m */,
 			);
 			name = More;
 			sourceTree = "<group>";
@@ -245,6 +253,8 @@
 		F372EE5E1EE0EA7000F033C2 /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
+				F3AC345A1EEA54FD00473033 /* JobWriteView.h */,
+				F3AC345B1EEA54FD00473033 /* JobWriteView.m */,
 				5409F8A41EE08306003CAB00 /* JobInfoDetailView.h */,
 				5409F8A51EE08306003CAB00 /* JobInfoDetailView.m */,
 			);
@@ -356,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3F481731EDE4F8400A29635 /* AlertManager.m in Sources */,
+				F3AC34591EEA28A200473033 /* MyInfo.m in Sources */,
 				5413668C1ED7C9B9008CFAF1 /* More.m in Sources */,
 				5413667F1ED7C92A008CFAF1 /* JobInformation.m in Sources */,
 				541366861ED7C98D008CFAF1 /* JobRegistor.m in Sources */,
@@ -366,6 +377,7 @@
 				5413665C1ED7AD42008CFAF1 /* main.m in Sources */,
 				F35198791EE5EA0100881EFE /* CashChargeView.m in Sources */,
 				F35198661EE53CF100881EFE /* HumanInfoDetailView.m in Sources */,
+				F3AC345C1EEA54FD00473033 /* JobWriteView.m in Sources */,
 				541366A21ED7F468008CFAF1 /* SearchTopView.m in Sources */,
 				541366891ED7C9A6008CFAF1 /* MemoBox.m in Sources */,
 				F3F4816C1EDD23B400A29635 /* CHCSVParser.m in Sources */,

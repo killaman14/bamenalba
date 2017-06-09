@@ -48,6 +48,10 @@
     [self Viewload:@"Clause"];
 }
 
+- (IBAction) MyInfo:(id)sender {
+    [self Viewload:@"MyInfo"];
+}
+
 - (IBAction) CashChargeViewLoad:(id)sender {
     [self Viewload:@"CashCharge"];
 }

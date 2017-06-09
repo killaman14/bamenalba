@@ -6,8 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,64 +15,66 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWA-e4-Hw3">
-                    <rect key="frame" x="10" y="0.0" width="43" height="30"/>
-                    <color key="backgroundColor" red="0.98416592235304068" green="1" blue="0.96694205236003694" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" title="▼ 전체">
-                        <color key="titleColor" red="1" green="0.96085914417300222" blue="0.96972350659739426" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                </button>
-                <button hidden="YES" opaque="NO" tag="101" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQZ-04-Gai" userLabel="Province Button">
-                    <rect key="frame" x="58" y="0.0" width="43" height="30"/>
-                    <color key="backgroundColor" red="0.9841659224" green="1" blue="0.96694205239999997" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" title="▼ 선택">
-                        <color key="titleColor" red="1" green="0.96085914419999996" blue="0.96972350659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                </button>
-                <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRX-xo-hEH" userLabel="▼ 프리미엄">
-                    <rect key="frame" x="235" y="3" width="90" height="23"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3zt-pI-dXA" userLabel="Left Buttons">
+                    <rect key="frame" x="10" y="0.0" width="171" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWA-e4-Hw3" userLabel="One Button">
+                            <rect key="frame" x="0.0" y="0.0" width="43" height="30"/>
+                            <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="43" id="Tcl-c6-cb2"/>
+                            </constraints>
+                            <state key="normal" title="▼ 전체">
+                                <color key="titleColor" red="1" green="0.96085914417300222" blue="0.96972350659739426" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                        <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="249" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQZ-04-Gai" userLabel="Two Button">
+                            <rect key="frame" x="51" y="0.0" width="43" height="30"/>
+                            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="▼ 선택">
+                                <color key="titleColor" red="1" green="0.96085914419999996" blue="0.96972350659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRX-xo-hEH" userLabel="Three Button">
+                            <rect key="frame" x="102" y="0.0" width="69" height="30"/>
+                            <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="▼ 프리미엄">
+                                <color key="titleColor" red="1" green="0.96085914419999996" blue="0.96972350659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="jRX-xo-hEH" firstAttribute="leading" secondItem="DQZ-04-Gai" secondAttribute="trailing" constant="8" symbolic="YES" id="AUd-0b-C1k"/>
+                        <constraint firstItem="DQZ-04-Gai" firstAttribute="leading" secondItem="iWA-e4-Hw3" secondAttribute="trailing" constant="8" symbolic="YES" id="Js3-3H-EKi"/>
+                    </constraints>
+                </stackView>
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzG-UL-Uwb" userLabel="Right Button">
+                    <rect key="frame" x="323" y="0.0" width="90" height="30"/>
                     <color key="backgroundColor" red="0.9841659224" green="1" blue="0.96694205239999997" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="90" id="EXC-Ka-VG4"/>
+                        <constraint firstAttribute="width" constant="90" id="i4F-RA-1WG"/>
                     </constraints>
-                    <state key="normal" title="▼ 프리미엄">
-                        <color key="titleColor" red="1" green="0.96085914419999996" blue="0.96972350659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                </button>
-                <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzG-UL-Uwb">
-                    <rect key="frame" x="320" y="3" width="90" height="23"/>
-                    <color key="backgroundColor" red="0.9841659224" green="1" blue="0.96694205239999997" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="90" id="7RM-1z-0n9"/>
-                    </constraints>
-                    <state key="normal" title="▼ 거리순">
+                    <state key="normal" title="▼ 광고작성">
                         <color key="titleColor" red="1" green="0.96085914419999996" blue="0.96972350659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.99381440877914429" green="0.52333182096481323" blue="0.71984142065048218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="DQZ-04-Gai" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2kV-bE-Mut"/>
-                <constraint firstAttribute="trailing" secondItem="fzG-UL-Uwb" secondAttribute="trailing" constant="4" id="9eh-Hj-gUJ"/>
-                <constraint firstItem="DQZ-04-Gai" firstAttribute="leading" secondItem="iWA-e4-Hw3" secondAttribute="trailing" constant="5" id="Cjn-Pi-f1O"/>
-                <constraint firstItem="fzG-UL-Uwb" firstAttribute="top" secondItem="jRX-xo-hEH" secondAttribute="top" id="FQ3-L5-j7k"/>
-                <constraint firstItem="DQZ-04-Gai" firstAttribute="baseline" secondItem="iWA-e4-Hw3" secondAttribute="baseline" id="GcL-dv-Gs7"/>
-                <constraint firstAttribute="trailing" secondItem="jRX-xo-hEH" secondAttribute="trailing" constant="89" id="Glh-H1-ucJ"/>
+                <constraint firstItem="fzG-UL-Uwb" firstAttribute="top" secondItem="3zt-pI-dXA" secondAttribute="top" id="4J0-ft-GiD"/>
                 <constraint firstItem="fzG-UL-Uwb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="MSP-8b-eMm"/>
-                <constraint firstItem="iWA-e4-Hw3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Mbx-Vg-aWa"/>
-                <constraint firstItem="fzG-UL-Uwb" firstAttribute="baseline" secondItem="jRX-xo-hEH" secondAttribute="firstBaseline" id="eWW-L8-Vfl"/>
-                <constraint firstItem="fzG-UL-Uwb" firstAttribute="firstBaseline" secondItem="jRX-xo-hEH" secondAttribute="baseline" id="fBf-a7-73l"/>
-                <constraint firstItem="DQZ-04-Gai" firstAttribute="centerY" secondItem="jRX-xo-hEH" secondAttribute="centerY" id="jb8-Wb-AJB"/>
-                <constraint firstItem="fzG-UL-Uwb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="3" id="nDv-1r-FjI"/>
+                <constraint firstItem="3zt-pI-dXA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="ZMD-Hj-F1d"/>
+                <constraint firstAttribute="trailing" secondItem="fzG-UL-Uwb" secondAttribute="trailing" constant="1" id="gqD-QO-kRW"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="CityButton" destination="iWA-e4-Hw3" id="jjx-TX-pej"/>
-                <outlet property="DistanceButton" destination="fzG-UL-Uwb" id="Ury-BL-rm0"/>
-                <outlet property="PremiumButton" destination="jRX-xo-hEH" id="0YN-yK-jRk"/>
-                <outlet property="ProvinceButton" destination="DQZ-04-Gai" id="svp-Z3-3xP"/>
+                <outlet property="LEFT_ONE_BUTTON" destination="iWA-e4-Hw3" id="u6i-tc-rqz"/>
+                <outlet property="LEFT_THREE_BUTTON" destination="jRX-xo-hEH" id="kAW-qd-DOi"/>
+                <outlet property="LEFT_TWO_BUTTON" destination="DQZ-04-Gai" id="mLZ-xN-A5N"/>
+                <outlet property="RIGHT_BUTTON" destination="fzG-UL-Uwb" id="A3c-fR-OAQ"/>
             </connections>
-            <point key="canvasLocation" x="76" y="76"/>
+            <point key="canvasLocation" x="86" y="44"/>
         </view>
     </objects>
 </document>

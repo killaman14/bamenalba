@@ -8,31 +8,39 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef enum {
+    TOPVIEW_LEFT_BUTTON_ONE = 0,
+    TOPVIEW_LEFT_BUTTON_TWO,
+    TOPVIEW_LEFT_BUTTON_THREE,
+    
+    TOPVIEW_RIGHT_BUTTON
+} TOPVIEW_BUTTON;
+
+
 @protocol SearchTopViewDelegate <NSObject>
 
 @required
-- (void) CallCityButton;
-- (void) CallProvinceButton;
-- (void) CallPremiumButton;
-- (void) CallDistanceButton;
+- (void) requestButton:(TOPVIEW_BUTTON) buttontype;
 
 @end
 
 @interface SearchTopView : UIView
 
-@property (weak, nonatomic) IBOutlet UIButton *CityButton;
+@property (weak, nonatomic) IBOutlet UIButton *LEFT_ONE_BUTTON;
+@property (weak, nonatomic) IBOutlet UIButton *LEFT_TWO_BUTTON;
+@property (weak, nonatomic) IBOutlet UIButton *LEFT_THREE_BUTTON;
 
-@property (weak, nonatomic) IBOutlet UIButton *ProvinceButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *PremiumButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *DistanceButton;
+@property (weak, nonatomic) IBOutlet UIButton *RIGHT_BUTTON;
 
 
 @property (weak, nonatomic) id<SearchTopViewDelegate> delegate;
 
-- (void) SetCityLabelText:(NSString *)text;
-- (void) SetProvinceLabelText:(NSString *)text;
-- (void) SetPremiumLabelText:(NSString *)text;
-- (void) SetDistanceLabelText:(NSString *)text;
+- (id) Init;
+
+- (IBAction) Call:(id)sender;
+
+- (void) setHidden:(BOOL)hidden ButtonType:(TOPVIEW_BUTTON) buttontype;
+- (void) setText:(NSString *)text ButtonType:(TOPVIEW_BUTTON) buttontype;
+
 @end

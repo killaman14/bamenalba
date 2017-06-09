@@ -129,13 +129,14 @@
 {
     if (tag == AlertDataArea) {
         self.CityName = selectedString;
-        [_SearchTopView SetCityLabelText:selectedString];
+        [_SearchTopView setText:selectedString ButtonType:TOPVIEW_LEFT_BUTTON_ONE];
         
         [self CallProvinceButton];
     }
     else if(tag == AlertDataProvince) {
         self.ProvinceName = selectedString;
-        [_SearchTopView SetProvinceLabelText:selectedString];
+        
+        [_SearchTopView setText:selectedString ButtonType:TOPVIEW_LEFT_BUTTON_TWO];
     }
 }
 
@@ -164,8 +165,22 @@
     NSLog(@"CallPrimiumButton");
 }
 
-- (void) CallDistanceButton {
-    NSLog(@"CallDistanceButton");
+
+- (void) requestButton:(TOPVIEW_BUTTON)buttontype
+{
+    NSLog(@"requestButton : %u", buttontype);
+    switch (buttontype) {
+        case TOPVIEW_LEFT_BUTTON_ONE:
+            [self CallCityButton];
+            break;
+        case TOPVIEW_LEFT_BUTTON_TWO:
+            [self CallProvinceButton];
+            break;
+        case TOPVIEW_RIGHT_BUTTON:
+            [self storyBoardViewLoad:@"JobWriteView"];
+        default:
+            break;
+    }
 }
 
 #pragma mark - [ JobInfoCell Delegate ]
@@ -180,6 +195,12 @@
     NSLog(@"Post :  %d", index);
 }
 
+#pragma mark - [ PROCESS ]
 
+- (void) storyBoardViewLoad:(NSString *)identifier {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:identifier];
+    [self presentViewController:vc animated:YES completion:NULL];
+}
 
 @end

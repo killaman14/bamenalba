@@ -97,12 +97,24 @@
 }
 
 - (void) CallPremiumButton {
-    NSLog(@"CallPremiumButton %ld", [[[SystemManager TabbarController] tabBar] tag]);
+    
     
 }
 
 - (void) CallDistanceButton {
     
+}
+
+
+- (void) requestButton:(TOPVIEW_BUTTON)buttontype {
+    switch (buttontype) {
+        case TOPVIEW_LEFT_BUTTON_ONE:
+            [self CallCityButton];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 

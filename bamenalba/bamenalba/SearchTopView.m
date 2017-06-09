@@ -10,14 +10,15 @@
 
 
 @interface SearchTopView()
-
-
-
-
-
 @end
 
 @implementation SearchTopView
+
+@synthesize LEFT_ONE_BUTTON;
+@synthesize LEFT_TWO_BUTTON;
+@synthesize LEFT_THREE_BUTTON;
+@synthesize RIGHT_BUTTON;
+
 
 @synthesize delegate;
 
@@ -42,73 +43,72 @@
     
     [self setBackgroundColor:[UIColor blueColor]];
     
-    [self.CityButton addTarget:self
-                        action:@selector(CallCity:)
+    [self.LEFT_ONE_BUTTON addTarget:self
+                        action:@selector(Call:)
               forControlEvents:UIControlEventTouchUpInside];
     
-    [self.ProvinceButton addTarget:self
-                            action:@selector(CallProvinceButton:)
+    [self.LEFT_TWO_BUTTON addTarget:self
+                            action:@selector(Call:)
                   forControlEvents:UIControlEventTouchUpInside];
     
-    [[self.ProvinceButton titleLabel] setAdjustsFontSizeToFitWidth:YES];
-    [[self.ProvinceButton titleLabel] setMinimumScaleFactor:0.5f];
+    [[self.LEFT_TWO_BUTTON titleLabel] setAdjustsFontSizeToFitWidth:YES];
+    [[self.LEFT_TWO_BUTTON titleLabel] setMinimumScaleFactor:0.5f];
     
-    [self.PremiumButton addTarget:self
-                           action:@selector(CallPremium:)
+    [self.LEFT_THREE_BUTTON addTarget:self
+                           action:@selector(Call:)
                  forControlEvents:UIControlEventTouchUpInside];
     
-    [self.DistanceButton addTarget:self
-                            action:@selector(CallDistance:)
+    [self.RIGHT_BUTTON addTarget:self
+                            action:@selector(Call:)
                   forControlEvents:UIControlEventTouchUpInside];
 }
 
 
 #pragma mark - [ Event ]
 
-- (void) SetCityLabelText:(NSString *)text {
-    if (!([text isEqualToString:@""] || [text isEqualToString:@"전체"])) {
-        [self.ProvinceButton setHidden:NO];
-        [self.ProvinceButton setEnabled:YES];
-    }
-    [self.CityButton setTitle:[NSString stringWithFormat:@"▼ %@", text] forState:UIControlStateNormal];
-}
-
-- (void) SetProvinceLabelText:(NSString *)text {
-    [self.ProvinceButton setTitle:[NSString stringWithFormat:@"▼ %@", text] forState:UIControlStateNormal];
-}
-
-- (void) SetPremiumLabelText:(NSString *)text {
-    [self.PremiumButton setTitle:text forState:UIControlStateNormal];
-}
-
-- (void) SetDistanceLabelText:(NSString *)text {
-    [self.DistanceButton setTitle:text forState:UIControlStateNormal];
-}
-
-
-#pragma mark - [ JobInfoTopView Delegate Methods ]
-
-- (void)CallCity:(id)sender {
+- (IBAction) Call:(id)sender {
+    UIButton *btn = (UIButton *) sender;
     if (delegate != nil) {
-        [delegate CallCityButton];
+        [delegate requestButton:(TOPVIEW_BUTTON)btn.tag];
     }
 }
 
-- (void)CallProvinceButton:(id)sender {
-    if (delegate != nil) {
-        [delegate CallProvinceButton];
-    }
+- (void) setHidden:(BOOL)hidden ButtonType:(TOPVIEW_BUTTON) buttontype
+{
+
+    [[self getButtonTypeObject:buttontype] setHidden:hidden];
 }
 
-- (void)CallPremium:(id)sender {
-    if (delegate != nil) {
-        [delegate CallPremiumButton];
+- (void) setText:(NSString *)text ButtonType:(TOPVIEW_BUTTON) buttontype
+{
+    UIButton *btn = [self getButtonTypeObject:buttontype];
+    
+    if (btn != nil) {
+        if (btn.hidden == YES) {
+            [btn setHidden:NO];
+        }
+        [[btn titleLabel] setText:text];
     }
+    
 }
 
-- (void)CallDistance:(id)sender {
-    if (delegate != nil) {
-        [delegate CallDistanceButton];
+- (UIButton *) getButtonTypeObject:(TOPVIEW_BUTTON) buttontype {
+    switch (buttontype)
+    {
+        case TOPVIEW_LEFT_BUTTON_ONE:
+            return LEFT_ONE_BUTTON;
+            
+        case TOPVIEW_LEFT_BUTTON_TWO:
+            return LEFT_TWO_BUTTON;
+            
+        case TOPVIEW_LEFT_BUTTON_THREE:
+            return LEFT_THREE_BUTTON;
+            
+        case TOPVIEW_RIGHT_BUTTON:
+            return RIGHT_BUTTON;
+            
+        default:
+            return nil;
     }
 }
 

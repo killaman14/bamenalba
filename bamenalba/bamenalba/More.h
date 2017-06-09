@@ -15,6 +15,8 @@
 
 - (IBAction) ClauseViewLoad:(id)sender;
 
+- (IBAction) MyInfo:(id)sender;
+
 - (IBAction) CashChargeViewLoad:(id)sender;
 
 @end
