@@ -18,10 +18,17 @@ typedef enum {
 } TOPVIEW_BUTTON;
 
 
-@protocol SearchTopViewDelegate <NSObject>
+#define SEARCHTOP_ONE_BUTTON @"0"
+#define SEARCHTOP_TWO_BUTTON @"1"
+#define SEARCHTOP_THREE_BUTTON @"2"
+#define SEARCHTOP_RIGHT_BUTTON @"3"
 
+
+@protocol SearchTopViewDelegate <NSObject>
 @required
 - (void) requestButton:(TOPVIEW_BUTTON) buttontype;
+@optional
+- (NSDictionary *) searchbarTitles;
 
 @end
 
@@ -35,8 +42,6 @@ typedef enum {
 
 
 @property (weak, nonatomic) id<SearchTopViewDelegate> delegate;
-
-- (id) Init;
 
 - (IBAction) Call:(id)sender;
 

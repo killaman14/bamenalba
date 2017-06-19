@@ -14,6 +14,11 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
++ (AppDelegate *) sharedAppDelegate;
+
+
+
+- (const char*) getDeviceUUID;
 
 @end
 

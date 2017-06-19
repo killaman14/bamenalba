@@ -10,6 +10,9 @@
 
 @interface JobWriteView : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIScrollView *ScrollView;
+@property (weak, nonatomic) IBOutlet UICollectionView *ThemaCollectionView;
+
 - (IBAction) Close:(id)sender;
 
 @end

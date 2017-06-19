@@ -7,31 +7,69 @@
 //
 
 #import "MemoBox.h"
+#import "MemoBoxCell.h"
 
-@interface MemoBox ()
+#import "SearchTopView.h"
 
+@interface MemoBox () <UITableViewDelegate, UITableViewDataSource, SearchTopViewDelegate>
+@property (weak, nonatomic) SearchTopView *_SearchTopView;
 @end
 
 @implementation MemoBox
+@synthesize TopView;
+@synthesize TableView;
+@synthesize _SearchTopView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    _SearchTopView = [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
+                                                    owner:self
+                                                  options:nil] objectAtIndex:0];
+    [_SearchTopView setFrame:CGRectMake(0, 0, TopView.frame.size.width, TopView.frame.size.height)];
+    [_SearchTopView setDelegate:self];
+    
+    [TopView addSubview:_SearchTopView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark -
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction) Close:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
-*/
+
+#pragma mark - 
+
+- (void) requestButton:(TOPVIEW_BUTTON)buttontype {
+    
+}
+
+- (NSDictionary *) searchbarTitles {
+    NSDictionary *titles = @{ SEARCHTOP_RIGHT_BUTTON : @"전체-삭제" };
+    return titles;
+}
+
+
+#pragma mark - 
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MemoBoxCell *cell = (MemoBoxCell *) [tableView dequeueReusableCellWithIdentifier:@"MemoBoxCell" forIndexPath:indexPath];
+    
+    return cell;
+}
 
 @end

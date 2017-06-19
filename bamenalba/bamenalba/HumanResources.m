@@ -15,7 +15,7 @@
 #import "PostAlert.h"
 
 @interface HumanResources () <UITableViewDelegate, UITableViewDataSource, SearchTopViewDelegate, HumanResourcesCellDelegate, AlertManagerDelegate, PostAlertDelegate>
-@property (weak, nonatomic) IBOutlet UIView *TopView;
+
 
 @property (weak, nonatomic) SearchTopView *_SearchTopView;
 
@@ -42,9 +42,8 @@
                                                   options:nil] objectAtIndex:0];
     [_SearchTopView setFrame:CGRectMake(0, 0, TopView.frame.size.width, TopView.frame.size.height)];
     [_SearchTopView setDelegate:self];
-    [TopView addSubview:_SearchTopView];
     
-    NSLog(@"%@\n%@\n%@", NSStringFromCGRect(self.view.frame), NSStringFromCGRect(_SearchTopView.frame), NSStringFromCGRect(TopView.frame));
+    [TopView addSubview:_SearchTopView];
     
     [TableView setDelegate:self];
     [TableView setDataSource:self];
@@ -55,6 +54,11 @@
     [super didReceiveMemoryWarning];
 }
 
+
+- (NSDictionary *) searchbarTitles {
+    NSDictionary *titles = @{ SEARCHTOP_ONE_BUTTON : @"전체(지역)", SEARCHTOP_RIGHT_BUTTON : @"성별-전체" };
+    return titles;
+}
 
 
 #pragma mark - [ TABLE VIEW DELEGATE ]
@@ -101,8 +105,10 @@
     
 }
 
-- (void) CallDistanceButton {
-    
+- (void) CallMeetingWrite {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"MeetingWrite"];
+    [self presentViewController:vc animated:YES completion:NULL];
 }
 
 
@@ -111,7 +117,8 @@
         case TOPVIEW_LEFT_BUTTON_ONE:
             [self CallCityButton];
             break;
-            
+        case TOPVIEW_RIGHT_BUTTON:
+            [self CallMeetingWrite];
         default:
             break;
     }
@@ -189,4 +196,5 @@
         
     }];
 }
+
 @end

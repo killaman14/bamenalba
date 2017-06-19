@@ -52,7 +52,7 @@
     
     [self.ScrollView setDelegate:self];
     
-    CGSize size = CGSizeMake(self.view.frame.size.width, self.ScrollView.contentSize.height * 1.3f);
+    CGSize size = CGSizeMake(self.view.frame.size.width, self.ScrollView.contentSize.height);
     [self.ScrollView setContentSize:size];
 }
 
@@ -92,7 +92,7 @@
 #pragma mark - [ TEXT VIEW DELEGATE ]
 
 - (void) textViewDidBeginEditing:(UITextView *)textView {
-    NSLog(@"");
+    
     [self.ScrollView setContentOffset:CGPointMake(self.IntroduceTextView.frame.origin.x,
                                                   self.IntroduceTextView.frame.origin.y + self.IntroduceTextView.frame.size.height + [UIScreen mainScreen].bounds.size.height/2) ];
 }

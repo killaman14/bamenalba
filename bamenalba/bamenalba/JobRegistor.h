@@ -10,4 +10,5 @@
 
 @interface JobRegistor : UIViewController
 
+@property (weak, nonatomic) IBOutlet UICollectionView *CollectionView;
 @end

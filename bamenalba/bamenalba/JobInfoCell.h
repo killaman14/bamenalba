@@ -30,6 +30,7 @@ typedef enum  {
 
 @interface JobInfoCell : UITableViewCell
 
+@property (assign, nonatomic) float scale;
 /*
  [ 주소 ]
  */
@@ -44,11 +45,6 @@ typedef enum  {
  [ 아이템 적용 뷰 ]
  */
 @property (weak, nonatomic) IBOutlet UIView *ItemView;
-
-
-@property (weak, nonatomic) IBOutlet UIButton *DetailButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *PostButton;
 
 
 

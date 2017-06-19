@@ -9,10 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface JobInformation : UIViewController
-{
-    UIView *_headerview;
-    UITableView *_tableview;
-}
 
 @property (nonatomic, strong) IBOutlet UIView *TopView;
 @property (nonatomic, strong) IBOutlet UITableView *Table;

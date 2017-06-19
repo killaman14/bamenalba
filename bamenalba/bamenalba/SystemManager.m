@@ -14,20 +14,20 @@
 
 @interface SystemManager() <CHCSVParserDelegate, UITabBarDelegate, UITabBarControllerDelegate>
 {
-    NSMutableArray *Keys;
+    NSMutableArray *CSVKeys;
     
-    NSMutableDictionary *ProvinceKeys;
+    NSMutableDictionary *CSVProvinceKeys;
     
-    NSMutableDictionary *Data;
+    NSMutableDictionary *CSVData;
 }
 
 @property (assign, nonatomic) NSInteger ReadLineIndex;
 
-@property (strong, nonatomic) NSMutableArray *Keys;
+@property (strong, nonatomic) NSMutableArray *CSVKeys;
 
-@property (strong, nonatomic) NSMutableDictionary *ProvinceKeys;
+@property (strong, nonatomic) NSMutableDictionary *CSVProvinceKeys;
 
-@property (strong, nonatomic) NSMutableDictionary *Data;
+@property (strong, nonatomic) NSMutableDictionary *CSVData;
 
 @property (strong, nonatomic) UITabBarController *Tabbar;
 
@@ -37,10 +37,13 @@
 @implementation SystemManager
 
 
-@synthesize Keys;
-@synthesize ProvinceKeys;
-@synthesize Data;
+@synthesize CSVKeys;
+@synthesize CSVProvinceKeys;
+@synthesize CSVData;
 @synthesize Tabbar;
+
+@synthesize IsSignUp;
+@synthesize UUID;
 
 @synthesize ReadLineIndex = _ReadLineIndex;
 
@@ -72,9 +75,9 @@ static SystemManager *sharedInstance = nil;
 
 + (NSArray *) AlertDataKey:(NSString *)key {
     
-    if ([sharedInstance Data] != nil) {
-        if ([[[sharedInstance Data] allKeys] containsObject:key]) {
-            return [[sharedInstance Data] objectForKey:key];
+    if ([sharedInstance CSVData] != nil) {
+        if ([[[sharedInstance CSVData] allKeys] containsObject:key]) {
+            return [[sharedInstance CSVData] objectForKey:key];
         }
     }
     
@@ -82,7 +85,7 @@ static SystemManager *sharedInstance = nil;
 }
 
 + (NSString *) ProvinceKey:(NSString *)area {
-    return [[sharedInstance ProvinceKeys] objectForKey:area];
+    return [[sharedInstance CSVProvinceKeys] objectForKey:area];
 }
 
 + (UITabBarController *) TabbarController {
@@ -96,7 +99,7 @@ static SystemManager *sharedInstance = nil;
 
 
 - (BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-    NSLog(@"alsdkjflaskdj");
+    
     return NO;
 }
 
@@ -111,31 +114,49 @@ static SystemManager *sharedInstance = nil;
 
 - (void) InitProvinceKeySetting
 {
-    if (ProvinceKeys != nil) {
-        [ProvinceKeys removeAllObjects];
+    if (CSVProvinceKeys != nil) {
+        [CSVProvinceKeys removeAllObjects];
     }
     else {
-        ProvinceKeys = [[NSMutableDictionary alloc] init];
+        CSVProvinceKeys = [[NSMutableDictionary alloc] init];
     }
     
-    [ProvinceKeys setObject:CSV_KEY_SEOUL forKey:@"서울"];
-    [ProvinceKeys setObject:CSV_KEY_GYEONGGI forKey:@"경기"];
-    [ProvinceKeys setObject:CSV_KEY_BUSAN forKey:@"부산"];
-    [ProvinceKeys setObject:CSV_KEY_INCHEON forKey:@"인천"];
-    [ProvinceKeys setObject:CSV_KEY_DAEGU forKey:@"대구"];
-    [ProvinceKeys setObject:CSV_KEY_GWANGJU forKey:@"광주"];
-    [ProvinceKeys setObject:CSV_KEY_GYEONGNAM forKey:@"경남"];
-    [ProvinceKeys setObject:CSV_KEY_CHUNGNAM forKey:@"충남"];
-    [ProvinceKeys setObject:CSV_KEY_DAEJEON forKey:@"대전"];
-    [ProvinceKeys setObject:CSV_KEY_CHUNGBUK forKey:@"충북"];
-    [ProvinceKeys setObject:CSV_KEY_GYEONGSANGBUK forKey:@"경북"];
-    [ProvinceKeys setObject:CSV_KEY_ULSAN forKey:@"울산"];
-    [ProvinceKeys setObject:CSV_KEY_SEJONG forKey:@"세정"];
-    [ProvinceKeys setObject:CSV_KEY_JEONBUK forKey:@"전북"];
-    [ProvinceKeys setObject:CSV_KEY_GANGWON forKey:@"강원"];
-    [ProvinceKeys setObject:CSV_KEY_JEONNAM forKey:@"전남"];
-    [ProvinceKeys setObject:CSV_KEY_JEJU forKey:@"제주"];
+    [CSVProvinceKeys setObject:CSV_KEY_SEOUL       forKey:@"서울"];
+    [CSVProvinceKeys setObject:CSV_KEY_GYEONGGI    forKey:@"경기"];
+    [CSVProvinceKeys setObject:CSV_KEY_BUSAN       forKey:@"부산"];
+    [CSVProvinceKeys setObject:CSV_KEY_INCHEON     forKey:@"인천"];
+    [CSVProvinceKeys setObject:CSV_KEY_DAEGU       forKey:@"대구"];
+    [CSVProvinceKeys setObject:CSV_KEY_GWANGJU     forKey:@"광주"];
+    [CSVProvinceKeys setObject:CSV_KEY_GYEONGNAM   forKey:@"경남"];
+    [CSVProvinceKeys setObject:CSV_KEY_CHUNGNAM    forKey:@"충남"];
+    [CSVProvinceKeys setObject:CSV_KEY_DAEJEON     forKey:@"대전"];
+    [CSVProvinceKeys setObject:CSV_KEY_CHUNGBUK    forKey:@"충북"];
+    [CSVProvinceKeys setObject:CSV_KEY_GYEONGSANGBUK forKey:@"경북"];
+    [CSVProvinceKeys setObject:CSV_KEY_ULSAN       forKey:@"울산"];
+    [CSVProvinceKeys setObject:CSV_KEY_SEJONG      forKey:@"세정"];
+    [CSVProvinceKeys setObject:CSV_KEY_JEONBUK     forKey:@"전북"];
+    [CSVProvinceKeys setObject:CSV_KEY_GANGWON     forKey:@"강원"];
+    [CSVProvinceKeys setObject:CSV_KEY_JEONNAM     forKey:@"전남"];
+    [CSVProvinceKeys setObject:CSV_KEY_JEJU        forKey:@"제주"];
 }
+
+- (const char *) getDeviceUUID
+{
+    NSUserDefaults* userDefault = [NSUserDefaults standardUserDefaults];
+    NSString* iOSUUID = [userDefault stringForKey:@"UUID_KEY"];
+    
+    if ( iOSUUID == nil || [iOSUUID isEqual: @""] )
+    {
+        iOSUUID = [[NSUUID UUID] UUIDString];
+    }
+    
+    [userDefault setObject:iOSUUID forKey:@"UUID_KEY"];
+    [userDefault synchronize];
+    
+    return [iOSUUID UTF8String];
+}
+
+#pragma mark - [ CSV ]
 
 - (void) InitCSVLoad {
     NSBundle *mainBundle = [NSBundle mainBundle];
@@ -159,9 +180,9 @@ static SystemManager *sharedInstance = nil;
 
 - (void) parserDidBeginDocument:(CHCSVParser *)parser
 {
-    Data = [[NSMutableDictionary alloc] init];
+    CSVData = [[NSMutableDictionary alloc] init];
     
-    Keys = [[NSMutableArray alloc] init];
+    CSVKeys = [[NSMutableArray alloc] init];
 }
 
 - (void) parser:(CHCSVParser *)parser didBeginLine:(NSUInteger)recordNumber
@@ -177,8 +198,8 @@ static SystemManager *sharedInstance = nil;
     {
         for (int i = 0; i < arr.count; i++)
         {
-            [Keys addObject:[arr objectAtIndex:i]];
-            [Data setObject:[NSMutableArray array] forKey:[arr objectAtIndex:i]];
+            [CSVKeys addObject:[arr objectAtIndex:i]];
+            [CSVData setObject:[NSMutableArray array] forKey:[arr objectAtIndex:i]];
         }
     }
     
@@ -187,7 +208,7 @@ static SystemManager *sharedInstance = nil;
         {
             if (![[arr objectAtIndex:i] isEqualToString:@""])
             {
-                [[Data objectForKey:[Keys objectAtIndex:i]] addObject:[arr objectAtIndex:i]];
+                [[CSVData objectForKey:[CSVKeys objectAtIndex:i]] addObject:[arr objectAtIndex:i]];
             }
         }
     }
@@ -206,6 +227,22 @@ static SystemManager *sharedInstance = nil;
 - (void)parser:(CHCSVParser *)parser didFailWithError:(NSError *)error
 {
     NSLog(@"ERROR: %@", error);
+}
+
+
+#pragma mark - [ APP PROCESS ] 
+
+- (void) InitApp
+{
+    [self setUUID:[self getDeviceUUID]];
+    [self setIsSignUp:[[NSUserDefaults standardUserDefaults] boolForKey:IS_SIGNUP]];
+}
+
+
+#pragma mark - [ EVENT ]
+
+- (void) SaveSignup {
+    
 }
 
 @end

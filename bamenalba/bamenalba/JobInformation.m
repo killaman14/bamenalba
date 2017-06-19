@@ -39,17 +39,21 @@
 
 @synthesize _SearchTopView;
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+//    [self storyBoardViewLoad:@"SignUp"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [SystemManager sharedInstance];
+    
+    
 
     
     data = [NSMutableArray array];
-    
-    [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
-                                   owner:self
-                                 options:nil] objectAtIndex:0];
     
     _SearchTopView = [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
                                                      owner:self
@@ -62,16 +66,18 @@
     Table.delegate = self;
     Table.dataSource = self;
     [Table registerNib:[UINib nibWithNibName:NSStringFromClass([JobInfoCell class]) bundle:nil] forCellReuseIdentifier:@"JobInfoCell"];
+    Table.rowHeight = UITableViewAutomaticDimension;
+    Table.estimatedRowHeight = 140;
     
     NSArray *address = @[ @"가락동 1번지", @"황금동 2번지", @"황금동 2번지" ];
-    NSArray *name = @[ @"김실장", @"김마담", @"미미짱"];
-    NSArray *age = @[ @"33", @"42", @"66" ];
+    NSArray *name    = @[ @"김실장", @"김마담", @"미미짱"];
+    NSArray *age     = @[ @"33", @"42", @"66" ];
     
     NSArray *category = @[ @"노래방", @"룸사롱/주점", @"가라오케" ];
-    NSArray *sex = @[ @"남자", @"여자", @"여자" ];
+    NSArray *sex      = @[ @"남자", @"여자", @"여자" ];
     NSArray *pay_type = @[ @"일급", @"일급", @"주급" ];
-    NSArray *pay = @[ @"500,000원", @"1,000,000원", @"500,000" ];
-    NSArray *city = @[ @"부산", @"광주", @"제주" ];
+    NSArray *pay      = @[ @"500,000원", @"1,000,000원", @"500,000" ];
+    NSArray *city     = @[ @"부산", @"광주", @"제주" ];
     NSArray *province = @[ @"달동", @"광산구", @"제주시" ];
     NSArray *distance = @[ @"10km", @"0km", @"100km" ];
     
@@ -92,6 +98,13 @@
         
         [data addObject:dic];
     }
+}
+
+- (NSDictionary *) searchbarTitles {
+    NSDictionary *titles = @{ SEARCHTOP_ONE_BUTTON : @"⚬ 전체(지역)",
+                              SEARCHTOP_THREE_BUTTON : @"⚬ 거리순",
+                              SEARCHTOP_RIGHT_BUTTON : @"⚬ 광고작성" };
+    return titles;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -118,9 +131,11 @@
     return cell;
 }
 
-- (double) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 90;
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80.0f;
 }
+
 
 
 #pragma mark - [ JobInfo Top View Delegate ]

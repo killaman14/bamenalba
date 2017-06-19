@@ -8,15 +8,28 @@
 
 #import "JobRegistor.h"
 
-@interface JobRegistor ()
+#import "ThemaCell.h"
 
+@interface JobRegistor () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@property (strong, nonatomic) NSArray *data;
 @end
 
 @implementation JobRegistor
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.data = @[@"초보가능", @"당일지급", @"경력우대", @"출퇴근자유", @"파트타임", @"차비지원", @"숙식제공", @"성형지원", @"선불가능"];
+    
+    [self.CollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([ThemaCell class]) bundle:nil] forCellWithReuseIdentifier:@"ThemaCell"];
+
+    [self.CollectionView setDelegate:self];
+    [self.CollectionView setDataSource:self];
+    
+    
+    NSLog(@"viewFrame : %@\nCollectionFrame : %@", NSStringFromCGRect(self.view.frame), NSStringFromCGRect(self.CollectionView.frame));
+    
+    [self.CollectionView setFrame:self.view.frame];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,5 +46,24 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return [self.data count];
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ThemaCell *cell = [self.CollectionView dequeueReusableCellWithReuseIdentifier:@"ThemaCell" forIndexPath:indexPath];
+    
+    [[cell themaText] setText:[self.data objectAtIndex:indexPath.row]];
+    
+    return cell;
+}
+
+
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
 
 @end

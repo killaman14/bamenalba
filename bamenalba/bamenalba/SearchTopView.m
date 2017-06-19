@@ -22,7 +22,8 @@
 
 @synthesize delegate;
 
-- (id) initWithFrame:(CGRect)frame {
+- (id) initWithFrame:(CGRect)frame addView:(UIView *)view
+{
     self = [super initWithFrame:frame];
     if (self) {
         NSLog(@"initWithFrame");
@@ -40,16 +41,16 @@
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
-    
-    [self setBackgroundColor:[UIColor blueColor]];
-    
+
     [self.LEFT_ONE_BUTTON addTarget:self
                         action:@selector(Call:)
               forControlEvents:UIControlEventTouchUpInside];
+    [self settingButtonLabel:self.LEFT_ONE_BUTTON.titleLabel];
     
     [self.LEFT_TWO_BUTTON addTarget:self
                             action:@selector(Call:)
                   forControlEvents:UIControlEventTouchUpInside];
+    [self settingButtonLabel:self.LEFT_TWO_BUTTON.titleLabel];
     
     [[self.LEFT_TWO_BUTTON titleLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self.LEFT_TWO_BUTTON titleLabel] setMinimumScaleFactor:0.5f];
@@ -57,10 +58,17 @@
     [self.LEFT_THREE_BUTTON addTarget:self
                            action:@selector(Call:)
                  forControlEvents:UIControlEventTouchUpInside];
+    [self settingButtonLabel:self.LEFT_THREE_BUTTON.titleLabel];
     
     [self.RIGHT_BUTTON addTarget:self
                             action:@selector(Call:)
                   forControlEvents:UIControlEventTouchUpInside];
+    [self settingButtonLabel:self.RIGHT_BUTTON.titleLabel];
+    
+    NSDictionary *titles = [delegate searchbarTitles];
+    for (NSString *key in [titles allKeys]) {
+        [self setText:[titles objectForKey:key] ButtonType:(TOPVIEW_BUTTON)[key integerValue]];
+    }
 }
 
 
@@ -84,10 +92,12 @@
     UIButton *btn = [self getButtonTypeObject:buttontype];
     
     if (btn != nil) {
-        if (btn.hidden == YES) {
+        if (btn.hidden == YES || [text isEqualToString:@""]) {
             [btn setHidden:NO];
         }
-        [[btn titleLabel] setText:text];
+        NSLog(@"TEXT : %@", text);
+        [btn setTitle:text forState:UIControlStateNormal];
+//        [[btn titleLabel] setText:text];
     }
     
 }
@@ -110,6 +120,12 @@
         default:
             return nil;
     }
+}
+
+- (void) settingButtonLabel:(UILabel *)lb {
+    lb.numberOfLines = 1;
+    lb.adjustsFontSizeToFitWidth = YES;
+    lb.lineBreakMode = NSLineBreakByClipping;
 }
 
 @end

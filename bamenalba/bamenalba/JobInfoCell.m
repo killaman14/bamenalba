@@ -11,15 +11,23 @@
 
 @interface JobInfoCell()
 @property (assign, nonatomic) int Index;
-@property (assign, nonatomic) float scale;
+
+@property (weak, nonatomic) IBOutlet UIView *DetailParent;
+@property (weak, nonatomic) IBOutlet UIView *EditParent;
+@property (weak, nonatomic) IBOutlet UIView *PostParent;
+@property (weak, nonatomic) IBOutlet UIView *DeleteParent;
+
+@property (weak, nonatomic) IBOutlet UIImageView *DetailButtonBG;
+@property (weak, nonatomic) IBOutlet UIImageView *PostButtonBG;
+@property (weak, nonatomic) IBOutlet UIImageView *EditButtonBG;
+@property (weak, nonatomic) IBOutlet UIImageView *DeleteButtonBG;
+
+
 @end
 
 
 
 @implementation JobInfoCell
-
-@synthesize DetailButton;
-@synthesize PostButton;
 
 @synthesize Items;
 @synthesize ItemDatas;
@@ -27,6 +35,17 @@
 @synthesize scale;
 
 @synthesize delegate;
+
+
+@synthesize DetailParent;
+@synthesize EditParent;
+@synthesize PostParent;
+@synthesize DeleteParent;
+
+@synthesize DetailButtonBG;
+@synthesize PostButtonBG;
+@synthesize EditButtonBG;
+@synthesize DeleteButtonBG;
 
 
 - (id) initWithCoder:(NSCoder *)aDecoder {
@@ -46,6 +65,15 @@
 - (void) drawRect:(CGRect)rect {
     [super drawRect:rect];
     
+    [DetailButtonBG.layer setCornerRadius:5];
+    [PostButtonBG.layer setCornerRadius:5];
+    [EditButtonBG.layer setCornerRadius:5];
+    [DeleteButtonBG.layer setCornerRadius:5];
+    
+    
+    
+    
+    
     [_Address setText:[ItemDatas objectForKey:@"ADDRESS"]];
     
     [_Name setText:[NSString stringWithFormat:@"%@(%@)",
@@ -60,9 +88,8 @@
     }
     
     CGRect rc = self.ItemView.frame;
-    NSLog(@"1. rc : %@   scale : %f", NSStringFromCGRect(rc), scale );
+    
     [self.ItemView setFrame:CGRectMake(rc.origin.x, rc.origin.y, rc.size.width * scale, rc.size.height * scale)];
-    NSLog(@"2. rc : %@   scale : %f", NSStringFromCGRect(rc), scale );
     
     NSArray *arr = [self.ItemView subviews];
     

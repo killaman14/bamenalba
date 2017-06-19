@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HumanResources : UIViewController
-
+@property (weak, nonatomic) IBOutlet UIView *TopView;
 @end
