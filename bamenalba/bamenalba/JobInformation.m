@@ -49,10 +49,7 @@
     [super viewDidLoad];
     
     [SystemManager sharedInstance];
-    
-    
 
-    
     data = [NSMutableArray array];
     
     _SearchTopView = [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
@@ -65,9 +62,8 @@
     
     Table.delegate = self;
     Table.dataSource = self;
-    [Table registerNib:[UINib nibWithNibName:NSStringFromClass([JobInfoCell class]) bundle:nil] forCellReuseIdentifier:@"JobInfoCell"];
-    Table.rowHeight = UITableViewAutomaticDimension;
-    Table.estimatedRowHeight = 140;
+    Table.estimatedRowHeight = 110;
+    
     
     NSArray *address = @[ @"가락동 1번지", @"황금동 2번지", @"황금동 2번지" ];
     NSArray *name    = @[ @"김실장", @"김마담", @"미미짱"];
@@ -124,18 +120,15 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JobInfoCell *cell = (JobInfoCell *) [tableView dequeueReusableCellWithIdentifier:@"JobInfoCell" forIndexPath:indexPath];
     
+    
+    [cell setBackgroundColor:[UIColor clearColor]];
+    
     [cell setDelegate:self];
     
     [cell SetData:[data objectAtIndex:indexPath.row] Index:indexPath.row];
-    
+
     return cell;
 }
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 80.0f;
-}
-
 
 
 #pragma mark - [ JobInfo Top View Delegate ]

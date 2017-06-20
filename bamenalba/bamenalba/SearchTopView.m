@@ -42,10 +42,12 @@
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
 
+    
     [self.LEFT_ONE_BUTTON addTarget:self
                         action:@selector(Call:)
               forControlEvents:UIControlEventTouchUpInside];
     [self settingButtonLabel:self.LEFT_ONE_BUTTON.titleLabel];
+    
     
     [self.LEFT_TWO_BUTTON addTarget:self
                             action:@selector(Call:)
@@ -55,10 +57,12 @@
     [[self.LEFT_TWO_BUTTON titleLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self.LEFT_TWO_BUTTON titleLabel] setMinimumScaleFactor:0.5f];
     
+    
     [self.LEFT_THREE_BUTTON addTarget:self
                            action:@selector(Call:)
                  forControlEvents:UIControlEventTouchUpInside];
     [self settingButtonLabel:self.LEFT_THREE_BUTTON.titleLabel];
+    
     
     [self.RIGHT_BUTTON addTarget:self
                             action:@selector(Call:)
@@ -95,7 +99,7 @@
         if (btn.hidden == YES || [text isEqualToString:@""]) {
             [btn setHidden:NO];
         }
-        NSLog(@"TEXT : %@", text);
+        
         [btn setTitle:text forState:UIControlStateNormal];
 //        [[btn titleLabel] setText:text];
     }
@@ -126,6 +130,8 @@
     lb.numberOfLines = 1;
     lb.adjustsFontSizeToFitWidth = YES;
     lb.lineBreakMode = NSLineBreakByClipping;
+    [lb setFont:[UIFont systemFontOfSize:14]];
+    [lb setMinimumScaleFactor:0.6];
 }
 
 @end

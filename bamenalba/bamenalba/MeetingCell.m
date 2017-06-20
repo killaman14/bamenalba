@@ -8,10 +8,18 @@
 
 #import "MeetingCell.h"
 
+@interface MeetingCell()
+@property (weak, nonatomic) IBOutlet UIImageView *PostButtonBG;
+@property (weak, nonatomic) IBOutlet UIImageView *DeleteButtonBG;
+@end
+
 @implementation MeetingCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    [self.PostButtonBG.layer setCornerRadius:5];
+    [self.DeleteButtonBG.layer setCornerRadius:5];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

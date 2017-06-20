@@ -8,11 +8,16 @@
 
 #import "MemoBoxCell.h"
 
+@interface MemoBoxCell()
+@property (weak, nonatomic) IBOutlet UIImageView *TitleImage;
+@end
+
 @implementation MemoBoxCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    [self.TitleImage.layer setCornerRadius:25];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

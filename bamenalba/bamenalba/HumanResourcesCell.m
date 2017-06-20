@@ -8,12 +8,24 @@
 
 #import "HumanResourcesCell.h"
 
+@interface HumanResourcesCell()
+@property (weak, nonatomic) IBOutlet UIImageView *TitleImage;
+
+@property (weak, nonatomic) IBOutlet UIView *DetailButton;
+@property (weak, nonatomic) IBOutlet UIView *PostButton;
+@end
+
 @implementation HumanResourcesCell
 
 @synthesize delegate;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    [self.TitleImage.layer setCornerRadius:25];
+    
+    [self.DetailButton.layer setCornerRadius:5];
+    [self.PostButton.layer setCornerRadius:5];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

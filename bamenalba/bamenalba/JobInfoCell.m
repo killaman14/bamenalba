@@ -17,11 +17,16 @@
 @property (weak, nonatomic) IBOutlet UIView *PostParent;
 @property (weak, nonatomic) IBOutlet UIView *DeleteParent;
 
-@property (weak, nonatomic) IBOutlet UIImageView *DetailButtonBG;
-@property (weak, nonatomic) IBOutlet UIImageView *PostButtonBG;
-@property (weak, nonatomic) IBOutlet UIImageView *EditButtonBG;
-@property (weak, nonatomic) IBOutlet UIImageView *DeleteButtonBG;
 
+@property (weak, nonatomic) IBOutlet UIView *ParentView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *ArrowImage;
+
+
+@property (assign) float ParentTransfromX;
+@property (assign) BOOL IsSelected;
+
+- (IBAction) EnableButtons:(id)sender;
 
 @end
 
@@ -42,11 +47,9 @@
 @synthesize PostParent;
 @synthesize DeleteParent;
 
-@synthesize DetailButtonBG;
-@synthesize PostButtonBG;
-@synthesize EditButtonBG;
-@synthesize DeleteButtonBG;
+@synthesize ParentView;
 
+@synthesize ArrowImage;
 
 - (id) initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -60,18 +63,25 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    _ParentTransfromX = -60;
+    _IsSelected = false;
+    
+//    [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 }
 
 - (void) drawRect:(CGRect)rect {
     [super drawRect:rect];
     
-    [DetailButtonBG.layer setCornerRadius:5];
-    [PostButtonBG.layer setCornerRadius:5];
-    [EditButtonBG.layer setCornerRadius:5];
-    [DeleteButtonBG.layer setCornerRadius:5];
+//    [DetailParent.layer setCornerRadius:5];
+//    [PostParent.layer setCornerRadius:5];
+//    [EditParent.layer setCornerRadius:5];
+//    [DeleteParent.layer setCornerRadius:5];
     
-    
-    
+    [EditParent setHidden:YES];
+    [DeleteParent setHidden:YES];
+    [PostParent setHidden:NO];
+    [DetailParent setHidden:NO];
     
     
     [_Address setText:[ItemDatas objectForKey:@"ADDRESS"]];
@@ -99,6 +109,9 @@
     }
     
     
+    
+    
+    
     [Items removeAllObjects];
 }
 
@@ -111,12 +124,15 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+    
+    
 }
 
 - (void) ItemSetting:(NSString *) content ItemType:(ITEM_TYPE) type
 {
     UILabel *lb = [[UILabel alloc] init];
     [lb setText:content];
+    [lb setTextAlignment:NSTextAlignmentCenter];
     [lb setFont:[UIFont systemFontOfSize:10]];
     [lb setMinimumScaleFactor:4];
     [lb setAdjustsFontSizeToFitWidth:YES];
@@ -126,6 +142,12 @@
     
     [self.ItemView addSubview:lb];
     
+    CGRect rect = lb.frame;
+    
+    float rX = rect.size.width * 1.2f;
+    float rY = rect.size.height * 1.2f;
+    
+    [lb setFrame:CGRectMake(rect.origin.x * 1.2f, rect.origin.y * 1.2f, rX, rY)];
  
     float x = [[Items lastObject] frame].size.width + [[Items lastObject] frame].origin.x + 4;
     float y = [[Items lastObject] frame].origin.y;
@@ -139,6 +161,7 @@
         y = [[Items lastObject] frame].size.height + [[Items lastObject] frame].origin.y + 2;
     }
     
+    
     UIImageView *imgView = [self RoundImageSetting:type];
     [imgView setFrame:CGRectMake(x, y, lb.frame.size.width + 6, lb.frame.size.height + 4)];
     [self.ItemView addSubview:imgView];
@@ -148,6 +171,20 @@
     [Items addObject:imgView];
 }
 
+
+
+
+- (IBAction) EnableButtons:(id)sender {
+    
+    _IsSelected = !_IsSelected;
+    
+    [UIView animateWithDuration:0.4f animations:^{
+        [ParentView setTransform:CGAffineTransformTranslate(ParentView.transform, _IsSelected ? -70 : 70, 0)];
+        [ArrowImage setTransform:CGAffineTransformRotate(ArrowImage.transform, M_PI * 180.0f / 180.0f)];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
 
 #pragma mark - [ Content Color Setting ]
 
@@ -204,6 +241,39 @@
     if (delegate != nil) {
         [delegate CallPostButton:_Index];
     }
+}
+
+
+#pragma mark -
+
+- (BOOL) gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    return NO;
+}
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceivePress:(UIPress *)press {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    return NO;
+}
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    return NO;
+}
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    return NO;
+}
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    return NO;
+}
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    return NO;
 }
 
 @end
