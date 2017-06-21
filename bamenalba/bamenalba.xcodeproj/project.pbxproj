@@ -45,6 +45,7 @@
 		F3C65B6C1EEB8E2C00F4D987 /* ThemaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3C65B6A1EEB8E2C00F4D987 /* ThemaCell.xib */; };
 		F3C686001EF756C700D145CA /* HTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C685FF1EF756C700D145CA /* HTTPRequest.m */; };
 		F3CF2B041EF9167900451117 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CF2B031EF9167900451117 /* arrow.png */; };
+		F3CF2B071EFA3EDA00451117 /* ThemaCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CF2B061EFA3EDA00451117 /* ThemaCollectionCell.m */; };
 		F3D2C0061EF785030096BB5E /* bubble_you.9.png in Resources */ = {isa = PBXBuildFile; fileRef = F3D2BFD51EF785030096BB5E /* bubble_you.9.png */; };
 		F3D2C0071EF785030096BB5E /* default_companyimg.png in Resources */ = {isa = PBXBuildFile; fileRef = F3D2BFD61EF785030096BB5E /* default_companyimg.png */; };
 		F3D2C0081EF785030096BB5E /* default_icon_girl.png in Resources */ = {isa = PBXBuildFile; fileRef = F3D2BFD71EF785030096BB5E /* default_icon_girl.png */; };
@@ -168,6 +169,8 @@
 		F3C685FE1EF756C700D145CA /* HTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPRequest.h; sourceTree = "<group>"; };
 		F3C685FF1EF756C700D145CA /* HTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPRequest.m; sourceTree = "<group>"; };
 		F3CF2B031EF9167900451117 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		F3CF2B051EFA3EDA00451117 /* ThemaCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemaCollectionCell.h; sourceTree = "<group>"; };
+		F3CF2B061EFA3EDA00451117 /* ThemaCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemaCollectionCell.m; sourceTree = "<group>"; };
 		F3D2BFD51EF785030096BB5E /* bubble_you.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_you.9.png; sourceTree = "<group>"; };
 		F3D2BFD61EF785030096BB5E /* default_companyimg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_companyimg.png; sourceTree = "<group>"; };
 		F3D2BFD71EF785030096BB5E /* default_icon_girl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_icon_girl.png; sourceTree = "<group>"; };
@@ -434,6 +437,8 @@
 				F3C65B6A1EEB8E2C00F4D987 /* ThemaCell.xib */,
 				F3C65B681EEB8E2C00F4D987 /* ThemaCell.h */,
 				F3C65B691EEB8E2C00F4D987 /* ThemaCell.m */,
+				F3CF2B051EFA3EDA00451117 /* ThemaCollectionCell.h */,
+				F3CF2B061EFA3EDA00451117 /* ThemaCollectionCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -634,6 +639,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3CF2B071EFA3EDA00451117 /* ThemaCollectionCell.m in Sources */,
 				F3F481731EDE4F8400A29635 /* AlertManager.m in Sources */,
 				F36BD57E1EF204F200C1DB3E /* MemoBoxCell.m in Sources */,
 				F3AC34591EEA28A200473033 /* MyInfo.m in Sources */,

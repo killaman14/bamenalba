@@ -101,17 +101,12 @@
     
     [self.ItemView setFrame:CGRectMake(rc.origin.x, rc.origin.y, rc.size.width * scale, rc.size.height * scale)];
     
-    NSArray *arr = [self.ItemView subviews];
+    NSArray *subviews = [self.ItemView subviews];
     
-    for (id aa in arr) {
-        CGRect gc = [aa frame];
-        [aa setFrame:CGRectMake(gc.origin.x * scale, gc.origin.y * scale, gc.size.width * scale, gc.size.height * scale)];
+    for (id subview in subviews) {
+        CGRect gc = [subview frame];
+        [subview setFrame:CGRectMake(gc.origin.x * scale, gc.origin.y * scale, gc.size.width * scale, gc.size.height * scale)];
     }
-    
-    
-    
-    
-    
     [Items removeAllObjects];
 }
 
@@ -130,10 +125,10 @@
 
 - (void) ItemSetting:(NSString *) content ItemType:(ITEM_TYPE) type
 {
-    UILabel *lb = [[UILabel alloc] init];
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
     [lb setText:content];
     [lb setTextAlignment:NSTextAlignmentCenter];
-    [lb setFont:[UIFont systemFontOfSize:10]];
+    [lb setFont:[UIFont systemFontOfSize:12]];
     [lb setMinimumScaleFactor:4];
     [lb setAdjustsFontSizeToFitWidth:YES];
     [lb sizeToFit];
@@ -151,16 +146,17 @@
  
     float x = [[Items lastObject] frame].size.width + [[Items lastObject] frame].origin.x + 4;
     float y = [[Items lastObject] frame].origin.y;
-    if (type == CITY) {
+    
+    if (type == PAY) {
         float w = self.ItemView.frame.size.width;
         float r = w/x;
+
         r = r > 1.0f ? 1.0f : r;
         scale = r;
-        
+
         x = 4;
-        y = [[Items lastObject] frame].size.height + [[Items lastObject] frame].origin.y + 2;
+        y = [[Items lastObject] frame].size.height + [[Items lastObject] frame].origin.y + 6;
     }
-    
     
     UIImageView *imgView = [self RoundImageSetting:type];
     [imgView setFrame:CGRectMake(x, y, lb.frame.size.width + 6, lb.frame.size.height + 4)];
@@ -179,7 +175,7 @@
     _IsSelected = !_IsSelected;
     
     [UIView animateWithDuration:0.4f animations:^{
-        [ParentView setTransform:CGAffineTransformTranslate(ParentView.transform, _IsSelected ? -70 : 70, 0)];
+        [ParentView setTransform:CGAffineTransformTranslate(ParentView.transform, _IsSelected ? -66 : 66, 0)];
         [ArrowImage setTransform:CGAffineTransformRotate(ArrowImage.transform, M_PI * 180.0f / 180.0f)];
     } completion:^(BOOL finished) {
         

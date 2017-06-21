@@ -10,6 +10,8 @@
 
 @interface JobInfoDetailView : UIViewController
 
+@property (weak, nonatomic) IBOutlet UICollectionView *CollectionView;
+
 - (id) initWithCoder:(NSCoder *)aDecoder data:(NSDictionary *)data;
 
 - (IBAction)Close:(id)sender;
