@@ -9,30 +9,51 @@
 #import "ClauseView.h"
 
 @interface ClauseView ()
+@property (nonatomic) NSString *CALUSEText;
+@property (nonatomic) NSString *PIHText;
 
+@property (nonatomic) BOOL isSwitch;
 @end
 
 @implementation ClauseView
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.CALUSEText = @"[밤엔알바 이용안내]\n\n 밤앤알바(구직자) 이용안내";
+    
+    self.PIHText = @"위치기반서비스 이용약관\n\n 제1조 [목작]";
+    
+    self.isSwitch = true;
+    
+    [self ClauseSwitchAction:self.ClauseSwitch];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - [ ACTION ]
+
+- (IBAction) ClauseSwitchAction:(id)sender {
+    self.isSwitch = !self.isSwitch;
+
+    [self.ClauseSwitch setSelectedSegmentIndex:(int)self.isSwitch];
+    
+    switch (self.isSwitch) {
+        case true:
+            [self.ClauseTv setText:self.PIHText];
+            break;
+        case false:
+            [self.ClauseTv setText:self.CALUSEText];
+            break;
+        default:
+            break;
+    }
+    
 }
-*/
 
 - (IBAction) Close:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{

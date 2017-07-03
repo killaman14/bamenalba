@@ -12,11 +12,13 @@
 
 
 - (IBAction) SettingViewLoad:(id)sender;
-
 - (IBAction) ClauseViewLoad:(id)sender;
-
 - (IBAction) MyInfo:(id)sender;
-
 - (IBAction) CashChargeViewLoad:(id)sender;
+
+- (IBAction) PackageViewLoad:(id)sender;
+- (IBAction) Hardships:(id)sender;
+- (IBAction) Enquiry:(id)sender;
+- (IBAction) Store:(id)sender;
 
 @end

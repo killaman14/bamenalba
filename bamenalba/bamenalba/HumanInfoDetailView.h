@@ -9,5 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @interface HumanInfoDetailView : UIViewController
+
+@property (weak, nonatomic) IBOutlet UIImageView *TitleImg;
+@property (weak, nonatomic) IBOutlet UILabel *NicknameLb;
+@property (weak, nonatomic) IBOutlet UILabel *AgeLb;
+@property (weak, nonatomic) IBOutlet UILabel *SexLb;
+@property (weak, nonatomic) IBOutlet UILabel *AreaLb;
+@property (weak, nonatomic) IBOutlet UILabel *ProvinceLb;
+@property (weak, nonatomic) IBOutlet UILabel *HopesectorLb;
+@property (weak, nonatomic) IBOutlet UILabel *CommentLb;
+
+- (IBAction) TitleImageZoom:(id)sender;
+
+- (IBAction) PostSend:(id)sender;
+
 - (IBAction) Close:(id)sender;
 @end

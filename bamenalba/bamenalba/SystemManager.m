@@ -245,4 +245,8 @@ static SystemManager *sharedInstance = nil;
     
 }
 
+
+#pragma mark - [ ALERT DATA ] 
+
+
 @end

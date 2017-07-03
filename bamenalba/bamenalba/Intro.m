@@ -12,6 +12,8 @@
 
 #import "HTTPRequest.h"
 
+#import "KEY.h"
+
 @interface Intro ()
 
 @end
@@ -28,9 +30,17 @@
         [IntroImg setAlpha:1.0f];
         [IntroImg setTransform:CGAffineTransformTranslate(IntroImg.transform, 0, 30)];
     } completion:^(BOOL finished) {
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UITabBarController *vc = [sb instantiateViewControllerWithIdentifier:@"TabBar"];
-        [self presentViewController:vc animated:YES completion:NULL];
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:IS_SINGUP] == NO) {
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UITabBarController *vc = [sb instantiateViewControllerWithIdentifier:@"SignUp"];
+            [self presentViewController:vc animated:YES completion:NULL];
+        }
+        else {
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UITabBarController *vc = [sb instantiateViewControllerWithIdentifier:@"TabBar"];
+            [self presentViewController:vc animated:YES completion:NULL];
+        }
     }];
 }
 

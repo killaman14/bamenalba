@@ -24,6 +24,7 @@
 		5413669E1ED7EF65008CFAF1 /* JobInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5413669D1ED7EF65008CFAF1 /* JobInfoCell.m */; };
 		541366A21ED7F468008CFAF1 /* SearchTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 541366A11ED7F468008CFAF1 /* SearchTopView.m */; };
 		541366A41ED7F4B5008CFAF1 /* SearchTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541366A31ED7F4B5008CFAF1 /* SearchTopView.xib */; };
+		F32A4A941F00EAF900E307CB /* UIImageView+Corner.m in Sources */ = {isa = PBXBuildFile; fileRef = F32A4A931F00EAF900E307CB /* UIImageView+Corner.m */; };
 		F35198661EE53CF100881EFE /* HumanInfoDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = F35198651EE53CF100881EFE /* HumanInfoDetailView.m */; };
 		F351986B1EE55D9400881EFE /* PostAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = F351986A1EE55D9400881EFE /* PostAlert.m */; };
 		F351986D1EE55DA200881EFE /* PostAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = F351986C1EE55DA200881EFE /* PostAlert.xib */; };
@@ -38,7 +39,6 @@
 		F36BD5861EF3D08500C1DB3E /* SignUpInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F36BD5851EF3D08500C1DB3E /* SignUpInfo.m */; };
 		F36BD5891EF3D99900C1DB3E /* Intro.m in Sources */ = {isa = PBXBuildFile; fileRef = F36BD5881EF3D99900C1DB3E /* Intro.m */; };
 		F3A31F741EE523C100D18923 /* HumanResourcesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A31F721EE523C100D18923 /* HumanResourcesCell.m */; };
-		F3A31F751EE523C100D18923 /* HumanResourcesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3A31F731EE523C100D18923 /* HumanResourcesCell.xib */; };
 		F3AC34591EEA28A200473033 /* MyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AC34581EEA28A200473033 /* MyInfo.m */; };
 		F3AC345C1EEA54FD00473033 /* JobWriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AC345B1EEA54FD00473033 /* JobWriteView.m */; };
 		F3C65B6B1EEB8E2C00F4D987 /* ThemaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C65B691EEB8E2C00F4D987 /* ThemaCell.m */; };
@@ -131,6 +131,9 @@
 		541366A01ED7F468008CFAF1 /* SearchTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTopView.h; sourceTree = "<group>"; };
 		541366A11ED7F468008CFAF1 /* SearchTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTopView.m; sourceTree = "<group>"; };
 		541366A31ED7F4B5008CFAF1 /* SearchTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTopView.xib; sourceTree = "<group>"; };
+		F32A4A921F00EAF900E307CB /* UIImageView+Corner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Corner.h"; sourceTree = "<group>"; };
+		F32A4A931F00EAF900E307CB /* UIImageView+Corner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Corner.m"; sourceTree = "<group>"; };
+		F32A4A951F09EF7700E307CB /* KEY.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KEY.h; sourceTree = "<group>"; };
 		F35198641EE53CF100881EFE /* HumanInfoDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanInfoDetailView.h; sourceTree = "<group>"; };
 		F35198651EE53CF100881EFE /* HumanInfoDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HumanInfoDetailView.m; sourceTree = "<group>"; };
 		F35198691EE55D9400881EFE /* PostAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostAlert.h; sourceTree = "<group>"; };
@@ -158,7 +161,6 @@
 		F36BD5881EF3D99900C1DB3E /* Intro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Intro.m; sourceTree = "<group>"; };
 		F3A31F711EE523C100D18923 /* HumanResourcesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanResourcesCell.h; sourceTree = "<group>"; };
 		F3A31F721EE523C100D18923 /* HumanResourcesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HumanResourcesCell.m; sourceTree = "<group>"; };
-		F3A31F731EE523C100D18923 /* HumanResourcesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HumanResourcesCell.xib; sourceTree = "<group>"; };
 		F3AC34571EEA28A200473033 /* MyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfo.h; sourceTree = "<group>"; };
 		F3AC34581EEA28A200473033 /* MyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfo.m; sourceTree = "<group>"; };
 		F3AC345A1EEA54FD00473033 /* JobWriteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobWriteView.h; sourceTree = "<group>"; };
@@ -273,8 +275,6 @@
 				5413666B1ED7AD49008CFAF1 /* LaunchScreen.storyboard */,
 				5413666E1ED7AD49008CFAF1 /* Info.plist */,
 				5413665A1ED7AD42008CFAF1 /* Supporting Files */,
-				F36BD5871EF3D99900C1DB3E /* Intro.h */,
-				F36BD5881EF3D99900C1DB3E /* Intro.m */,
 			);
 			path = bamenalba;
 			sourceTree = "<group>";
@@ -293,6 +293,8 @@
 		541366801ED7C930008CFAF1 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				F36BD5871EF3D99900C1DB3E /* Intro.h */,
+				F36BD5881EF3D99900C1DB3E /* Intro.m */,
 				F35198681EE55C9C00881EFE /* Common */,
 				5413667D1ED7C92A008CFAF1 /* JobInformation.h */,
 				5413667E1ED7C92A008CFAF1 /* JobInformation.m */,
@@ -352,6 +354,7 @@
 				F3F4816F1EDD23D500A29635 /* SystemManager.m */,
 				F3C685FE1EF756C700D145CA /* HTTPRequest.h */,
 				F3C685FF1EF756C700D145CA /* HTTPRequest.m */,
+				F32A4A951F09EF7700E307CB /* KEY.h */,
 				F3C65B671EEB8DF100F4D987 /* View */,
 			);
 			name = Common;
@@ -417,7 +420,6 @@
 		F3A31F761EE523C800D18923 /* HumanResources */ = {
 			isa = PBXGroup;
 			children = (
-				F3A31F731EE523C100D18923 /* HumanResourcesCell.xib */,
 				F3A31F711EE523C100D18923 /* HumanResourcesCell.h */,
 				F3A31F721EE523C100D18923 /* HumanResourcesCell.m */,
 				F35198671EE53CF800881EFE /* DetailView */,
@@ -439,6 +441,8 @@
 				F3C65B691EEB8E2C00F4D987 /* ThemaCell.m */,
 				F3CF2B051EFA3EDA00451117 /* ThemaCollectionCell.h */,
 				F3CF2B061EFA3EDA00451117 /* ThemaCollectionCell.m */,
+				F32A4A921F00EAF900E307CB /* UIImageView+Corner.h */,
+				F32A4A931F00EAF900E307CB /* UIImageView+Corner.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -572,7 +576,6 @@
 			files = (
 				F3D2C0331EF785030096BB5E /* intro_logo2.png in Resources */,
 				F3D2C0341EF785030096BB5E /* sign_logo.png in Resources */,
-				F3A31F751EE523C100D18923 /* HumanResourcesCell.xib in Resources */,
 				F3F481791EDFA82300A29635 /* x.csv in Resources */,
 				F3D2C0141EF785030096BB5E /* icon_detail.png in Resources */,
 				F3D2C01F1EF785030096BB5E /* icon_sub_1.png in Resources */,
@@ -670,6 +673,7 @@
 				F36BD5761EEFB4CA00C1DB3E /* MeetingWrite.m in Sources */,
 				F35198711EE5E06500881EFE /* SettingView.m in Sources */,
 				5413669E1ED7EF65008CFAF1 /* JobInfoCell.m in Sources */,
+				F32A4A941F00EAF900E307CB /* UIImageView+Corner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +792,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = EKMW3Q4CCW;
+				GCC_ENABLE_BUILTIN_FUNCTIONS = NO;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = bamenalba/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -801,6 +808,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = EKMW3Q4CCW;
+				GCC_ENABLE_BUILTIN_FUNCTIONS = NO;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = bamenalba/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

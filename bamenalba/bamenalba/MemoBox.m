@@ -13,6 +13,8 @@
 
 @interface MemoBox () <UITableViewDelegate, UITableViewDataSource, SearchTopViewDelegate>
 @property (weak, nonatomic) SearchTopView *_SearchTopView;
+
+@property (strong, nonatomic) NSMutableArray *sampleData;
 @end
 
 @implementation MemoBox
@@ -30,6 +32,14 @@
     [_SearchTopView setDelegate:self];
     
     [TopView addSubview:_SearchTopView];
+    
+    
+    self.sampleData = [NSMutableArray array];
+    
+    [self.sampleData addObject:@{ @"nick":@"미미쨩데스", @"age":@"23세", @"dis":@"10km", @"time":@"3초 전", @"content":@"배스배스" }];
+    [self.sampleData addObject:@{ @"nick":@"미미쨩데스네", @"age":@"24세", @"dis":@"10km", @"time":@"3초 전", @"content":@"배스배스" }];
+    [self.sampleData addObject:@{ @"nick":@"미미쨩데스삼", @"age":@"25세", @"dis":@"10km", @"time":@"3초 전", @"content":@"배스배스" }];
+    [self.sampleData addObject:@{ @"nick":@"미미쨩데스사", @"age":@"26세", @"dis":@"10km", @"time":@"3초 전", @"content":@"배스배스" }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,11 +73,14 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [self.sampleData count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MemoBoxCell *cell = (MemoBoxCell *) [tableView dequeueReusableCellWithIdentifier:@"MemoBoxCell" forIndexPath:indexPath];
+    
+    [cell setCellData:[self.sampleData objectAtIndex:[indexPath row]]];
+    
     
     return cell;
 }

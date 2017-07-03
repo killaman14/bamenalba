@@ -10,4 +10,11 @@
 
 @interface SignUp : UIViewController
 
+
+@property (weak, nonatomic) IBOutlet UIView *UserView;
+@property (weak, nonatomic) IBOutlet UIView *CompanyView;
+
+- (IBAction) User:(id)sender;
+- (IBAction) Company:(id)sender;
+
 @end

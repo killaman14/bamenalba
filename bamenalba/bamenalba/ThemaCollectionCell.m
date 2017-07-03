@@ -26,10 +26,21 @@
     [ThemaLabel setText:text];
 }
 
+- (void) IsThemaEnable:(bool)enable {
+    if (enable) {
+//        [ThemaIcon setTintColor:[UIColor magentaColor]];
+        [ThemaIcon.layer setCornerRadius:20];
+        [ThemaIcon.layer setBorderWidth:1];
+    }
+    else {
+        [ThemaIcon setTintColor:[UIColor clearColor]];
+        [ThemaIcon.layer setCornerRadius:0];
+        [ThemaIcon.layer setBorderWidth:0];
+    }
+}
+
 - (void) drawRect:(CGRect)rect
 {
     [super drawRect:rect];
-    
-    
 }
 @end

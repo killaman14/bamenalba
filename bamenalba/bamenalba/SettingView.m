@@ -8,15 +8,23 @@
 
 #import "SettingView.h"
 
-@interface SettingView ()
+#import "UIImageView+Corner.h"
 
+@interface SettingView ()
+@property (weak, nonatomic) UIImageView *CHK_IMG;
 @end
 
 @implementation SettingView
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    [self.AlarmBG Corner:5];
+    
+    [self.AlarmCKBG Corner:5];
+    [self.AlarmCKBG Border:1];
+    
+    [self.AlarmCK setImage:[UIImage imageNamed:@"icon_chack.png"]];
 }
 
 - (void)didReceiveMemoryWarning {

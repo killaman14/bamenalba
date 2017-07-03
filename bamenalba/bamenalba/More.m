@@ -29,15 +29,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+#pragma mark - [ ACTION ]
 
 
 - (IBAction) SettingViewLoad:(id)sender {
@@ -54,6 +47,23 @@
 
 - (IBAction) CashChargeViewLoad:(id)sender {
     [self Viewload:@"CashCharge"];
+}
+
+
+- (IBAction) PackageViewLoad:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.naver.com"]];
+}
+
+- (IBAction) Hardships:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"www.naver.com"]];
+}
+
+- (IBAction) Enquiry:(id)sender {
+    
+}
+
+- (IBAction) Store:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"www.naver.com"]];
 }
 
 

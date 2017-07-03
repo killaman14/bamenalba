@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JobInformation : UIViewController
+@interface JobInformation : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UIView *TopView;
 @property (nonatomic, strong) IBOutlet UITableView *Table;
 
-@property (nonatomic, strong) NSMutableArray *data;
+@property (nonatomic, strong) NSMutableArray *sampleData;
 
 @end

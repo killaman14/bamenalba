@@ -16,28 +16,66 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self.CornerImg_1.layer setCornerRadius:15];
+    [self.CornerImg_2.layer setCornerRadius:15];
+    [self.CornerImg_3.layer setCornerRadius:15];
+    
+    [self ButtonSetting:self.Payment_1];
+    [self ButtonSetting:self.Payment_2];
+    [self ButtonSetting:self.Payment_3];
+    [self ButtonSetting:self.Payment_4];
+    [self ButtonSetting:self.Payment_5];
+    [self ButtonSetting:self.CouponBtn];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction) CouponAction:(id)sender
+{
+    NSLog(@"Coupon OK : %@", self.CouponTf.text);
 }
-*/
+
+- (IBAction) PaymentAction:(id)sender
+{
+    switch ([sender tag]) {
+        case 1:
+            
+            break;
+        case 2:
+            
+            break;
+        case 3:
+            
+            break;
+        case 4:
+            
+            break;
+        case 5:
+            
+            break;
+            
+        default:
+            break;
+    }
+    
+    NSLog(@"Payment : %d", [sender tag]);
+}
 
 - (IBAction) Close:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+
+
+
+- (void) ButtonSetting:(UIButton *)btn {
+    [btn.layer setCornerRadius:15];
+    [btn setBackgroundColor:[UIColor colorWithRed:(237.0f/255.0f) green:(58.0f/255.0f) blue:(130.0f/255.0f) alpha:1]];
 }
 
 @end

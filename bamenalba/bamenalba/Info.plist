@@ -26,6 +26,10 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>앨범사용을 허락하시겠습니까?</string>
+	<key>NSLocationUsageDescription</key>
+	<string>위치정보에 접근을 허락하시겠습니까?</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

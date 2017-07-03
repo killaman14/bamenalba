@@ -93,6 +93,11 @@
     
 }
 
+
+- (IBAction) Photo:(id)sender {
+
+}
+
 - (IBAction)Close:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{
         

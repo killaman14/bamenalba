@@ -80,7 +80,9 @@
 
 - (IBAction) Call:(id)sender {
     UIButton *btn = (UIButton *) sender;
+
     if (delegate != nil) {
+//    if ([delegate respondsToSelector:@selector(requestButton:)]) {
         [delegate requestButton:(TOPVIEW_BUTTON)btn.tag];
     }
 }
@@ -98,6 +100,7 @@
     if (btn != nil) {
         if (btn.hidden == YES || [text isEqualToString:@""]) {
             [btn setHidden:NO];
+            [btn setEnabled:YES];
         }
         
         [btn setTitle:text forState:UIControlStateNormal];

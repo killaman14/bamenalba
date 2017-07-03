@@ -11,4 +11,6 @@
 @interface ThemaCollectionCell : UICollectionViewCell
 - (void) SetIconImageName:(NSString *) imagename;
 - (void) SetTitleText:(NSString *) text;
+
+- (void) IsThemaEnable:(bool)enable;
 @end

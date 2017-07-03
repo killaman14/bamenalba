@@ -18,5 +18,22 @@
 
 
 @interface HumanResourcesCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UIImageView *TitleImage;
+
+@property (weak, nonatomic) IBOutlet UILabel *StateLb;
+@property (weak, nonatomic) IBOutlet UILabel *ComentLb;
+
+@property (weak, nonatomic) IBOutlet UIView *DetailButton;
+@property (weak, nonatomic) IBOutlet UIView *PostButton;
+
 @property (assign, nonatomic) id<HumanResourcesCellDelegate> delegate;
+
+
+
+- (void) SetCellData:(NSDictionary *)data;
+
+- (IBAction)CallPost:(id)sender;
+
+- (IBAction)CallDetail:(id)sender;
 @end

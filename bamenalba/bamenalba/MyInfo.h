@@ -8,7 +8,29 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyInfo : UIViewController
+#import <Photos/Photos.h>
+
+@interface MyInfo : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UIImageView *MyImage;
+
+@property (weak, nonatomic) IBOutlet UITextField *NickTf;
+@property (weak, nonatomic) IBOutlet UILabel *AgeLb;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *SexSc;
+@property (weak, nonatomic) IBOutlet UILabel *AreaLb;
+@property (weak, nonatomic) IBOutlet UILabel *ProvinceLb;
+@property (weak, nonatomic) IBOutlet UILabel *SectorLb;
+@property (weak, nonatomic) IBOutlet UILabel *CommentLb;
+@property (weak, nonatomic) IBOutlet UITextField *SecretKeyTf;
+
+
+- (IBAction) AlertShow:(id)sender;
+
+- (IBAction) SegmentChangeValue:(id)sender;
+
+- (IBAction) KeyExample:(id)sender;
+
+- (IBAction) SaveSend:(id)sender;
 
 - (IBAction) Close:(id)sender;
 

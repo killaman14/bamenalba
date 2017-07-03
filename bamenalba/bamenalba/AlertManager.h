@@ -41,12 +41,15 @@ enum AlertData
     AlertDataSector,
     AlertDataPayType,
     AlertDataInquireType,
+    AlertDataSort,
+    AlertDataSex,
 };
 
 
 @protocol AlertManagerDelegate <NSObject>
 
-@required
+@optional
+- (void) AlertManagerDidSelected:(NSInteger)tag withIndex:(NSInteger)index;
 - (void) AlertManagerSelected:(NSString *)selectedString withTag:(NSInteger)tag;
 @end
 

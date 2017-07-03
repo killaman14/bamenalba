@@ -16,8 +16,13 @@
 
 #import "AppDelegate.h"
 
+
+
+
+
+
 @interface JobInformation ()
-<UITableViewDelegate, UITableViewDataSource, SearchTopViewDelegate, JobInfoCellDelegate, AlertManagerDelegate>
+<SearchTopViewDelegate, JobInfoCellDelegate, AlertManagerDelegate>
 @property (strong, nonatomic) SearchTopView *_SearchTopView;
 
 @property (weak, nonatomic) NSString *CityName;
@@ -33,7 +38,7 @@
 
 @synthesize Table;
 
-@synthesize data;
+@synthesize sampleData;
 
 
 
@@ -48,9 +53,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [SystemManager sharedInstance];
+    
 
-    data = [NSMutableArray array];
+    sampleData = [NSMutableArray array];
     
     _SearchTopView = [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
                                                      owner:self
@@ -92,7 +97,7 @@
         [dic setObject:[province objectAtIndex:i] forKey:@"PROVINCE"];
         [dic setObject:[distance objectAtIndex:i] forKey:@"DISTANCE"];
         
-        [data addObject:dic];
+        [sampleData addObject:dic];
     }
 }
 
@@ -114,7 +119,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [data count];
+    return [sampleData count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,13 +130,13 @@
     
     [cell setDelegate:self];
     
-    [cell SetData:[data objectAtIndex:indexPath.row] Index:indexPath.row];
+    [cell SetData:[sampleData objectAtIndex:indexPath.row] Index:indexPath.row];
 
     return cell;
 }
 
 
-#pragma mark - [ JobInfo Top View Delegate ]
+#pragma mark - [ ALERT MANAGER Delegate ]
 
 - (void) AlertManagerSelected:(NSString *)selectedString withTag:(NSInteger)tag
 {
@@ -145,6 +150,9 @@
         self.ProvinceName = selectedString;
         
         [_SearchTopView setText:selectedString ButtonType:TOPVIEW_LEFT_BUTTON_TWO];
+    }
+    else if(tag == AlertDataSort) {
+        [_SearchTopView setText:selectedString ButtonType:TOPVIEW_LEFT_BUTTON_THREE];
     }
 }
 
@@ -169,10 +177,17 @@
                                showViewController:self];
 }
 
-- (void) CallPremiumButton {
-    NSLog(@"CallPrimiumButton");
+- (void) CallDistanceButton {
+
+    [[AlertManager sharedInstance] showAlertTitle:@"정렬"
+                                             data:@[ @"거리순", @"등록순", @"나의글" ]
+                                              tag:AlertDataSort
+                                         delegate:self
+                               showViewController:self];
+    
 }
 
+#pragma mark - [ SEARCH TOP VIEW DELEGATE ]
 
 - (void) requestButton:(TOPVIEW_BUTTON)buttontype
 {
@@ -183,6 +198,8 @@
             break;
         case TOPVIEW_LEFT_BUTTON_TWO:
             [self CallProvinceButton];
+        case TOPVIEW_LEFT_BUTTON_THREE:
+            [self CallDistanceButton];
             break;
         case TOPVIEW_RIGHT_BUTTON:
             [self storyBoardViewLoad:@"JobWriteView"];

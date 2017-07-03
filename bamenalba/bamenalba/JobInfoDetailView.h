@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface JobInfoDetailView : UIViewController
 
 @property (weak, nonatomic) IBOutlet UICollectionView *CollectionView;
 
 - (id) initWithCoder:(NSCoder *)aDecoder data:(NSDictionary *)data;
+
+
+
+- (IBAction) Photo:(id)sender;
 
 - (IBAction)Close:(id)sender;
 

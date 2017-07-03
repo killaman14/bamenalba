@@ -8,30 +8,43 @@
 
 #import "SignUp.h"
 
-@interface SignUp ()
+#import "SignUpInfo.h"
 
+@interface SignUp ()
+@property (strong, nonatomic) SignUpInfo *SUIViewController;
 @end
 
 @implementation SignUp
 
+@synthesize SUIViewController;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self.UserView.layer setCornerRadius:5];
+    [self.CompanyView.layer setCornerRadius:5];
+    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SUIViewController = (SignUpInfo *) [sb instantiateViewControllerWithIdentifier:@"SignUpInfo"];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction) User:(id)sender {
+    [SUIViewController SignUpIsCompany:false];
+    [self presentViewController:SUIViewController animated:YES completion:NULL];
 }
-*/
+
+- (IBAction) Company:(id)sender {
+    [SUIViewController SignUpIsCompany:true];
+    [self presentViewController:SUIViewController animated:YES completion:NULL];
+}
+
+- (void) Viewload {
+    
+}
 
 @end

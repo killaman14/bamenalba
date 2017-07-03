@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface ClauseView : UIViewController
+@property (weak, nonatomic) IBOutlet UISegmentedControl *ClauseSwitch;
+@property (weak, nonatomic) IBOutlet UITextView *ClauseTv;
+
+
+- (IBAction) ClauseSwitchAction:(id)sender;
 
 - (IBAction) Close:(id)sender;
 

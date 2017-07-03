@@ -10,4 +10,12 @@
 
 @interface MeetingCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *ContentLb;
+@property (weak, nonatomic) IBOutlet UILabel *StateLb;
+
+@property (weak, nonatomic) IBOutlet UIImageView *PostButtonBG;
+@property (weak, nonatomic) IBOutlet UIImageView *DeleteButtonBG;
+
+
+- (void) setCellData:(NSDictionary *) data;
 @end

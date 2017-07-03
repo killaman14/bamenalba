@@ -10,4 +10,16 @@
 
 @interface MemoBoxCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIView *ContentView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *TitleIMG;
+@property (weak, nonatomic) IBOutlet UILabel *StateLb;
+@property (weak, nonatomic) IBOutlet UILabel *ContentLb;
+@property (weak, nonatomic) IBOutlet UILabel *TimeLb;
+
+
+- (IBAction) Photo:(id)sender;
+
+- (void) setCellData:(NSDictionary *) data;
+
 @end

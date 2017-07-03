@@ -36,6 +36,7 @@ static AlertManager *sharedInstance = nil;
                                       preferredStyle:UIAlertControllerStyleAlert];
     
     
+    int index = 0;
     for (NSString *message in data)
     {
         UIAlertAction *action = [UIAlertAction actionWithTitle:message
@@ -44,11 +45,18 @@ static AlertManager *sharedInstance = nil;
                                  {
                                      if (delegate != nil)
                                      {
-                                         [delegate AlertManagerSelected:message withTag:tag];
+                                         if ([delegate respondsToSelector:@selector(AlertManagerSelected:withTag:)])
+                                             [delegate AlertManagerSelected:message withTag:tag];
+                                         
+                                         if ([delegate respondsToSelector:@selector(AlertManagerDidSelected:withIndex:)])
+                                             [delegate AlertManagerDidSelected:tag withIndex:index];
+                                         
                                      }
                                  }];
         
         [actionSheet addAction:action];
+        
+        index++;
     }
     
     [actionSheet setModalPresentationStyle:UIModalPresentationPopover];

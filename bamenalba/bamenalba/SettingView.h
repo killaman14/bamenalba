@@ -10,6 +10,11 @@
 
 @interface SettingView : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *AlarmBG;
+@property (weak, nonatomic) IBOutlet UIImageView *AlarmCK;
+@property (weak, nonatomic) IBOutlet UIImageView *AlarmCKBG;
+
+
 - (IBAction) Close:(id)sender;
 
 @end

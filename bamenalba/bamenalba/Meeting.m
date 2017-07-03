@@ -15,6 +15,8 @@
 @property (strong, nonatomic) SearchTopView *_SearchTopView;
 
 
+@property (nonatomic, strong) NSMutableArray *sampleData;
+
 @end
 
 @implementation Meeting
@@ -25,19 +27,36 @@
 
 @synthesize _SearchTopView;
 
-@synthesize data;
+@synthesize sampleData;
+
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
-    data = [NSMutableArray array];
-    [data addObject:@""]; [data addObject:@""]; [data addObject:@""]; [data addObject:@""]; [data addObject:@""];
-    
     _SearchTopView = [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
                                                     owner:self
                                                   options:nil] objectAtIndex:0];
+    
+    
+    self.sampleData = [NSMutableArray array];
+    
+    [self.sampleData addObject:@{ @"name":@"김봉자", @"sex":@"남자" , @"age":@"33세", @"dis":@"10km", @"time":@"2초", @"content":@"123" }];
+    
+    [self.sampleData addObject:@{ @"name":@"김봉자", @"sex":@"여자", @"age":@"34세", @"dis":@"10km", @"time":@"2초", @"content":@"123123123123123123123123123" }];
+    
+    [self.sampleData addObject:@{ @"name":@"김봉자", @"sex":@"남자", @"age":@"35세", @"dis":@"10km", @"time":@"2초", @"content":@"123123123123123123123123123\n123123123123123123123123123" }];
+    
+    [self.sampleData addObject:@{ @"name":@"김봉자", @"sex":@"여자", @"age":@"36세", @"dis":@"10km", @"time":@"2초", @"content":@"123123123123123123123123123\n123123123123123123123123123\n123123123123123123123123123" }];
+    
+    [self.sampleData addObject:@{ @"name":@"김봉자", @"sex":@"남자", @"age":@"37세", @"dis":@"10km", @"time":@"2초", @"content":@"123123123123123123123123123\n123123123123123123123123123\n123123123123123123123123123\n123123123123123123123123123" }];
+    
+    NSLog(@"sampleData : %lu", (unsigned long)self.sampleData.count);
     
     [_SearchTopView setFrame:CGRectMake(0, 0, self.view.frame.size.width, _SearchTopView.frame.size.height)];
     [_SearchTopView setDelegate:self];
@@ -45,9 +64,9 @@
     
     Table.delegate = self;
     Table.dataSource = self;
-//    [Table registerNib:[UINib nibWithNibName:NSStringFromClass([MeetingCell class]) bundle:nil] forCellReuseIdentifier:@"MeetingCell"];
+    Table.estimatedRowHeight = 81;
     Table.rowHeight = UITableViewAutomaticDimension;
-    Table.estimatedRowHeight = 140;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,24 +77,38 @@
 #pragma mark - [ TABLEVIEW DELEGATE ]
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.data count];
+    return 1;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [self.sampleData count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MeetingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MeetingCell" forIndexPath:indexPath];
     
+    [cell setCellData:[sampleData objectAtIndex:indexPath.row]];
+    
     return cell;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    MeetingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell.frame.size.height < 81)
+        return 81;
+    else
+        return UITableViewAutomaticDimension;
 }
 
 
 
-
 - (void) requestButton:(TOPVIEW_BUTTON)buttontype {
-    NSLog(@"buttontype : %u", buttontype);
+    if (buttontype == TOPVIEW_RIGHT_BUTTON) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"MeetingWrite"];
+        [self presentViewController:vc animated:YES completion:NULL];
+    }
 }
 
 - (NSDictionary *) searchbarTitles {

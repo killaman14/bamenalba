@@ -64,7 +64,7 @@
                                                             delegateQueue:[NSOperationQueue mainQueue]];
 
     
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:DEFAULT_URL]];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", DEFAULT_URL, url]]];
     [urlRequest setHTTPMethod:@"POST"];
     
     NSString *convertBody = [NSString stringWithFormat:@"%@=%@", POST_KEY, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
@@ -130,5 +130,7 @@ didReceiveResponse:(NSURLResponse *)response
 didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask {
     NSLog(@"%sl", __PRETTY_FUNCTION__);
 }
+
+
 
 @end

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HumanResources : UIViewController
+@interface HumanResources : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *TopView;
+@property (weak, nonatomic) IBOutlet UITableView *TableView;
 @end

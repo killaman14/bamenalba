@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "SystemManager.h"
+
 @interface AppDelegate ()
 
 @end
@@ -23,7 +25,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+    [SystemManager sharedInstance];
     
     return YES;
 }
