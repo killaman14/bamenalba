@@ -8,6 +8,7 @@
 
 #import "JobInfoCell.h"
 
+#import "UIImageView+Cache.h"
 
 @interface JobInfoCell()
 @property (assign, nonatomic) int Index;
@@ -36,6 +37,8 @@
 
 @synthesize Items;
 @synthesize ItemDatas;
+
+@synthesize CompanyName;
 
 @synthesize scale;
 
@@ -67,6 +70,7 @@
     _ParentTransfromX = -60;
     _IsSelected = false;
     
+    
 //    [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 }
 
@@ -83,14 +87,29 @@
     [PostParent setHidden:NO];
     [DetailParent setHidden:NO];
     
+    [self.TitleIMG.layer setCornerRadius:5];
+    [self.TitleIMG.layer setMasksToBounds:YES];
+}
+
+- (void) SetData:(NSMutableDictionary *) dic Index:(NSInteger) index
+{
+    ItemDatas = dic;
     
-    [_Address setText:[ItemDatas objectForKey:@"ADDRESS"]];
+    _Index = (int)index;
     
-    [_Name setText:[NSString stringWithFormat:@"%@(%@)",
-                    [ItemDatas objectForKey:@"NAME"],
-                    [ItemDatas objectForKey:@"AGE"]]];
+    for (UIView *subview in [self.ItemView subviews]) {
+        [subview removeFromSuperview];
+    }
     
-    NSArray *Key = @[ @"CATEGORY", @"SEX", @"PAY_TYPE", @"PAY", @"CITY", @"PROVINCE", @"DISTANCE" ];
+
+    
+    [CompanyName setText:[ItemDatas objectForKey:@"company_name"]];
+    
+    [_Name setText:[NSString stringWithFormat:@"%@ (%@세)",
+                    [ItemDatas objectForKey:@"user_name"],
+                    [ItemDatas objectForKey:@"user_age"]]];
+    
+    NSArray *Key = @[ @"company_sector", @"company_sex", @"company_pay", @"company_payvalue", @"company_address1", @"company_address2", @"distance" ];
     
     for (int k = 0; k < Key.count; k++)
     {
@@ -108,25 +127,48 @@
         [subview setFrame:CGRectMake(gc.origin.x * scale, gc.origin.y * scale, gc.size.width * scale, gc.size.height * scale)];
     }
     [Items removeAllObjects];
-}
-
-- (void) SetData:(NSMutableDictionary *) dic Index:(NSInteger) index
-{
-    ItemDatas = dic;
     
-    _Index = (int)index;
+    if ([[NSString stringWithFormat:@"%@", [ItemDatas objectForKey:@"img"]] isEqualToString:@""]) {
+        [self.TitleIMG setImage:[UIImage imageNamed:@"ex_img"]];
+    }
+    else {
+        [[UIImageView_Cache getInstance] loadFromUrl:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [ItemDatas objectForKey:@"img"]]] callback:^(UIImage *image) {
+            [self.TitleIMG setImage:image];
+        }];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
-    
 }
 
 - (void) ItemSetting:(NSString *) content ItemType:(ITEM_TYPE) type
 {
     UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
-    [lb setText:content];
+    
+    if (type == SEX) { [lb setText:[content isEqualToString:@"M"] ? @"남성" : @"여성"]; }
+    else if (type == PAY) {
+        int pay = [content integerValue];
+        if (pay > 999) {
+            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+            [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+            NSNumber *myNumber = [NSNumber numberWithInteger:pay];
+            NSString *formattedNumberString = [NSString stringWithFormat:@"%@ 원", [numberFormatter stringFromNumber:myNumber]];
+            [lb setText:formattedNumberString];
+        }
+        else
+        {
+            if (pay > 1) {
+                [lb setText:[NSString stringWithFormat:@"%d 원", pay]];
+            }
+            else {
+                [lb setText:content];
+            }
+        }
+    }
+    else {
+        [lb setText:content];
+    }
     [lb setTextAlignment:NSTextAlignmentCenter];
     [lb setFont:[UIFont systemFontOfSize:12]];
     [lb setMinimumScaleFactor:4];
@@ -237,39 +279,6 @@
     if (delegate != nil) {
         [delegate CallPostButton:_Index];
     }
-}
-
-
-#pragma mark -
-
-- (BOOL) gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    return NO;
-}
-
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceivePress:(UIPress *)press {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    return NO;
-}
-
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    return NO;
-}
-
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    return NO;
-}
-
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    return NO;
-}
-
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    return NO;
 }
 
 @end

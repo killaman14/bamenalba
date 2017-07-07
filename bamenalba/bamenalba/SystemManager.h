@@ -44,11 +44,16 @@
     BOOL IsInit;
     BOOL IsSignUp;
     
-    const char *UUID;
+    NSString *UUID;
+    
+    NSDictionary *UserData;
 }
 @property (assign, nonatomic) BOOL IsSignUp;
 
-@property (assign, nonatomic) const char *UUID;
+@property (strong, nonatomic) NSString *UUID;
+@property (assign, nonatomic) const NSString *PUSH_TOKEN;
+
+@property (strong, nonatomic) NSDictionary *UserData;
 
 
 + (id)sharedInstance;
@@ -58,5 +63,10 @@
 + (NSString *) ProvinceKey:(NSString *)area;
 
 + (UITabBarController *) TabbarController;
+
+
+
+
+- (NSString *) TimeSpace_WriteTime:(NSDate *)wt CurrentTime:(NSDate *)ct;
 
 @end

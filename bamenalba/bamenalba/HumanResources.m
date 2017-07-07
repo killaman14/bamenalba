@@ -37,6 +37,10 @@
 
 @synthesize sampleData;
 
+- (void) LoadData {
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

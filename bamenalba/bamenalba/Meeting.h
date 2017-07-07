@@ -13,4 +13,6 @@
 @property (nonatomic, strong) IBOutlet UIView *TopView;
 @property (nonatomic, strong) IBOutlet UITableView *Table;
 
+- (void) InitLoadData;
+
 @end

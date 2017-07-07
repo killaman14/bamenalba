@@ -31,10 +31,12 @@ typedef enum  {
 @interface JobInfoCell : UITableViewCell
 
 @property (assign, nonatomic) float scale;
+
+@property (weak, nonatomic) IBOutlet UIImageView *TitleIMG;
 /*
  [ 주소 ]
  */
-@property (weak, nonatomic) IBOutlet UILabel *Address;
+@property (weak, nonatomic) IBOutlet UILabel *CompanyName;
 
 /*
  [ 이름(나이) ]

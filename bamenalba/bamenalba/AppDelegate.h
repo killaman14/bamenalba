@@ -16,9 +16,5 @@
 
 + (AppDelegate *) sharedAppDelegate;
 
-
-
-- (const char*) getDeviceUUID;
-
 @end
 

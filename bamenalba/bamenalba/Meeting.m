@@ -9,14 +9,21 @@
 #import "Meeting.h"
 #import "MeetingCell.h"
 
+#import "HTTPRequest.h"
+#import "SystemManager.h"
+
 #import "SearchTopView.h"
 
-@interface Meeting () <UITableViewDelegate, UITableViewDataSource, SearchTopViewDelegate>
+#import "KEY.h"
+
+@interface Meeting () <UITableViewDelegate, UITableViewDataSource, SearchTopViewDelegate, HTTPRequestDelegate>
 @property (strong, nonatomic) SearchTopView *_SearchTopView;
+@property (nonatomic, strong) NSMutableArray *Data;
 
+@property (assign) BOOL IsLoading;
 
-@property (nonatomic, strong) NSMutableArray *sampleData;
-
+@property (assign, nonatomic) NSInteger Page;
+@property (assign, nonatomic) NSInteger TPage;
 @end
 
 @implementation Meeting
@@ -27,13 +34,25 @@
 
 @synthesize _SearchTopView;
 
-@synthesize sampleData;
+@synthesize Data;
 
+
+
+- (void) InitLoadData {
+    self.IsLoading = false;
+    
+    self.Page = 0;
+    self.TPage = 0;
+    
+    [self.Data removeAllObjects];
+    
+    [self.Table reloadData];
+    
+    [self loadMore];
+}
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    
 }
 
 - (void)viewDidLoad {
@@ -44,19 +63,7 @@
                                                   options:nil] objectAtIndex:0];
     
     
-    self.sampleData = [NSMutableArray array];
-    
-    [self.sampleData addObject:@{ @"name":@"김봉자", @"sex":@"남자" , @"age":@"33세", @"dis":@"10km", @"time":@"2초", @"content":@"123" }];
-    
-    [self.sampleData addObject:@{ @"name":@"김봉자", @"sex":@"여자", @"age":@"34세", @"dis":@"10km", @"time":@"2초", @"content":@"123123123123123123123123123" }];
-    
-    [self.sampleData addObject:@{ @"name":@"김봉자", @"sex":@"남자", @"age":@"35세", @"dis":@"10km", @"time":@"2초", @"content":@"123123123123123123123123123\n123123123123123123123123123" }];
-    
-    [self.sampleData addObject:@{ @"name":@"김봉자", @"sex":@"여자", @"age":@"36세", @"dis":@"10km", @"time":@"2초", @"content":@"123123123123123123123123123\n123123123123123123123123123\n123123123123123123123123123" }];
-    
-    [self.sampleData addObject:@{ @"name":@"김봉자", @"sex":@"남자", @"age":@"37세", @"dis":@"10km", @"time":@"2초", @"content":@"123123123123123123123123123\n123123123123123123123123123\n123123123123123123123123123\n123123123123123123123123123" }];
-    
-    NSLog(@"sampleData : %lu", (unsigned long)self.sampleData.count);
+    self.Data = [NSMutableArray array];
     
     [_SearchTopView setFrame:CGRectMake(0, 0, self.view.frame.size.width, _SearchTopView.frame.size.height)];
     [_SearchTopView setDelegate:self];
@@ -64,9 +71,8 @@
     
     Table.delegate = self;
     Table.dataSource = self;
-    Table.estimatedRowHeight = 81;
+    Table.estimatedRowHeight = 40;
     Table.rowHeight = UITableViewAutomaticDimension;
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,27 +87,22 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.sampleData count];
+    return [self.Data count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MeetingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MeetingCell" forIndexPath:indexPath];
     
-    [cell setCellData:[sampleData objectAtIndex:indexPath.row]];
+    [cell setCellData:[Data objectAtIndex:indexPath.row]];
     
     return cell;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    MeetingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell.frame.size.height < 81)
-        return 81;
-    else
-        return UITableViewAutomaticDimension;
+- (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
 }
 
-
+#pragma mark - [ SEARCH TOP VIEW DELEGATE ]
 
 - (void) requestButton:(TOPVIEW_BUTTON)buttontype {
     if (buttontype == TOPVIEW_RIGHT_BUTTON) {
@@ -109,6 +110,59 @@
         UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"MeetingWrite"];
         [self presentViewController:vc animated:YES completion:NULL];
     }
+}
+
+#pragma mark - [ HTTP REQUEST DELEGATE ]
+
+- (void) HTTPRequestFinish:(NSDictionary *)data HttpTag:(HTTP_TAG)httpTag ReturnRequest:(id)request {
+    
+    NSDictionary *Info = [NSDictionary dictionary];
+    
+    switch (httpTag) {
+        case HTTP_SUCCESS:
+            
+            Info = [data objectForKey:@"info"];
+            
+            self.Page = [[Info objectForKey:@"cpage"] intValue];
+            
+            self.TPage = [[Info objectForKey:@"tpage"] intValue];
+            
+            [self.Table setClearsContextBeforeDrawing:YES];
+            
+            [self.Data addObjectsFromArray:[NSArray arrayWithArray:[data objectForKey:@"list"]]];
+            
+            [self.Table reloadData];
+            break;
+            
+        default:
+            break;
+    }
+    
+    self.IsLoading = false;
+}
+
+#pragma mark - [ PROCESS ]
+
+- (void) loadMore {
+    if (self.IsLoading == false)
+    {
+        self.IsLoading = true;
+        
+        self.Page = self.Page + 1;
+        
+        NSMutableDictionary *user_data = [NSMutableDictionary dictionary];
+        
+        [user_data setObject:[[SystemManager sharedInstance] UUID] forKey:KEY_DEVICE_ID];
+        [user_data setObject:[NSString stringWithFormat:@"%d", self.Page] forKey:KEY_PAGE];
+        [user_data setObject:@"전체" forKey:KEY_AREA];
+        [user_data setObject:@"전체" forKey:KEY_PROVINCE];
+        [user_data setObject:@"전체" forKey:KEY_SORT];
+        
+        HTTPRequest *request = [[HTTPRequest alloc] initWithTag:1];
+        [request setDelegate:self];
+        [request SendUrl:URL_MEETING_LIST withDictionary:user_data];
+    }
+
 }
 
 - (NSDictionary *) searchbarTitles {

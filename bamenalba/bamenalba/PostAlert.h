@@ -29,6 +29,10 @@
 @property (weak, nonatomic) IBOutlet UITextView *ExampleTextView;
 
 
+- (void) SetData:(NSDictionary *)data;
+
+- (void) Show:(UIView *)view;
+
 - (IBAction) PostSend:(id)sender;
 
 - (IBAction) Close:(id)sender;

@@ -9,7 +9,7 @@
 #import "SystemManager.h"
 #import "CHCSVParser.h"
 
-
+#import <math.h>
 
 
 @interface SystemManager() <CHCSVParserDelegate, UITabBarDelegate, UITabBarControllerDelegate>
@@ -36,6 +36,7 @@
 
 @implementation SystemManager
 
+@synthesize UserData;
 
 @synthesize CSVKeys;
 @synthesize CSVProvinceKeys;
@@ -44,6 +45,7 @@
 
 @synthesize IsSignUp;
 @synthesize UUID;
+@synthesize PUSH_TOKEN;
 
 @synthesize ReadLineIndex = _ReadLineIndex;
 
@@ -61,6 +63,8 @@ static SystemManager *sharedInstance = nil;
     dispatch_once(&onceToken,
                   ^{
                       sharedInstance = [[SystemManager alloc] init];
+                      
+                      [sharedInstance InitApp];
                       
                       [sharedInstance InitCSVLoad];
                       
@@ -140,7 +144,7 @@ static SystemManager *sharedInstance = nil;
     [CSVProvinceKeys setObject:CSV_KEY_JEJU        forKey:@"제주"];
 }
 
-- (const char *) getDeviceUUID
+- (NSString *) getDeviceUUID
 {
     NSUserDefaults* userDefault = [NSUserDefaults standardUserDefaults];
     NSString* iOSUUID = [userDefault stringForKey:@"UUID_KEY"];
@@ -153,8 +157,47 @@ static SystemManager *sharedInstance = nil;
     [userDefault setObject:iOSUUID forKey:@"UUID_KEY"];
     [userDefault synchronize];
     
-    return [iOSUUID UTF8String];
+    return [NSString stringWithUTF8String:[iOSUUID UTF8String]];
 }
+
+// 시간 차이 구하기 (분, 시간, 일) 1~60분, 1~23시간, 1일
+- (NSString *) TimeSpace_WriteTime:(NSDate *)wt CurrentTime:(NSDate *)ct
+{
+    //date1과 date2의 차이를 dateComp변수에 저장
+    NSDateComponents *dateComp;
+    dateComp = [[NSCalendar currentCalendar] components:NSCalendarUnitSecond fromDate:wt toDate:ct options:0];
+
+    long duration = [dateComp second];//((date1.getTime() - date2.getTime()) / 1000); // gettime()
+    int res = 0;
+ 
+    if(duration < 1)
+    {
+        return @"1초 전";
+    }
+    else if(duration < 60)
+    {
+        res = (int)duration;
+        
+        return [NSString stringWithFormat:@"%d 초 전", (int)ceil(res)];
+    }
+    else if(duration < 3600)
+    {
+        res = ((int)(duration/60)<=0)?1:(int)(duration/60);
+        
+        return [NSString stringWithFormat:@"%d 분 전", (int)ceil(res)];
+    }
+    else if(duration < 86400)
+    {
+        res = ((int)(duration/3600)<=0)?1:(int)(duration/3600);
+        return [NSString stringWithFormat:@"%d 시간 전", (int)ceil(res)];
+    }
+    else
+    {
+        res = ((int)(duration/86400)<=0)?1:(int)(duration/86400);
+        return [NSString stringWithFormat:@"%d 일", (int)ceil(res)];
+    }
+}
+
 
 #pragma mark - [ CSV ]
 
@@ -234,8 +277,15 @@ static SystemManager *sharedInstance = nil;
 
 - (void) InitApp
 {
-    [self setUUID:[self getDeviceUUID]];
+//    self.UUID = [self getDeviceUUID];
+    self.UUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     [self setIsSignUp:[[NSUserDefaults standardUserDefaults] boolForKey:IS_SIGNUP]];
+    
+    self.UserData = [NSDictionary dictionary];
+}
+
+- (void) setPUSH_TOKEN:(const NSString *)PUSH_TOKEN {
+    self.PUSH_TOKEN = PUSH_TOKEN;
 }
 
 

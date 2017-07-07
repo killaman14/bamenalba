@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JobInformation : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface JobInformation : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UIView *TopView;
 @property (nonatomic, strong) IBOutlet UITableView *Table;
 
 @property (nonatomic, strong) NSMutableArray *sampleData;
+
+
+- (void) InitLoadData;
 
 @end

@@ -11,22 +11,31 @@
 #import "JobInfoCell.h"
 #import "JobInfoDetailView.h"
 
+#import "PostAlert.h"
+
 #import "SystemManager.h"
 #import "AlertManager.h"
 
 #import "AppDelegate.h"
 
+#import "HTTPRequest.h"
 
-
-
+#import "KEY.h"
 
 
 @interface JobInformation ()
-<SearchTopViewDelegate, JobInfoCellDelegate, AlertManagerDelegate>
+<SearchTopViewDelegate, JobInfoCellDelegate, AlertManagerDelegate, HTTPRequestDelegate, PostAlertDelegate>
 @property (strong, nonatomic) SearchTopView *_SearchTopView;
+
+@property (strong, nonatomic) PostAlert *PAlert;
 
 @property (weak, nonatomic) NSString *CityName;
 @property (weak, nonatomic) NSString *ProvinceName;
+
+@property (assign) BOOL IsLoading;
+
+@property (assign, nonatomic) NSInteger Page;
+@property (assign, nonatomic) NSInteger TPage;
 @end
 
 
@@ -35,27 +44,64 @@
 
 
 @synthesize TopView;
-
 @synthesize Table;
-
 @synthesize sampleData;
-
-
 
 @synthesize _SearchTopView;
 
+
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+}
+
+- (void) InitLoadData {
+    self.IsLoading = false;
     
-//    [self storyBoardViewLoad:@"SignUp"];
+    self.Page = 0;
+    self.TPage = 0;
+    
+    [self.sampleData removeAllObjects];
+    
+    [self.Table reloadData];
+    
+    [self loadMore];
+}
+
+- (void) HTTPRequestFinish:(NSDictionary *)data HttpTag:(HTTP_TAG)httpTag ReturnRequest:(id)request {
+    
+    NSDictionary *Info = [NSDictionary dictionary];
+    
+    switch (httpTag) {
+        case HTTP_SUCCESS:
+
+            Info = [data objectForKey:@"info"];
+            
+            self.Page = [[Info objectForKey:@"cpage"] intValue];
+            
+            self.TPage = [[Info objectForKey:@"tpage"] intValue];
+            
+            [self.Table setClearsContextBeforeDrawing:YES];
+            
+            [self.sampleData addObjectsFromArray:[NSArray arrayWithArray:[data objectForKey:@"list"]]];
+            
+            [self.Table reloadData];
+            break;
+            
+        default:
+            break;
+    }
+    
+    self.IsLoading = false;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-
     sampleData = [NSMutableArray array];
+    [sampleData removeAllObjects];
+    
+    self.PAlert = (PostAlert *)[[[NSBundle mainBundle] loadNibNamed:@"PostAlert" owner:self options:nil] firstObject];
+    [self.PAlert setDelegate:self];
     
     _SearchTopView = [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
                                                      owner:self
@@ -65,40 +111,10 @@
     [_SearchTopView setDelegate:self];
     [TopView addSubview:_SearchTopView];
     
+    
     Table.delegate = self;
     Table.dataSource = self;
     Table.estimatedRowHeight = 110;
-    
-    
-    NSArray *address = @[ @"가락동 1번지", @"황금동 2번지", @"황금동 2번지" ];
-    NSArray *name    = @[ @"김실장", @"김마담", @"미미짱"];
-    NSArray *age     = @[ @"33", @"42", @"66" ];
-    
-    NSArray *category = @[ @"노래방", @"룸사롱/주점", @"가라오케" ];
-    NSArray *sex      = @[ @"남자", @"여자", @"여자" ];
-    NSArray *pay_type = @[ @"일급", @"일급", @"주급" ];
-    NSArray *pay      = @[ @"500,000원", @"1,000,000원", @"500,000" ];
-    NSArray *city     = @[ @"부산", @"광주", @"제주" ];
-    NSArray *province = @[ @"달동", @"광산구", @"제주시" ];
-    NSArray *distance = @[ @"10km", @"0km", @"100km" ];
-    
-    for (int i = 0; i < 3; i++)
-    {
-        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-        
-        [dic setObject:[address objectAtIndex:i] forKey:@"ADDRESS"];
-        [dic setObject:[name objectAtIndex:i] forKey:@"NAME"];
-        [dic setObject:[age objectAtIndex:i] forKey:@"AGE"];
-        [dic setObject:[category objectAtIndex:i] forKey:@"CATEGORY"];
-        [dic setObject:[sex objectAtIndex:i] forKey:@"SEX"];
-        [dic setObject:[pay_type objectAtIndex:i] forKey:@"PAY_TYPE"];
-        [dic setObject:[pay objectAtIndex:i] forKey:@"PAY"];
-        [dic setObject:[city objectAtIndex:i] forKey:@"CITY"];
-        [dic setObject:[province objectAtIndex:i] forKey:@"PROVINCE"];
-        [dic setObject:[distance objectAtIndex:i] forKey:@"DISTANCE"];
-        
-        [sampleData addObject:dic];
-    }
 }
 
 - (NSDictionary *) searchbarTitles {
@@ -123,13 +139,9 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    JobInfoCell *cell = (JobInfoCell *) [tableView dequeueReusableCellWithIdentifier:@"JobInfoCell" forIndexPath:indexPath];
-    
-    
-    [cell setBackgroundColor:[UIColor clearColor]];
-    
+    static NSString *identifier = @"JobInfoCell";
+    JobInfoCell *cell = (JobInfoCell *) [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     [cell setDelegate:self];
-    
     [cell SetData:[sampleData objectAtIndex:indexPath.row] Index:indexPath.row];
 
     return cell;
@@ -211,13 +223,21 @@
 #pragma mark - [ JobInfoCell Delegate ]
 
 - (void) CallDetailButton:(int) index{
+    
+    NSDictionary *data = [self.sampleData objectAtIndex:index];
+    
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"JobInfoDetailView"];
+    JobInfoDetailView *vc = [sb instantiateViewControllerWithIdentifier:@"JobInfoDetailView"];
+    [vc InitLoadData:data];
     [self presentViewController:vc animated:YES completion:NULL];
 }
 
 - (void) CallPostButton:(int) index {
-    NSLog(@"Post :  %d", index);
+    [self.PAlert Show:self.view];
+}
+
+- (void) PostAlertClose {
+    [self.view willRemoveSubview:self.PAlert];
 }
 
 #pragma mark - [ PROCESS ]
@@ -226,6 +246,42 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *vc = [sb instantiateViewControllerWithIdentifier:identifier];
     [self presentViewController:vc animated:YES completion:NULL];
+}
+
+
+- (void) loadMore
+{
+    if (self.IsLoading == false)
+    {
+        self.IsLoading = true;
+        
+        self.Page = self.Page + 1;
+        
+        NSMutableDictionary *user_data = [NSMutableDictionary dictionary];
+        
+        [user_data setObject:[[SystemManager sharedInstance] UUID] forKey:KEY_DEVICE_ID];
+        [user_data setObject:[NSString stringWithFormat:@"%ld", (long)self.Page] forKey:KEY_PAGE];
+        [user_data setObject:@"전체" forKey:KEY_AREA];
+        [user_data setObject:@"전체" forKey:KEY_PROVINCE];
+        [user_data setObject:@"거리순" forKey:KEY_SORT];
+        
+        HTTPRequest *request = [[HTTPRequest alloc] initWithTag:1];
+        [request setDelegate:self];
+        [request SendUrl:URL_ADS_LIST withDictionary:user_data];
+    }
+}
+
+#pragma mark - [ SCROLLVIEW DELEGATE ]
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    float offset = (scrollView.contentOffset.y - (scrollView.contentSize.height - scrollView.frame.size.height));
+    if (offset >= 0 && offset <= 5 && (self.TPage > self.Page)) {
+        // This is the last cell so get more data
+        NSLog(@"Load More");
+        [self loadMore];
+        //        [self loadmore];
+    }
 }
 
 @end

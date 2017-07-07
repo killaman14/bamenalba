@@ -28,14 +28,12 @@
 
 - (void) IsThemaEnable:(bool)enable {
     if (enable) {
-//        [ThemaIcon setTintColor:[UIColor magentaColor]];
-        [ThemaIcon.layer setCornerRadius:20];
-        [ThemaIcon.layer setBorderWidth:1];
+        [ThemaIcon setTintColor:[UIColor colorWithRed:(238.0f/255.0f) green:(44.0f/255.0f) blue:(35.0f/255.0f) alpha:1]];
+        [ThemaLabel setTextColor:[UIColor colorWithRed:(238.0f/255.0f) green:(44.0f/255.0f) blue:(35.0f/255.0f) alpha:1]];
     }
     else {
-        [ThemaIcon setTintColor:[UIColor clearColor]];
-        [ThemaIcon.layer setCornerRadius:0];
-        [ThemaIcon.layer setBorderWidth:0];
+        [ThemaIcon setTintColor:[UIColor darkGrayColor]];
+        [ThemaLabel setTextColor:[UIColor darkGrayColor]];
     }
 }
 
@@ -43,4 +41,5 @@
 {
     [super drawRect:rect];
 }
+
 @end

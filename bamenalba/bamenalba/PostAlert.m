@@ -24,6 +24,7 @@
 @synthesize ExampleTextView;
 
 
+
 - (void) drawRect:(CGRect)rect {
     [super drawRect:rect];
 
@@ -82,8 +83,32 @@
 }
 
 
+- (void) SetData:(NSDictionary *)data {
+    
+}
 
 
+- (void) Show:(UIView *)view {
+    self.frame = view.bounds;
+    
+    self.alpha = 0.0f;
+    
+    [self setUserInteractionEnabled:NO];
+    
+    [view addSubview:self];
+    
+    
+    
+    [UIView animateWithDuration:0.25f
+                          delay:0.0f
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.alpha = 1.0;
+                     }
+                     completion:^(BOOL finished){
+                         [self setUserInteractionEnabled:YES];
+                     }];
+}
 
 #pragma mark - [ ACTION ]
 
@@ -93,7 +118,19 @@
 
 - (IBAction) Close:(id)sender {
     if (delegate != nil) {
-        [delegate PostAlertClose];
+        self.alpha = 1;
+
+        [UIView animateWithDuration:0.25f
+                              delay:0.0f
+                            options: UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             self.alpha = 0.0;
+                         }
+                         completion:^(BOOL finished){
+                             [delegate PostAlertClose];
+                         }];
+        
+        
     }
 }
 

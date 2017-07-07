@@ -8,14 +8,18 @@
 
 #import "HTTPRequest.h"
 #import "AppDelegate.h"
+
+#import "AlertManager.h"
 #import <UIKit/UIKit.h>
 
 
-@interface HTTPRequest() <NSURLSessionDelegate, NSURLSessionDataDelegate>
+@interface HTTPRequest() <NSURLSessionDelegate, NSURLSessionDataDelegate, AlertManagerDelegate>
 @property (strong, nonatomic) NSMutableData *RequestData;
 @property (strong, nonatomic) UIActivityIndicatorView *IndicatorView;
 
 @property (strong, nonatomic) UIView *FrontView;
+
+@property (assign) NSInteger Tag;
 @end
 
 @implementation HTTPRequest
@@ -24,6 +28,8 @@
 @synthesize IndicatorView;
 
 @synthesize FrontView;
+
+@synthesize Tag;
 
 
 - (id) init {
@@ -39,9 +45,34 @@
     return self;
 }
 
+- (id) initWithTag:(NSInteger) tag {
+    self = [self init];
+    if (self) {
+        self.Tag = tag;
+    }
+    return self;
+}
+
+- (void) SendUrl:(NSString *)url RequestTag:(int)tag withDictionary:(NSDictionary *)data {
+    NSError *error = nil;
+    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:data
+                                                      options:0
+                                                        error:&error];
+    
+    [self SendUrl:url withData:jsonObj];
+}
+
+- (void) SendUrl:(NSString *)url withDictionary:(NSDictionary *)data {
+    NSError *error = nil;
+    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:data
+                                                      options:0
+                                                        error:&error];
+    
+    [self SendUrl:url withData:jsonObj];
+}
 
 - (void) SendUrl:(NSString *)url withData:(NSData *)data {
-    
+
     if (self.RequestData == nil) {
         self.RequestData = [[NSMutableData alloc] init];
     }
@@ -81,8 +112,6 @@
 didReceiveResponse:(NSURLResponse *)response
  completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
 {
-    
-    NSLog(@"%sl", __PRETTY_FUNCTION__);
     completionHandler(NSURLSessionResponseAllow);
 }
 
@@ -94,7 +123,6 @@ didReceiveResponse:(NSURLResponse *)response
 {
     
     [self.RequestData appendData:data];
-    NSLog(@"%sl", __PRETTY_FUNCTION__);
 }
 
 #pragma mark -
@@ -105,22 +133,35 @@ didReceiveResponse:(NSURLResponse *)response
  completionHandler:(void (^)(NSCachedURLResponse * _Nullable cachedResponse))completionHandler
 {
     
-//    [self.IndicatorView stopAnimating];
-//    [self.FrontView willRemoveSubview:self.IndicatorView];
-//    self.IndicatorView = nil;
+    [self.IndicatorView stopAnimating];
+    [self.FrontView willRemoveSubview:self.IndicatorView];
+    self.IndicatorView = nil;
     
     NSString *logStr = [[NSString alloc] initWithData:self.RequestData encoding:NSUTF8StringEncoding];
+    
+//    NSString* newStr = [NSString stringWithUTF8String:[self.RequestData bytes]];
+    
     NSLog(@"LogStr : %@", logStr);
     
     NSMutableDictionary *dic = (NSMutableDictionary *)[NSJSONSerialization JSONObjectWithData:self.RequestData options:NSJSONReadingMutableLeaves error:nil];
+
+    HTTP_TAG tag = (HTTP_TAG) [[[dic objectForKey:@"result"] objectForKey:@"code"] intValue];
     
-    for (NSString *key in [[dic objectForKey:@"result"] objectAtIndex:0]) {
-        NSLog(@"Key : %@", key);
+    if (tag == HTTP_FAIL) {
+        [[AlertManager sharedInstance] showAlertTitle:@"잘못된 파라메터입니다." data:@[ @"닫기" ] tag:0 delegate:self showViewController:[[[AppDelegate sharedAppDelegate] window] rootViewController]];
     }
+    else {
+        if ([self.delegate respondsToSelector:@selector(HTTPRequestFinish:HttpTag:ReturnRequest:)]) {
+            [self.delegate HTTPRequestFinish:dic HttpTag:tag ReturnRequest:self];
+        }
+        if ([self.delegate respondsToSelector:@selector(HTTPRequestFinish:RequestTag:HttpTag:ReturnRequest:)]) {
+            [self.delegate HTTPRequestFinish:dic RequestTag:self.Tag HttpTag:tag ReturnRequest:self];
+        }
+    }
+}
+
+- (void) AlertManagerDidSelected:(NSInteger)tag withIndex:(NSInteger)index {
     
-    
-    
-    NSLog(@"%sl", __PRETTY_FUNCTION__);
 }
 
 #pragma mark -
@@ -128,7 +169,7 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)URLSession:(NSURLSession *)session
           dataTask:(NSURLSessionDataTask *)dataTask
 didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask {
-    NSLog(@"%sl", __PRETTY_FUNCTION__);
+    
 }
 
 

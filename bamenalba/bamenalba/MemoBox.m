@@ -22,6 +22,10 @@
 @synthesize TableView;
 @synthesize _SearchTopView;
 
+- (void) LoadData {
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

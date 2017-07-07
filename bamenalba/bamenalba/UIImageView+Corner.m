@@ -20,4 +20,9 @@
     [[self layer] setBorderColor:[UIColor colorWithRed:(237.0f/255.0f) green:(58.0f/255.0f) blue:(130.0f/255.0f) alpha:1].CGColor];
 }
 
+- (void) Corner:(float)radius Color:(UIColor *)color {
+    [self Corner:radius];
+    [self setBackgroundColor:color];
+}
+
 @end

@@ -11,4 +11,5 @@
 @interface UIImageView (Corner)
 - (void) Corner:(float) radius;
 - (void) Border:(float) width;
+- (void) Corner:(float)radius Color:(UIColor *)color;
 @end

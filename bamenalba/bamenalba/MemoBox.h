@@ -11,4 +11,7 @@
 @interface MemoBox : UIViewController
 @property (weak, nonatomic) IBOutlet UIView *TopView;
 @property (weak, nonatomic) IBOutlet UITableView *TableView;
+
+- (void) LoadData;
+
 @end
