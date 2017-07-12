@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MemoBox : UIViewController
+@interface MemoBox : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *TopView;
 @property (weak, nonatomic) IBOutlet UITableView *TableView;
 
-- (void) LoadData;
+- (void) InitLoadData;
 
 @end

@@ -109,6 +109,8 @@
     
 }
 
+#pragma mark = [ COLLECTION VIEW DELEGATE ]
+
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"path");
 }

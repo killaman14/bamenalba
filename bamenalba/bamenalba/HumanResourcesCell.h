@@ -11,7 +11,7 @@
 @protocol HumanResourcesCellDelegate <NSObject>
 
 @optional
-- (void) CallDetailView;
+- (void) CallDetailView:(NSDictionary *)data;
 - (void) CallPost;
 
 @end

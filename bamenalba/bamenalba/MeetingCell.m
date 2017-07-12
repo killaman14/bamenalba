@@ -36,64 +36,67 @@
      "user_sex":"M",
      "member_type":"2"
      */
-    
-    NSString *nTimeStr = [self.Data objectForKey:@"now_time"];
-    NSString *cTimeStr = [self.Data objectForKey:@"state_date"];
-    
-    NSString *time = [[SystemManager sharedInstance] TimeSpace_WriteTime:[self ConvertTime:cTimeStr]
-                                                             CurrentTime:[self ConvertTime:nTimeStr]];
-    
-    
-    NSString *state = [NSString stringWithFormat:@"%@ %@(%@) %@",
-                       time,
-                       [self.Data objectForKey:@"user_name"],
-                       [self.Data objectForKey:@"user_age"],
-                       [self.Data objectForKey:@"distance"]];
-    
+    @try {
+        NSString *nTimeStr = [self.Data objectForKey:@"now_time"];
+        NSString *cTimeStr = [self.Data objectForKey:@"state_date"];
+        
+        NSString *time = [[SystemManager sharedInstance] TimeSpace_WriteTime:[self ConvertTime:cTimeStr]
+                                                                 CurrentTime:[self ConvertTime:nTimeStr]];
+        
+        
+        NSString *state = [NSString stringWithFormat:@"%@ %@(%@세) %@",
+                           time,
+                           [self.Data objectForKey:@"user_name"],
+                           [self.Data objectForKey:@"user_age"],
+                           [self.Data objectForKey:@"distance"]];
+        
+        
+        NSDictionary *attribs = @{ NSForegroundColorAttributeName: [UIColor blackColor],
+                                   NSFontAttributeName: [UIFont systemFontOfSize:12] };
+        
+        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:state
+                                                                                           attributes:attribs];
+        
+        NSRange timeRange = [state rangeOfString:time];
+        [attributedText setAttributes:@{ NSForegroundColorAttributeName:[UIColor blackColor] }
+                                range:NSMakeRange(0, timeRange.length) ];
+        
+        
+        UIColor *sexColor;
+        if ([[self.Data objectForKey:@"user_sex"] isEqualToString:@"M"]) {
+            sexColor = [UIColor blueColor];
+        }
+        else sexColor = [UIColor magentaColor];
+        
+        NSString *nameageStr = [NSString stringWithFormat:@"%@(%@세)", [self.Data objectForKey:@"user_name"], [self.Data objectForKey:@"user_age"]];
+        NSRange nameageRange = [state rangeOfString:nameageStr];
+        
+        [attributedText setAttributes:@{ NSForegroundColorAttributeName:sexColor }
+                                range:NSMakeRange(timeRange.length + 1, nameageRange.length)];
+        
+        NSRange disRange = [state rangeOfString:[self.Data objectForKey:@"distance"]];
+        
+        [attributedText setAttributes:@{ NSForegroundColorAttributeName:[UIColor greenColor] }
+                                range:disRange];
+        
+        [self.StateLb setAttributedText:attributedText];
+        
+        [self.ContentLb setText:[self.Data objectForKey:@"content"]];
+        
+        if ([[self.Data objectForKey:@"img"] isEqualToString:@""]) {
+            [self.TitleIMG setImage:[UIImage imageNamed:@"ex_img.png"]];
+        }
+        else {
+            [[UIImageView_Cache getInstance] loadFromUrl:[NSURL URLWithString:[self.Data objectForKey:@"img"]] callback:^(UIImage *image) {
+                [self.TitleIMG setImage:image];
+            }];
+        }
 
-    NSDictionary *attribs = @{ NSForegroundColorAttributeName: [UIColor blackColor],
-                               NSFontAttributeName: [UIFont systemFontOfSize:12] };
-    
-    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:state
-                                                                                       attributes:attribs];
-    
-    NSRange timeRange = [state rangeOfString:time];
-    [attributedText setAttributes:@{ NSForegroundColorAttributeName:[UIColor blackColor] }
-                            range:timeRange];
-    
-    
-    UIColor *sexColor;
-    if ([[self.Data objectForKey:@"user_sex"] isEqualToString:@"M"]) {
-        sexColor = [UIColor blueColor];
+    } @catch (NSException *exception) {
+        NSLog(@"Exception : %@", exception);
+    } @finally {
+        
     }
-    else sexColor = [UIColor magentaColor];
-
-    
-    NSRange ageRange = [state rangeOfString:[self.Data objectForKey:@"user_age"]];
-    
-    [attributedText setAttributes:@{ NSForegroundColorAttributeName:sexColor }
-                            range:NSMakeRange(timeRange.length, ageRange.location + 1)];
-    
-    NSRange disRange = [state rangeOfString:[self.Data objectForKey:@"distance"]];
-    
-    [attributedText setAttributes:@{ NSForegroundColorAttributeName:[UIColor greenColor] }
-                            range:disRange];
-    
-    [self.StateLb setAttributedText:attributedText];
-
-    [self.ContentLb setText:[self.Data objectForKey:@"content"]];
-    
-    if ([[self.Data objectForKey:@"img"] isEqualToString:@""]) {
-        [self.TitleIMG setImage:[UIImage imageNamed:@"ex_img.png"]];
-    }
-    else {
-        [[UIImageView_Cache getInstance] loadFromUrl:[NSURL URLWithString:[self.Data objectForKey:@"img"]] callback:^(UIImage *image) {
-            [self.TitleIMG setImage:image];
-        }];
-    }
-
-//    NSDate* cDate = [firstDateFormatter dateFromString:cTimeStr];
-//    NSDate* nDate = [lastDateFormatter dateFromString:nTimeStr];
 }
 
 - (NSDate *) ConvertTime:(NSString *)strTime {

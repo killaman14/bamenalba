@@ -13,7 +13,7 @@
 @property (nonatomic, strong) IBOutlet UIView *TopView;
 @property (nonatomic, strong) IBOutlet UITableView *Table;
 
-@property (nonatomic, strong) NSMutableArray *sampleData;
+
 
 
 - (void) InitLoadData;

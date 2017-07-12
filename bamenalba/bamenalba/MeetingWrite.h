@@ -20,6 +20,8 @@
 
 
 
+- (IBAction) HideKeyboard:(id)sender;
+
 - (IBAction) Close:(id)sender;
 
 - (IBAction) TingSend:(id)sender;

@@ -65,5 +65,47 @@ static AlertManager *sharedInstance = nil;
     [viewController presentViewController:actionSheet animated:YES completion:nil];
 }
 
+- (void) showAlertTitle:(NSString *)title
+                message:(NSString *)message
+                   data:(NSArray *)data
+                    tag:(NSInteger)tag
+               delegate:(id<AlertManagerDelegate>) delegate
+     showViewController:(UIViewController *) viewController
+{
+    UIAlertController *actionSheet = [UIAlertController
+                                      alertControllerWithTitle:title
+                                      message:message
+                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    int index = 0;
+    for (NSString *actiontitle in data)
+    {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:actiontitle
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * action)
+                                 {
+                                     if (delegate != nil)
+                                     {
+                                         if ([delegate respondsToSelector:@selector(AlertManagerSelected:withTag:)])
+                                             [delegate AlertManagerSelected:actiontitle withTag:tag];
+                                         
+                                         if ([delegate respondsToSelector:@selector(AlertManagerDidSelected:withIndex:)])
+                                             [delegate AlertManagerDidSelected:tag withIndex:index];
+                                         
+                                     }
+                                 }];
+        
+        [actionSheet addAction:action];
+        
+        index++;
+    }
+    
+    [actionSheet setModalPresentationStyle:UIModalPresentationPopover];
+    [actionSheet.view setTintColor:[UIColor blackColor]];
+    
+    [viewController presentViewController:actionSheet animated:YES completion:nil];
+}
+
 
 @end

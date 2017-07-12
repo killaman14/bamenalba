@@ -19,14 +19,13 @@
 
 @property (assign, nonatomic) id<PostAlertDelegate> delegate;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *ScrollView;
 
 @property (weak, nonatomic) IBOutlet UIView *ParentView;
 @property (weak, nonatomic) IBOutlet UILabel *StateLb;
 @property (weak, nonatomic) IBOutlet UITextField *ContentTf;
 @property (weak, nonatomic) IBOutlet UILabel *OwnedPointsLb;
 @property (weak, nonatomic) IBOutlet UILabel *ExampleLb;
-
-@property (weak, nonatomic) IBOutlet UITextView *ExampleTextView;
 
 
 - (void) SetData:(NSDictionary *)data;

@@ -8,6 +8,7 @@
 
 #import "JobInfoCell.h"
 
+#import "SystemManager.h"
 #import "UIImageView+Cache.h"
 
 @interface JobInfoCell()
@@ -77,16 +78,6 @@
 - (void) drawRect:(CGRect)rect {
     [super drawRect:rect];
     
-//    [DetailParent.layer setCornerRadius:5];
-//    [PostParent.layer setCornerRadius:5];
-//    [EditParent.layer setCornerRadius:5];
-//    [DeleteParent.layer setCornerRadius:5];
-    
-    [EditParent setHidden:YES];
-    [DeleteParent setHidden:YES];
-    [PostParent setHidden:NO];
-    [DetailParent setHidden:NO];
-    
     [self.TitleIMG.layer setCornerRadius:5];
     [self.TitleIMG.layer setMasksToBounds:YES];
 }
@@ -136,6 +127,9 @@
             [self.TitleIMG setImage:image];
         }];
     }
+    
+    
+    [self ButtonChange:[[self.ItemDatas objectForKey:@"device_id"] isEqualToString:[[SystemManager sharedInstance] UUID]]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -210,7 +204,12 @@
 }
 
 
-
+- (void) ButtonChange:(BOOL)isMy {
+    [EditParent setHidden:!isMy];
+    [DeleteParent setHidden:!isMy];
+    [DetailParent setHidden:isMy];
+    [PostParent setHidden:isMy];
+}
 
 - (IBAction) EnableButtons:(id)sender {
     
@@ -270,14 +269,26 @@
 #pragma mark - [ JobInfoCell Delegate ]
 
 - (IBAction) CallDetail {
-    if (delegate != nil) {
+    if (delegate != nil && [delegate respondsToSelector:@selector(CallDetailButton:)]) {
         [delegate CallDetailButton:_Index];
     }
 }
 
 - (IBAction) CallPost {
-    if (delegate != nil) {
+    if (delegate != nil && [delegate respondsToSelector:@selector(CallPostButton:)]) {
         [delegate CallPostButton:_Index];
+    }
+}
+
+- (IBAction) CallEdit {
+    if (delegate != nil && [delegate respondsToSelector:@selector(CallEditButton:)]) {
+        [delegate CallEditButton:_Index];
+    }
+}
+
+- (IBAction) CallDelete {
+    if (delegate != nil && [delegate respondsToSelector:@selector(CallDelete)]) {
+        [delegate CallDeleteButton:_Index];
     }
 }
 

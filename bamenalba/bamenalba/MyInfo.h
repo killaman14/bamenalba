@@ -10,7 +10,10 @@
 
 #import <Photos/Photos.h>
 
-@interface MyInfo : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface MyInfo : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
+
+@property (weak, nonatomic) IBOutlet UIScrollView *ScrollView;
+@property (weak, nonatomic) IBOutlet UIView *ContentView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *MyImage;
 
@@ -22,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *SectorLb;
 @property (weak, nonatomic) IBOutlet UILabel *CommentLb;
 @property (weak, nonatomic) IBOutlet UITextField *SecretKeyTf;
+
+@property (weak, nonatomic) IBOutlet UIButton *EditButton;
 
 
 - (IBAction) AlertShow:(id)sender;

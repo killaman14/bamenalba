@@ -299,4 +299,12 @@ static SystemManager *sharedInstance = nil;
 #pragma mark - [ ALERT DATA ] 
 
 
+#pragma mark - 
+
+- (void) setUserData:(NSDictionary *)data {
+    UserData = data;
+    
+    self.AccountNumber = [UserData objectForKey:@"member_type"];
+}
+
 @end

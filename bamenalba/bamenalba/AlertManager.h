@@ -66,4 +66,11 @@ enum AlertData
                delegate:(id<AlertManagerDelegate>) delegate
      showViewController:(UIViewController *) viewController;
 
+- (void) showAlertTitle:(NSString *)title
+                message:(NSString *)message
+                   data:(NSArray *)data
+                    tag:(NSInteger)tag
+               delegate:(id<AlertManagerDelegate>) delegate
+     showViewController:(UIViewController *) viewController;
+
 @end

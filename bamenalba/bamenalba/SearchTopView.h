@@ -29,6 +29,7 @@ typedef enum {
 - (void) requestButton:(TOPVIEW_BUTTON) buttontype;
 @optional
 - (NSDictionary *) searchbarTitles;
+- (BOOL) searchButtonActivity;
 
 @end
 

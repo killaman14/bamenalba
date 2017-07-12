@@ -9,7 +9,7 @@
 #import "HumanResourcesCell.h"
 
 @interface HumanResourcesCell()
-@property (strong, nonatomic) NSDictionary *data;
+@property (strong, nonatomic) NSDictionary *Data;
 @end
 
 @implementation HumanResourcesCell
@@ -17,11 +17,11 @@
 @synthesize delegate;
 
 - (void) SetCellData:(NSDictionary *)data {
-    self.data = data;
+    self.Data = data;
     
-    if (self.data != nil)
+    if (self.Data != nil)
     {
-        NSString *state = [NSString stringWithFormat:@"%@(%@) %@", [self.data objectForKey:@"name"], [self.data objectForKey:@"age"], [self.data objectForKey:@"dis"] ];
+        NSString *state = [NSString stringWithFormat:@"%@(%@) %@", [self.Data objectForKey:@"user_nickname"], [self.Data objectForKey:@"user_age"], [self.Data objectForKey:@"distance"]];
         
         NSDictionary *attribs = @{
                                   NSForegroundColorAttributeName: [UIColor blackColor],
@@ -31,14 +31,14 @@
         [[NSMutableAttributedString alloc] initWithString:state
                                                attributes:attribs];
         
-        NSRange nameRange = [state rangeOfString:[self.data objectForKey:@"name"]];
-        NSRange ageRange = [state rangeOfString:[self.data objectForKey:@"age"]];
+        NSRange nameRange = [state rangeOfString:[self.Data objectForKey:@"user_nickname"]];
+        NSRange ageRange = [state rangeOfString:[self.Data objectForKey:@"user_age"]];
         
         [attributedText setAttributes:@{NSForegroundColorAttributeName:[UIColor blueColor],
                                         NSFontAttributeName: [UIFont systemFontOfSize:12]}
                                 range:NSMakeRange(0, nameRange.length + ageRange.location + 1)];
 
-        NSRange disRange = [state rangeOfString:[self.data objectForKey:@"dis"]];
+        NSRange disRange = [state rangeOfString:[self.Data objectForKey:@"distance"]];
         
         [attributedText setAttributes:@{NSForegroundColorAttributeName:[UIColor greenColor],
                                         NSFontAttributeName: [UIFont systemFontOfSize:12]}
@@ -47,7 +47,7 @@
         
         [self.StateLb setAttributedText:attributedText];
         
-        [self.ComentLb setText:[self.data objectForKey:@"coment"]];
+        [self.ComentLb setText:[self.Data objectForKey:@"user_ment"]];
     }
 }
 
@@ -66,8 +66,8 @@
 }
 
 - (IBAction)CallDetail:(id)sender {
-    if (delegate != nil) {
-        [delegate CallDetailView];
+    if (delegate != nil && [delegate respondsToSelector:@selector(CallDetailView:)]) {
+        [delegate CallDetailView:self.Data];
     }
 }
 

@@ -45,12 +45,14 @@
     BOOL IsSignUp;
     
     NSString *UUID;
+    NSString *AccountNumber;
     
     NSDictionary *UserData;
 }
 @property (assign, nonatomic) BOOL IsSignUp;
 
 @property (strong, nonatomic) NSString *UUID;
+@property (strong, nonatomic) NSString *AccountNumber;
 @property (assign, nonatomic) const NSString *PUSH_TOKEN;
 
 @property (strong, nonatomic) NSDictionary *UserData;

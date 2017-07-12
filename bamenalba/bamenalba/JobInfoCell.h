@@ -25,6 +25,8 @@ typedef enum  {
 @required
 - (void) CallDetailButton:(int)index;
 - (void) CallPostButton:(int)index;
+- (void) CallEditButton:(int)index;
+- (void) CallDeleteButton:(int)index;
 
 @end
 
@@ -69,4 +71,7 @@ typedef enum  {
 
 - (IBAction) CallDetail;
 - (IBAction) CallPost;
+- (IBAction) CallEdit;
+- (IBAction) CallDelete;
+
 @end

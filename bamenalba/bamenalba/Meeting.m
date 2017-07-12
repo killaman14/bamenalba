@@ -24,6 +24,7 @@
 
 @property (assign, nonatomic) NSInteger Page;
 @property (assign, nonatomic) NSInteger TPage;
+
 @end
 
 @implementation Meeting
@@ -104,12 +105,33 @@
 
 #pragma mark - [ SEARCH TOP VIEW DELEGATE ]
 
+- (NSDictionary *) searchbarTitles {
+    NSDictionary *titles = @{ SEARCHTOP_ONE_BUTTON : @"전체",
+                              SEARCHTOP_TWO_BUTTON : @"근처",
+                              SEARCHTOP_THREE_BUTTON : @"내꺼",
+                              SEARCHTOP_RIGHT_BUTTON : @"번개팅 작성" };
+    return titles;
+}
+
 - (void) requestButton:(TOPVIEW_BUTTON)buttontype {
     if (buttontype == TOPVIEW_RIGHT_BUTTON) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"MeetingWrite"];
         [self presentViewController:vc animated:YES completion:NULL];
     }
+    else if (buttontype == TOPVIEW_LEFT_BUTTON_ONE) {
+        NSLog(@"ONE");
+    }
+    else if (buttontype == TOPVIEW_LEFT_BUTTON_TWO) {
+        NSLog(@"TWO");
+    }
+    else if (buttontype == TOPVIEW_LEFT_BUTTON_THREE) {
+        NSLog(@"THREE");
+    }
+}
+
+- (BOOL) searchButtonActivity {
+    return true;
 }
 
 #pragma mark - [ HTTP REQUEST DELEGATE ]
@@ -120,18 +142,24 @@
     
     switch (httpTag) {
         case HTTP_SUCCESS:
+            @try {
+                Info = [data objectForKey:@"info"];
+                
+                self.Page = [[Info objectForKey:@"cpage"] intValue];
+                
+                self.TPage = [[Info objectForKey:@"tpage"] intValue];
+                
+                [self.Table setClearsContextBeforeDrawing:YES];
+                
+                [self.Data addObjectsFromArray:[NSArray arrayWithArray:[data objectForKey:@"list"]]];
+                
+                [self.Table reloadData];
+            } @catch (NSException *exception) {
+                NSLog(@"Exception : %@", exception);
+            } @finally {
+                
+            }
             
-            Info = [data objectForKey:@"info"];
-            
-            self.Page = [[Info objectForKey:@"cpage"] intValue];
-            
-            self.TPage = [[Info objectForKey:@"tpage"] intValue];
-            
-            [self.Table setClearsContextBeforeDrawing:YES];
-            
-            [self.Data addObjectsFromArray:[NSArray arrayWithArray:[data objectForKey:@"list"]]];
-            
-            [self.Table reloadData];
             break;
             
         default:
@@ -143,7 +171,8 @@
 
 #pragma mark - [ PROCESS ]
 
-- (void) loadMore {
+- (void) loadMore
+{
     if (self.IsLoading == false)
     {
         self.IsLoading = true;
@@ -163,14 +192,6 @@
         [request SendUrl:URL_MEETING_LIST withDictionary:user_data];
     }
 
-}
-
-- (NSDictionary *) searchbarTitles {
-    NSDictionary *titles = @{ SEARCHTOP_ONE_BUTTON : @"전체",
-                              SEARCHTOP_TWO_BUTTON : @"근처",
-                              SEARCHTOP_THREE_BUTTON : @"내꺼",
-                              SEARCHTOP_RIGHT_BUTTON : @"번개팅 작성" };
-    return titles;
 }
 
 @end

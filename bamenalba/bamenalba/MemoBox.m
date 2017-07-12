@@ -10,11 +10,18 @@
 #import "MemoBoxCell.h"
 
 #import "SearchTopView.h"
+#import "SystemManager.h"
+#import "HTTPRequest.h"
+#import "KEY.h"
 
-@interface MemoBox () <UITableViewDelegate, UITableViewDataSource, SearchTopViewDelegate>
+@interface MemoBox () <SearchTopViewDelegate, HTTPRequestDelegate>
 @property (weak, nonatomic) SearchTopView *_SearchTopView;
 
-@property (strong, nonatomic) NSMutableArray *sampleData;
+@property (strong, nonatomic) NSMutableArray *Data;
+
+@property (assign) BOOL IsLoading;
+@property (assign) int Page;
+@property (assign) int TPage;
 @end
 
 @implementation MemoBox
@@ -22,12 +29,31 @@
 @synthesize TableView;
 @synthesize _SearchTopView;
 
-- (void) LoadData {
+@synthesize Data;
+
+- (void) InitLoadData {
     
+    self.IsLoading = false;
+    
+    self.Page = 0;
+    self.TPage = 0;
+    
+    if (self.Data != nil) {
+        self.Data = [NSMutableArray array];
+    }
+    [self.Data removeAllObjects];
+    
+    [self.TableView reloadData];
+    
+    
+    [self loadMore];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.Data = [NSMutableArray array];
+    [self.Data removeAllObjects];
     
     _SearchTopView = [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
                                                     owner:self
@@ -37,13 +63,6 @@
     
     [TopView addSubview:_SearchTopView];
     
-    
-    self.sampleData = [NSMutableArray array];
-    
-    [self.sampleData addObject:@{ @"nick":@"미미쨩데스", @"age":@"23세", @"dis":@"10km", @"time":@"3초 전", @"content":@"배스배스" }];
-    [self.sampleData addObject:@{ @"nick":@"미미쨩데스네", @"age":@"24세", @"dis":@"10km", @"time":@"3초 전", @"content":@"배스배스" }];
-    [self.sampleData addObject:@{ @"nick":@"미미쨩데스삼", @"age":@"25세", @"dis":@"10km", @"time":@"3초 전", @"content":@"배스배스" }];
-    [self.sampleData addObject:@{ @"nick":@"미미쨩데스사", @"age":@"26세", @"dis":@"10km", @"time":@"3초 전", @"content":@"배스배스" }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,23 +89,72 @@
 }
 
 
-#pragma mark - 
+#pragma mark - [ TABLEVIEW DELEGATE ]
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.sampleData count];
+    return [self.Data count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MemoBoxCell *cell = (MemoBoxCell *) [tableView dequeueReusableCellWithIdentifier:@"MemoBoxCell" forIndexPath:indexPath];
     
-    [cell setCellData:[self.sampleData objectAtIndex:[indexPath row]]];
+    [cell setCellData:[self.Data objectAtIndex:[indexPath row]]];
     
     
     return cell;
+}
+
+
+#pragma mark - [ HTTPREQUEST DELEGATE ]
+
+
+- (void) HTTPRequestFinish:(NSDictionary *)data HttpTag:(HTTP_TAG)httpTag ReturnRequest:(id)request {
+    if (httpTag == HTTP_SUCCESS) {
+        self.Data = [data objectForKey:@"list"];
+        
+        [self.TableView reloadData];
+    }
+    /*
+     "user_img":"http:\/\/bamenalba.ivyro.net\/img\/member_395004.jpg",
+     "user_nickname":"\ubc30\uc2a4\uc2e0",
+     "user_age":"28",
+     "user_sex":"F",
+     "content":"\u314e\u314e\u314e\u314e",
+     "w_date":"2017-07-11 10:07:32",
+     "d_date":"2017-07-11 10:09:04",
+     "room_key":"3583526811",
+     "distance":"245",
+     "target_device":"352722070234532",
+     "count":"0"
+     */
+}
+
+
+#pragma mark - [ PROCESS ]
+
+- (void) loadMore
+{
+    if (self.IsLoading == false)
+    {
+        self.IsLoading = true;
+        
+        self.Page = self.Page + 1;
+        
+        NSMutableDictionary *user_data = [NSMutableDictionary dictionary];
+        
+        [user_data setObject:[[SystemManager sharedInstance] UUID] forKey:KEY_DEVICE_ID];
+//        [user_data setObject:@"352469074678179" forKey:KEY_DEVICE_ID];
+        [user_data setObject:[NSString stringWithFormat:@"%ld", (long)self.Page] forKey:KEY_PAGE];
+//        [user_data setObject:@"1" forKey:KEY_PAGE];
+
+        HTTPRequest *request = [[HTTPRequest alloc] initWithTag:1];
+        [request setDelegate:self];
+        [request SendUrl:URL_CHAT_LIST withDictionary:user_data];
+    }
 }
 
 @end

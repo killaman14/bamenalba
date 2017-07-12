@@ -10,6 +10,7 @@
 #import "SearchTopView.h"
 #import "JobInfoCell.h"
 #import "JobInfoDetailView.h"
+#import "JobWriteView.h"
 
 #import "PostAlert.h"
 
@@ -29,8 +30,11 @@
 
 @property (strong, nonatomic) PostAlert *PAlert;
 
+@property (nonatomic, strong) NSMutableArray *Data;
+
 @property (weak, nonatomic) NSString *CityName;
 @property (weak, nonatomic) NSString *ProvinceName;
+@property (weak, nonatomic) NSString *DistanceText;
 
 @property (assign) BOOL IsLoading;
 
@@ -45,7 +49,7 @@
 
 @synthesize TopView;
 @synthesize Table;
-@synthesize sampleData;
+@synthesize Data;
 
 @synthesize _SearchTopView;
 
@@ -55,14 +59,13 @@
 }
 
 - (void) InitLoadData {
-    self.IsLoading = false;
     
-    self.Page = 0;
-    self.TPage = 0;
     
-    [self.sampleData removeAllObjects];
+    self.CityName = @"전체";
+    self.ProvinceName = @"전체";
+    self.DistanceText = @"거리순";
     
-    [self.Table reloadData];
+    [self loadInit];
     
     [self loadMore];
 }
@@ -82,7 +85,7 @@
             
             [self.Table setClearsContextBeforeDrawing:YES];
             
-            [self.sampleData addObjectsFromArray:[NSArray arrayWithArray:[data objectForKey:@"list"]]];
+            [self.Data addObjectsFromArray:[NSArray arrayWithArray:[data objectForKey:@"list"]]];
             
             [self.Table reloadData];
             break;
@@ -97,8 +100,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    sampleData = [NSMutableArray array];
-    [sampleData removeAllObjects];
+    Data = [NSMutableArray array];
+    [Data removeAllObjects];
     
     self.PAlert = (PostAlert *)[[[NSBundle mainBundle] loadNibNamed:@"PostAlert" owner:self options:nil] firstObject];
     [self.PAlert setDelegate:self];
@@ -110,6 +113,7 @@
     [_SearchTopView setFrame:CGRectMake(0, 0, self.view.frame.size.width, _SearchTopView.frame.size.height)];
     [_SearchTopView setDelegate:self];
     [TopView addSubview:_SearchTopView];
+    
     
     
     Table.delegate = self;
@@ -135,14 +139,14 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [sampleData count];
+    return [Data count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"JobInfoCell";
     JobInfoCell *cell = (JobInfoCell *) [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     [cell setDelegate:self];
-    [cell SetData:[sampleData objectAtIndex:indexPath.row] Index:indexPath.row];
+    [cell SetData:[Data objectAtIndex:indexPath.row] Index:indexPath.row];
 
     return cell;
 }
@@ -155,23 +159,37 @@
     if (tag == AlertDataArea) {
         self.CityName = selectedString;
         [_SearchTopView setText:selectedString ButtonType:TOPVIEW_LEFT_BUTTON_ONE];
-        
+
         [self CallProvinceButton];
     }
     else if(tag == AlertDataProvince) {
         self.ProvinceName = selectedString;
         
         [_SearchTopView setText:selectedString ButtonType:TOPVIEW_LEFT_BUTTON_TWO];
+        
+        [self loadInit];
+        
+        [self loadMore];
     }
     else if(tag == AlertDataSort) {
+        self.DistanceText = selectedString;
+        
         [_SearchTopView setText:selectedString ButtonType:TOPVIEW_LEFT_BUTTON_THREE];
+        
+        [self loadInit];
+        
+        [self loadMore];
     }
 }
 
 
 - (void) CallCityButton {
+    
+    NSMutableArray *data = [NSMutableArray arrayWithObject:@"전체"];
+    [data addObjectsFromArray:[SystemManager AlertDataKey:CSV_KEY_AREA]];
+    
     [[AlertManager sharedInstance] showAlertTitle:@"지역선택"
-                                             data:[SystemManager AlertDataKey:CSV_KEY_AREA]
+                                             data:data
                                               tag:AlertDataArea
                                          delegate:self
                                showViewController:self];
@@ -180,13 +198,24 @@
 
 - (void) CallProvinceButton
 {
-    NSString *provinceKey = [SystemManager ProvinceKey:self.CityName];
-    
-    [[AlertManager sharedInstance] showAlertTitle:@"지역선택"
-                                             data:[SystemManager AlertDataKey:provinceKey]
-                                              tag:AlertDataProvince
-                                         delegate:self
-                               showViewController:self];
+    if ([self.CityName isEqualToString:@"전체"]) {
+        [_SearchTopView setHidden:YES ButtonType:TOPVIEW_LEFT_BUTTON_TWO];
+        
+        self.ProvinceName = @"전체";
+        
+        [self loadInit];
+        
+        [self loadMore];
+    }
+    else {
+        NSString *provinceKey = [SystemManager ProvinceKey:self.CityName];
+        
+        [[AlertManager sharedInstance] showAlertTitle:@"지역선택"
+                                                 data:[SystemManager AlertDataKey:provinceKey]
+                                                  tag:AlertDataProvince
+                                             delegate:self
+                                   showViewController:self];
+    }
 }
 
 - (void) CallDistanceButton {
@@ -203,7 +232,6 @@
 
 - (void) requestButton:(TOPVIEW_BUTTON)buttontype
 {
-    NSLog(@"requestButton : %u", buttontype);
     switch (buttontype) {
         case TOPVIEW_LEFT_BUTTON_ONE:
             [self CallCityButton];
@@ -224,7 +252,7 @@
 
 - (void) CallDetailButton:(int) index{
     
-    NSDictionary *data = [self.sampleData objectAtIndex:index];
+    NSDictionary *data = [self.Data objectAtIndex:index];
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     JobInfoDetailView *vc = [sb instantiateViewControllerWithIdentifier:@"JobInfoDetailView"];
@@ -233,7 +261,22 @@
 }
 
 - (void) CallPostButton:(int) index {
+    [self.PAlert SetData:[self.Data objectAtIndex:index]];
     [self.PAlert Show:self.view];
+}
+
+- (void) CallEditButton:(int)index {
+    
+    NSDictionary *data = [self.Data objectAtIndex:index];
+    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    JobWriteView *vc = [sb instantiateViewControllerWithIdentifier:@"JobInfoDetailView"];
+//    [vc InitLoadData:data];
+    [self presentViewController:vc animated:YES completion:NULL];
+}
+
+- (void) CallDeleteButton:(int)index {
+    
 }
 
 - (void) PostAlertClose {
@@ -248,6 +291,15 @@
     [self presentViewController:vc animated:YES completion:NULL];
 }
 
+- (void) loadInit {
+    self.IsLoading = false;
+    
+    self.Page = 0;
+    self.TPage = 0;
+    
+    [self.Data removeAllObjects];
+    [self.Table reloadData];
+}
 
 - (void) loadMore
 {
@@ -261,9 +313,9 @@
         
         [user_data setObject:[[SystemManager sharedInstance] UUID] forKey:KEY_DEVICE_ID];
         [user_data setObject:[NSString stringWithFormat:@"%ld", (long)self.Page] forKey:KEY_PAGE];
-        [user_data setObject:@"전체" forKey:KEY_AREA];
-        [user_data setObject:@"전체" forKey:KEY_PROVINCE];
-        [user_data setObject:@"거리순" forKey:KEY_SORT];
+        [user_data setObject:self.CityName forKey:KEY_AREA];
+        [user_data setObject:self.ProvinceName forKey:KEY_PROVINCE];
+        [user_data setObject:self.DistanceText forKey:KEY_SORT];
         
         HTTPRequest *request = [[HTTPRequest alloc] initWithTag:1];
         [request setDelegate:self];
@@ -277,10 +329,7 @@
 {
     float offset = (scrollView.contentOffset.y - (scrollView.contentSize.height - scrollView.frame.size.height));
     if (offset >= 0 && offset <= 5 && (self.TPage > self.Page)) {
-        // This is the last cell so get more data
-        NSLog(@"Load More");
         [self loadMore];
-        //        [self loadmore];
     }
 }
 

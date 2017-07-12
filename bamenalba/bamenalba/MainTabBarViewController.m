@@ -58,11 +58,11 @@
     }
     else if (tabIndex == 2) {
         HumanResources *v = (HumanResources *)[self selectedViewController];
-        [v LoadData];
+        [v InitLoadData];
     }
     else if (tabIndex == 3) {
         MemoBox *v = (MemoBox *)[self selectedViewController];
-        [v LoadData];
+        [v InitLoadData];
     }
     else {
         

@@ -26,7 +26,7 @@
 {
     self.Data = data;
     
-    NSString *state = [NSString stringWithFormat:@"%@ (%@) %@", [self.Data objectForKey:@"nick"], [self.Data objectForKey:@"age"], [self.Data objectForKey:@"dis"]];
+    NSString *state = [NSString stringWithFormat:@"%@ (%@) %@", [self.Data objectForKey:@"user_nickname"], [self.Data objectForKey:@"user_age"], [self.Data objectForKey:@"distance"]];
     
     NSDictionary *attribs = @{
                               NSForegroundColorAttributeName: [UIColor blackColor],
@@ -37,13 +37,13 @@
                                            attributes:attribs];
     
     
-    NSRange nameRange = [state rangeOfString:[self.Data objectForKey:@"nick"]];
-    NSRange ageRange = [state rangeOfString:[self.Data objectForKey:@"age"]];
+    NSRange nameRange = [state rangeOfString:[self.Data objectForKey:@"user_nickname"]];
+    NSRange ageRange = [state rangeOfString:[self.Data objectForKey:@"user_age"]];
     
     [attributedText setAttributes:@{NSForegroundColorAttributeName:[UIColor magentaColor]}
                             range:NSMakeRange(nameRange.length, ageRange.location + 1)];
     
-    NSRange disRange = [state rangeOfString:[self.Data objectForKey:@"dis"]];
+    NSRange disRange = [state rangeOfString:[self.Data objectForKey:@"distance"]];
     
     [attributedText setAttributes:@{NSForegroundColorAttributeName:[UIColor greenColor]}
                             range:disRange];
@@ -51,7 +51,7 @@
     [self.StateLb setAttributedText:attributedText];
     
     
-    [self.TimeLb setText:[NSString stringWithFormat:@"%@", [self.Data objectForKey:@"time"]]];
+//    [self.TimeLb setText:[NSString stringWithFormat:@"%@", [self.Data objectForKey:@"time"]]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

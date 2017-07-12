@@ -7,21 +7,29 @@
 //
 
 #import "HumanResources.h"
+#import "HumanInfoDetailView.h"
 #import "HumanResourcesCell.h"
 #import "SearchTopView.h"
 
 #import "SystemManager.h"
 #import "AlertManager.h"
 #import "PostAlert.h"
+#import "HTTPRequest.h"
+#import "KEY.h"
 
-@interface HumanResources () <SearchTopViewDelegate, HumanResourcesCellDelegate, AlertManagerDelegate, PostAlertDelegate>
+@interface HumanResources () <SearchTopViewDelegate, HumanResourcesCellDelegate, AlertManagerDelegate, PostAlertDelegate, HTTPRequestDelegate>
 @property (weak, nonatomic) SearchTopView *_SearchTopView;
 @property (weak, nonatomic) PostAlert *_PostAlert;
 
 @property (weak, nonatomic) NSString *CityText;
 @property (weak, nonatomic) NSString *ProvinceText;
 
-@property (strong, nonatomic) NSMutableArray *sampleData;
+@property (strong, nonatomic) NSMutableArray *Data;
+
+@property (assign) BOOL IsLoading;
+
+@property (assign, nonatomic) NSInteger Page;
+@property (assign, nonatomic) NSInteger TPage;
 @end
 
 @implementation HumanResources
@@ -34,24 +42,30 @@
 
 @synthesize TableView;
 
+@synthesize Data;
 
-@synthesize sampleData;
 
-- (void) LoadData {
+- (void) InitLoadData {
+    self.IsLoading = false;
     
+    self.Page = 0;
+    self.TPage = 0;
+    
+    if (Data != nil) {
+        self.Data = [NSMutableArray array];
+    }
+    [Data removeAllObjects];
+    
+    [self.TableView reloadData];
+    
+    [self loadMore];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.sampleData = [NSMutableArray array];
-    
-    [self.sampleData addObject:@{ @"name" : @"도봉순", @"age" : @"22세", @"dis" : @"5km", @"coment" : @"안전한 일자리를 구하고 싶어요." }];
-    [self.sampleData addObject:@{ @"name" : @"김군", @"age" : @"23세", @"dis" : @"6km", @"coment" : @"1234567890" }];
-    [self.sampleData addObject:@{ @"name" : @"박군", @"age" : @"24세", @"dis" : @"7km", @"coment" : @"12345678901234567890" }];
-    [self.sampleData addObject:@{ @"name" : @"문군", @"age" : @"25세", @"dis" : @"8km", @"coment" : @"123456789012345678901234567890" }];
-    [self.sampleData addObject:@{ @"name" : @"성군", @"age" : @"26세", @"dis" : @"9km", @"coment" : @"1234567890123456789012345678901234567890" }];
-    [self.sampleData addObject:@{ @"name" : @"손군", @"age" : @"27세", @"dis" : @"10km", @"coment" : @"12345678901234567890123456789012345678901234567890" }];
+
+    self.Data = [NSMutableArray array];
+    [self.Data removeAllObjects];
     
     _SearchTopView = [[[NSBundle mainBundle] loadNibNamed:@"SearchTopView"
                                                     owner:self
@@ -63,7 +77,6 @@
     
     [TableView setDelegate:self];
     [TableView setDataSource:self];
-//    [TableView registerNib:[UINib nibWithNibName:NSStringFromClass([HumanResourcesCell class]) bundle:nil] forCellReuseIdentifier:@"HumanResourcesCell"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,13 +97,13 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.sampleData count];
+    return [self.Data count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HumanResourcesCell *cell = (HumanResourcesCell *) [tableView dequeueReusableCellWithIdentifier:@"HumanResourcesCell" forIndexPath:indexPath];
     
-    [cell SetCellData:[self.sampleData objectAtIndex:indexPath.row]];
+    [cell SetCellData:[self.Data objectAtIndex:indexPath.row]];
     
     [cell setDelegate:self];
     
@@ -145,9 +158,10 @@
 
 #pragma mark - [ CELL DELEGATE ]
 
-- (void) CallDetailView {
+- (void) CallDetailView:(NSDictionary *)data {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"HumanInfoDetailView"];
+    HumanInfoDetailView *vc = [sb instantiateViewControllerWithIdentifier:@"HumanInfoDetailView"];
+    [vc SetData:data];
     [self presentViewController:vc animated:YES completion:NULL];
 }
 
@@ -202,24 +216,21 @@
 
 - (void) PostAlertClose {
     
-    _PostAlert.alpha = 1;
-    
-    
-    [UIView animateWithDuration:0.25f
-                          delay:0.0f
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         _PostAlert.alpha = 0.0;
-                     }
-                     completion:^(BOOL finished){
-                         _PostAlert.delegate = nil;
-                         [_PostAlert setUserInteractionEnabled:NO];
-                         [self.view willRemoveSubview:_PostAlert];
-                         
-                         _PostAlert = nil;
-                     }];
 }
 
+#pragma mark - [ HTTPREQUEST DELEGATE ]
+
+- (void) HTTPRequestFinish:(NSDictionary *)data HttpTag:(HTTP_TAG)httpTag ReturnRequest:(id)request {
+    
+    if (httpTag == HTTP_SUCCESS)
+    {
+        self.Data = [data objectForKey:@"list"];
+        
+        [self.TableView reloadData];
+    }
+    
+    self.IsLoading = false;
+}
 
 #pragma mark - [ EVENT ]
 
@@ -227,6 +238,27 @@
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+
+- (void) loadMore {
+    if (self.IsLoading == false)
+    {
+        self.IsLoading = true;
+        
+        self.Page = self.Page + 1;
+        
+        NSMutableDictionary *user_data = [NSMutableDictionary dictionary];
+        
+        [user_data setObject:[[SystemManager sharedInstance] UUID] forKey:KEY_DEVICE_ID];
+        [user_data setObject:[NSString stringWithFormat:@"%ld", (long)self.Page] forKey:KEY_PAGE];
+        [user_data setObject:@"전체" forKey:KEY_AREA];
+        [user_data setObject:@"전체" forKey:KEY_PROVINCE];
+        [user_data setObject:@"전체" forKey:KEY_USER_SEX];
+        
+        HTTPRequest *request = [[HTTPRequest alloc] initWithTag:1];
+        [request setDelegate:self];
+        [request SendUrl:URL_HUMAN_LIST withDictionary:user_data];
+    }
 }
 
 @end

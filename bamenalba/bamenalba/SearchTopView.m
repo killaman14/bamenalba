@@ -10,6 +10,8 @@
 
 
 @interface SearchTopView()
+@property (assign, nonatomic) BOOL IsEnableButtonActivity;
+@property (strong, nonatomic) NSMutableArray *Buttons;
 @end
 
 @implementation SearchTopView
@@ -19,8 +21,10 @@
 @synthesize LEFT_THREE_BUTTON;
 @synthesize RIGHT_BUTTON;
 
-
 @synthesize delegate;
+
+@synthesize IsEnableButtonActivity;
+
 
 - (id) initWithFrame:(CGRect)frame addView:(UIView *)view
 {
@@ -39,35 +43,44 @@
     return self;
 }
 
+- (void) Init {
+    
+}
+
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
+    
+    self.Buttons = [NSMutableArray array];
+    
+    [self.Buttons addObject:self.LEFT_ONE_BUTTON];
+    [self.Buttons addObject:self.LEFT_TWO_BUTTON];
+    [self.Buttons addObject:self.LEFT_THREE_BUTTON];
+    [self.Buttons addObject:self.RIGHT_BUTTON];
 
+    self.IsEnableButtonActivity = false;
+    if (delegate != nil && [self.delegate respondsToSelector:@selector(searchButtonActivity)]) {
+        self.IsEnableButtonActivity = [self.delegate searchButtonActivity];
+    }
     
-    [self.LEFT_ONE_BUTTON addTarget:self
-                        action:@selector(Call:)
-              forControlEvents:UIControlEventTouchUpInside];
+    
     [self settingButtonLabel:self.LEFT_ONE_BUTTON.titleLabel];
+    [self settingButton:self.LEFT_ONE_BUTTON];
     
     
-    [self.LEFT_TWO_BUTTON addTarget:self
-                            action:@selector(Call:)
-                  forControlEvents:UIControlEventTouchUpInside];
     [self settingButtonLabel:self.LEFT_TWO_BUTTON.titleLabel];
+    [self settingButton:self.LEFT_TWO_BUTTON];
+    
     
     [[self.LEFT_TWO_BUTTON titleLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self.LEFT_TWO_BUTTON titleLabel] setMinimumScaleFactor:0.5f];
     
-    
-    [self.LEFT_THREE_BUTTON addTarget:self
-                           action:@selector(Call:)
-                 forControlEvents:UIControlEventTouchUpInside];
+
     [self settingButtonLabel:self.LEFT_THREE_BUTTON.titleLabel];
+    [self settingButton:self.LEFT_THREE_BUTTON];
     
     
-    [self.RIGHT_BUTTON addTarget:self
-                            action:@selector(Call:)
-                  forControlEvents:UIControlEventTouchUpInside];
     [self settingButtonLabel:self.RIGHT_BUTTON.titleLabel];
+    [self settingButton:self.RIGHT_BUTTON];
     
     NSDictionary *titles = [delegate searchbarTitles];
     for (NSString *key in [titles allKeys]) {
@@ -81,15 +94,21 @@
 - (IBAction) Call:(id)sender {
     UIButton *btn = (UIButton *) sender;
 
-    if (delegate != nil) {
-//    if ([delegate respondsToSelector:@selector(requestButton:)]) {
+    for (UIButton *abtn in self.Buttons) {
+        [abtn setBackgroundColor:[UIColor clearColor]];
+    }
+
+    if (self.IsEnableButtonActivity) {
+        [btn setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f]];
+    }
+    
+    if (delegate != nil && [self.delegate respondsToSelector:@selector(requestButton:)]) {
         [delegate requestButton:(TOPVIEW_BUTTON)btn.tag];
     }
 }
 
 - (void) setHidden:(BOOL)hidden ButtonType:(TOPVIEW_BUTTON) buttontype
 {
-
     [[self getButtonTypeObject:buttontype] setHidden:hidden];
 }
 
@@ -104,7 +123,6 @@
         }
         
         [btn setTitle:text forState:UIControlStateNormal];
-//        [[btn titleLabel] setText:text];
     }
     
 }
@@ -135,6 +153,13 @@
     lb.lineBreakMode = NSLineBreakByClipping;
     [lb setFont:[UIFont systemFontOfSize:14]];
     [lb setMinimumScaleFactor:0.6];
+}
+
+- (void) settingButton:(UIButton *)btn {
+    [btn addTarget:self
+            action:@selector(Call:)
+     forControlEvents:UIControlEventTouchUpInside];
+    [btn.layer setCornerRadius:5];
 }
 
 @end

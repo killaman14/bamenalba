@@ -19,6 +19,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *HopesectorLb;
 @property (weak, nonatomic) IBOutlet UILabel *CommentLb;
 
+
+
+- (void) SetData:(NSDictionary *)data;
+
 - (IBAction) TitleImageZoom:(id)sender;
 
 - (IBAction) PostSend:(id)sender;

@@ -72,7 +72,7 @@
 }
 
 - (void) SendUrl:(NSString *)url withData:(NSData *)data {
-
+    NSLog(@"-----\n\n\n ------ \n\n %@ \n\n ------ ", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     if (self.RequestData == nil) {
         self.RequestData = [[NSMutableData alloc] init];
     }

@@ -19,11 +19,32 @@
 
 
 #define URL_LOGIN_CHECK @"login_check/check_login.php"
+#define URL_GPS_UPDATE @"token/gps_m.php"
 #define URL_SIGNUP @"login_check/member_join.php"
 
 #define URL_ADS_LIST    @"ads_write/ads_list.php"
 #define URL_ADS_DETAIL  @"ads_write/ads_detail.php"
+#define URL_ADS_WRITE_EDITOR   @"ads_write/ads_management.php"
+
 #define URL_MEETING_LIST @"lting/lting_list.php"
+#define URL_MEETING_WRITE_EDITOR    @"lting/lting_management.php"
+
+#define URL_HUMAN_LIST  @"hinfo/hinfo_list.php"
+#define URL_HUMAN_DETAIL    @"hinfo/hinfo_detail.php"
+
+
+#define URL_CHAT_LIST @"chat/chat_list.php"
+#define URL_CAHT_CONTENT_LOAD @"chat/chat_room.php"
+
+#define URL_POST_SEND @"token/push.php"
+
+#define URL_MYINFO_LOAD @"hinfo/hinfo_detail.php"
+#define URL_MYINFO_EDITOR @"login_check/member_fix.php"
+
+#define URL_AUTO_RESPONDER @"token/autoresponder.php"
+
+#define URL_CASH_UPDATE @"cash_info/cash_i.php"
+
 
 typedef enum
 {
@@ -32,6 +53,12 @@ typedef enum
     HTTP_FAIL       = 2000,
     HTTP_EMPLY_USER = 2001,
     HTTP_BLOCK      = 2002,
+    HTTP_TEXT_UPLOAD_FAIL   = 2003,
+    HTTP_IMAGE_UPLOAD_FAIL  = 2004,
+    HTTP_INSUFFICIENT_CACHE = 2005,
+    HTTP_CACHE_UPDATE_FAIL  = 2006,
+    HTTP_QUERY_NULL         = 2007,
+    HTTP_ACCOUNT_DUPLICATE  = 2008,
 
 } HTTP_TAG;
 
